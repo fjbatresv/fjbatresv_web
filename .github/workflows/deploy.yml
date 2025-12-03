@@ -26,7 +26,11 @@ jobs:
 
       - name: Optimize images (lossless)
         run: |
-          npx svgo -q -f src/assets --config=svgo.config.cjs
+          if compgen -G "src/assets/**/*.svg" > /dev/null; then
+            npx svgo -q -f src/assets --config=svgo.config.cjs
+          else
+            echo "No SVG assets found, skipping svgo."
+          fi
 
       - name: Inject environment (Sentry)
         env:
