@@ -15,6 +15,8 @@ import { TranslationService } from './core/services/translation.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+  readonly currentYear = new Date().getFullYear();
+
   constructor(
     private readonly title: Title,
     private readonly meta: Meta,
