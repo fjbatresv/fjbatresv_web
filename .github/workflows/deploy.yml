@@ -25,7 +25,9 @@ jobs:
         run: npm ci --registry=https://registry.npmjs.org
 
       - name: Optimize images (lossless)
-        run: npx imagemin "src/assets/**/*.{png,jpg,jpeg,svg}" --out-dir=src/assets
+        run: |
+          npm exec -- yes svgo -q -f src/assets --config='{ "multipass": true, "plugins": ["preset-default"] }'
+          npm exec -- yes sharp -i "src/assets/**/*.{png,jpg,jpeg,webp}" -o src/assets --recompress --quality 82 --adaptiveFiltering
 
       - name: Inject environment (Sentry)
         env:
