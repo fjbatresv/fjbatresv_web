@@ -1,7 +1,73 @@
 <app-hero></app-hero>
-<app-about></app-about>
-<app-experience></app-experience>
-<app-skills></app-skills>
-<app-projects></app-projects>
-<app-writing></app-writing>
-<app-contact></app-contact>
+
+@defer (on viewport) {
+  <app-about></app-about>
+} @placeholder {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+} @loading {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+}
+
+@defer (on viewport) {
+  <app-experience></app-experience>
+} @placeholder {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+} @loading {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+}
+
+@defer (on viewport) {
+  <app-skills></app-skills>
+} @placeholder {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+} @loading {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+}
+
+@defer (on viewport) {
+  <app-projects></app-projects>
+} @placeholder {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+} @loading {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+}
+
+@defer (on viewport) {
+  <app-writing></app-writing>
+} @placeholder {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+} @loading {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+}
+
+@defer (on viewport) {
+  <app-contact></app-contact>
+} @placeholder {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+} @loading {
+  <section class="skeleton-section">
+    <div class="container skeleton-card"></div>
+  </section>
+}

@@ -13,10 +13,10 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Use Node.js from .nvmrc
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -26,8 +26,7 @@ jobs:
 
       - name: Optimize images (lossless)
         run: |
-          npm exec -- yes svgo -q -f src/assets --config='{ "multipass": true, "plugins": ["preset-default"] }'
-          npm exec -- yes sharp -i "src/assets/**/*.{png,jpg,jpeg,webp}" -o src/assets --recompress --quality 82 --adaptiveFiltering
+          npx svgo -q -f src/assets --config='{ "multipass": true, "plugins": ["preset-default"] }'
 
       - name: Inject environment (Sentry)
         env:
@@ -57,7 +56,7 @@ jobs:
         run: npm run build
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
