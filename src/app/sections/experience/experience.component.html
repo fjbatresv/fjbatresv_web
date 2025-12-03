@@ -1,0 +1,27 @@
+<section id="experience" aria-labelledby="experience-title">
+  <div class="container">
+    <p class="tagline">{{ 'experience.tagline' | translate }}</p>
+    <h2 id="experience-title">{{ 'experience.title' | translate }}</h2>
+    <div class="timeline">
+      @for (exp of experiences; track exp.company) {
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content card">
+            <div class="timeline-header">
+              <div>
+                <h3>{{ exp.company }}</h3>
+                <p class="muted">{{ exp.roleKey | translate }}</p>
+              </div>
+              <span class="badge">{{ exp.period }}</span>
+            </div>
+            <ul>
+              @for (bullet of exp.bullets; track bullet) {
+                <li>{{ bullet | translate }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

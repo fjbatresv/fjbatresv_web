@@ -1,0 +1,18 @@
+<section id="skills" aria-labelledby="skills-title">
+  <div class="container">
+    <p class="tagline">{{ 'skills.tagline' | translate }}</p>
+    <h2 id="skills-title">{{ 'skills.title' | translate }}</h2>
+    <div class="grid grid-3">
+      @for (category of categories; track category.titleKey) {
+        <div class="card">
+          <h3>{{ category.titleKey | translate }}</h3>
+          <div class="chips">
+            @for (item of category.items; track item) {
+              <span class="badge">{{ item | translate }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

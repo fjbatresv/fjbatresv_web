@@ -1,0 +1,50 @@
+<section id="about">
+  <div class="container">
+    <p class="tagline">{{ 'about.tagline' | translate }}</p>
+    <h2>{{ 'about.title' | translate }}</h2>
+    <div class="card about-card">
+      <div class="about-grid">
+        <figure class="about-avatar">
+          <img
+            ngSrc="assets/face.webp"
+            alt="Portrait of Javier Batres"
+            width="400"
+            height="400"
+            fetchpriority="high"
+            priority
+            decoding="async"
+          />
+        </figure>
+        <div class="about-body">
+          <p>{{ 'about.body.one' | translate }}</p>
+          <p>{{ 'about.body.two' | translate }}</p>
+          <p>{{ 'about.body.three' | translate }}</p>
+          <p>{{ 'about.body.four' | translate }}</p>
+          <div class="about-list">
+            <div class="list-title">{{ 'about.list.title' | translate }}</div>
+            <div class="chips">
+              <span class="badge">{{ 'about.list.items.cloud' | translate }}</span>
+              <span class="badge">{{ 'about.list.items.devops' | translate }}</span>
+              <span class="badge">{{ 'about.list.items.architecture' | translate }}</span>
+              <span class="badge">{{ 'about.list.items.mentoring' | translate }}</span>
+            </div>
+          </div>
+          <div class="about-highlights">
+            <div class="highlight">
+              <div class="label">{{ 'about.highlights.years.label' | translate }}</div>
+              <div class="value">10+ {{ 'about.highlights.years.value' | translate }}</div>
+            </div>
+            <div class="highlight">
+              <div class="label">{{ 'about.highlights.mentoring.label' | translate }}</div>
+              <div class="value">{{ 'about.highlights.mentoring.value' | translate }}</div>
+            </div>
+            <div class="highlight">
+              <div class="label">{{ 'about.highlights.personal.label' | translate }}</div>
+              <div class="value">{{ 'about.highlights.personal.value' | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

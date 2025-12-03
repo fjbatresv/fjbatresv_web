@@ -1,0 +1,46 @@
+<section id="home" class="hero">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="tagline">{{ 'hero.tagline' | translate }}</p>
+      <h1>
+        Fernando Javier Batres Velásquez
+        <span class="accent">(Javier)</span>
+      </h1>
+      <h2 class="subtitle">{{ 'hero.subtitle' | translate }}</h2>
+      <p class="lead">{{ 'hero.summary' | translate }}</p>
+      <div class="hero__actions">
+        <a class="button" routerLink="/experience">{{ 'hero.cta.experience' | translate }}</a>
+        <a class="button alt" routerLink="/projects">{{ 'hero.cta.projects' | translate }}</a>
+      </div>
+      <div class="hero__badges">
+        <span class="badge">{{ 'hero.badges.cloud' | translate }}</span>
+        <span class="badge">{{ 'hero.badges.fullstack' | translate }}</span>
+        <span class="badge">{{ 'hero.badges.cloudmix' | translate }}</span>
+        <span class="badge">{{ 'hero.badges.quality' | translate }}</span>
+      </div>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      <div class="floating-card primary desktop-only">
+        <div class="title">{{ 'hero.cards.cloud.title' | translate }}</div>
+        <p>{{ 'hero.cards.cloud.desc' | translate }}</p>
+        <div class="chip-row">
+          <span class="badge">SQS</span>
+          <span class="badge">EventBridge</span>
+          <span class="badge">X-Ray</span>
+        </div>
+      </div>
+      <div class="floating-card secondary desktop-only">
+        <div class="title">{{ 'hero.cards.coffee.title' | translate }}</div>
+        <p>{{ 'hero.cards.coffee.desc' | translate }}</p>
+        <div class="chip-row">
+          <span class="badge">Espresso</span>
+          <span class="badge">Research</span>
+          <span class="badge">Gaia</span>
+        </div>
+      </div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+  </div>
+</section>

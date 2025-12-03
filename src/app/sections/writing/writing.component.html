@@ -1,0 +1,26 @@
+<section id="writing" aria-labelledby="writing-title">
+  <div class="container">
+    <p class="tagline">{{ 'writing.tagline' | translate }}</p>
+    <h2 id="writing-title">{{ 'writing.title' | translate }}</h2>
+    <div class="grid grid-2">
+      @for (item of items; track item.titleKey) {
+        <div class="card">
+          <div class="writing-header">
+            <h3>{{ item.titleKey | translate }}</h3>
+            <span class="badge">{{ item.date }}</span>
+          </div>
+          <p>{{ item.summaryKey | translate }}</p>
+          @if (item.link) {
+            <a
+              class="link-inline"
+              [href]="item.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ 'writing.read' | translate }} <span aria-hidden="true">↗</span></a
+            >
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
