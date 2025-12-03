@@ -35,8 +35,8 @@ if (sentryDsn) {
 class SentryErrorHandler implements ErrorHandler {
   handleError(error: unknown): void {
     Sentry.captureException(error);
-    // Re-throw to preserve default behavior
-    throw error;
+    // Log for local visibility without re-throwing to avoid duplicate handling
+    console.error(error);
   }
 }
 

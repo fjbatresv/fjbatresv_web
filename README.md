@@ -4,7 +4,7 @@
   <img src="src/assets/logo.webp" alt="Javier Batres logo" width="96" height="96" />
 </div>
 
-![CI](https://img.shields.io/github/actions/workflow/status/fjbatresv/javier-batres-site/ci.yml?branch=develop&label=CI&logo=github)
+![CI](https://img.shields.io/github/actions/workflow/status/fjbatresv/fjbatresv_web/ci.yml?branch=develop&label=CI&logo=github)
 ![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen?logo=jest)
 ![Angular](https://img.shields.io/badge/Angular-21.x-dd0031?logo=angular)
 ![Node](https://img.shields.io/badge/Node-24.x-026e00?logo=node.js)
@@ -85,13 +85,6 @@ Outputs production assets to `dist/javier-batres-site/`.
 - Renovate config at `renovate.json`.
 - Husky pre-commit runs `npm run lint` (install via `npm run prepare` after deps).
 
-## Lighthouse (latest local run)
-- Performance: 92
-- Accessibility: 100
-- Best Practices: 100
-- SEO: 100
-(Measured against the production build, served locally; run your own audit for fresh numbers.)
-
 ## Serve build locally
 ```bash
 npx http-server dist/javier-batres-site -p 8080
@@ -113,7 +106,7 @@ npx http-server dist/javier-batres-site -p 8080
    - Sync `dist/javier-batres-site/` to S3 with `aws s3 sync --delete` (long cache for assets, no-cache for index)
    - (Optional) Invalidate CloudFront if `CLOUDFRONT_DISTRIBUTION_ID` is set
 
-If you need CloudFront cache invalidation, add `DISTRIBUTION_ID` and extend the workflow with `aws cloudfront create-invalidation`.
+If you need CloudFront cache invalidation, add `CLOUDFRONT_DISTRIBUTION_ID` and extend the workflow with `aws cloudfront create-invalidation`.
 
 ## Notes
 - Images live in `src/assets/` and are referenced locally (no external fetch needed).
@@ -137,7 +130,7 @@ If you need CloudFront cache invalidation, add `DISTRIBUTION_ID` and extend the 
 (Measured against the production build, served locally; run your own audit for fresh numbers.)
 
 ## Project structure (essentials)
-```
+```text
 src/
   app/
     core/              # navbar, theme/lang services
@@ -153,5 +146,5 @@ src/
 
 ## Contact
 - Email: fjbatresv@gmail.com
-- LinkedIn: https://www.linkedin.com/in/fjbatresv
-- GitHub: https://github.com/fjbatresv
+- LinkedIn: [https://www.linkedin.com/in/fjbatresv](https://www.linkedin.com/in/fjbatresv)
+- GitHub: [https://github.com/fjbatresv](https://github.com/fjbatresv)

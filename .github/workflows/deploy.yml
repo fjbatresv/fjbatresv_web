@@ -31,13 +31,13 @@ jobs:
         env:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
-          cat > src/environments/environment.ts <<'EOF'
+          cat > src/environments/environment.ts <<EOF
           export const environment = {
             production: false,
             sentryDsn: '${SENTRY_DSN}'
           };
           EOF
-          cat > src/environments/environment.prod.ts <<'EOF'
+          cat > src/environments/environment.prod.ts <<EOF
           export const environment = {
             production: true,
             sentryDsn: '${SENTRY_DSN}'
@@ -61,7 +61,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sentry upload sourcemaps & release
-        if: ${{ secrets.SENTRY_AUTH_TOKEN != '' && secrets.SENTRY_ORG != '' && secrets.SENTRY_PROJECT != '' }}
+        if: ${{ env.SENTRY_AUTH_TOKEN != '' && env.SENTRY_ORG != '' && env.SENTRY_PROJECT != '' }}
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
@@ -84,7 +84,7 @@ jobs:
         run: du -sh dist/javier-batres-site
 
       - name: Invalidate CloudFront
-        if: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        if: ${{ env.DISTRIBUTION_ID != '' }}
         env:
           DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
         run: |

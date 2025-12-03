@@ -24,6 +24,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Initialize language first to set <html lang=""> dynamically
+    this.translationService.init();
+
     this.title.setTitle('Javier Batres');
     this.meta.addTags([
       {
@@ -42,7 +45,7 @@ export class AppComponent implements OnInit {
       },
       { name: 'robots', content: 'index, follow' },
       { name: 'theme-color', content: '#1e88e5' },
-      { property: 'og:image', content: 'assets/og-image.webp' },
+      { property: 'og:image', content: 'https://fjbatresv.com/assets/og-image.webp' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Javier Batres – Solutions Architect' },
       {
@@ -50,7 +53,5 @@ export class AppComponent implements OnInit {
         content: 'Cloud, architecture, and full-stack delivery from Guatemala.',
       },
     ]);
-
-    this.translationService.init();
   }
 }

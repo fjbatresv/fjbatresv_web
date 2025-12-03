@@ -9,7 +9,12 @@
           <span class="badge">{{ item.date }}</span>
         </div>
         <p>{{ item.summaryKey | translate }}</p>
-        <a class="link-inline" *ngIf="item.link" [href]="item.link" target="_blank" rel="noreferrer"
+        <a
+          class="link-inline"
+          *ngIf="item.link"
+          [href]="item.link"
+          target="_blank"
+          rel="noopener noreferrer"
           >{{ 'writing.read' | translate }} ↗</a
         >
       </div>

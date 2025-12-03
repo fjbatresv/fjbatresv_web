@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, AfterViewInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  AfterViewInit,
+  DestroyRef,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -28,6 +35,8 @@ import { WritingComponent } from '../writing/writing.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent implements AfterViewInit {
+  private readonly destroyRef = inject(DestroyRef);
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router
@@ -35,9 +44,14 @@ export class HomePageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.scrollToSection();
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      this.scrollToSection();
-    });
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => {
+        this.scrollToSection();
+      });
   }
 
   private scrollToSection(): void {

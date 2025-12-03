@@ -11,21 +11,28 @@
       <div class="brand-name">Javier Batres</div>
     </button>
 
-    <button class="menu-toggle" type="button" (click)="toggleMenu()" aria-label="Toggle menu">
+    <button
+      class="menu-toggle"
+      type="button"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu"
+      [attr.aria-expanded]="isMenuOpen"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
 
     <nav class="navbar__links" aria-label="Primary">
-      <a
+      <button
         *ngFor="let item of navItems"
+        type="button"
         (click)="navigate(item.section)"
         class="navbar__link"
         [ngClass]="{ contact: item.section === 'contact' }"
-        role="button"
-        >{{ item.labelKey | translate }}</a
       >
+        {{ item.labelKey | translate }}
+      </button>
     </nav>
 
     <div class="navbar__actions">
