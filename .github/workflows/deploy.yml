@@ -26,7 +26,7 @@ jobs:
 
       - name: Optimize images (lossless)
         run: |
-          npx svgo -q -f src/assets --config='{ "multipass": true, "plugins": ["preset-default"] }'
+          npx svgo -q -f src/assets --config=svgo.config.js
 
       - name: Inject environment (Sentry)
         env:
