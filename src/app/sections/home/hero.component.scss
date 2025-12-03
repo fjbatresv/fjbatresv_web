@@ -36,10 +36,7 @@
 
 .hero__visual {
   position: relative;
-  min-height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 320px;
 }
 
 .floating-card {
@@ -66,8 +63,8 @@
 }
 
 .floating-card.secondary {
-  bottom: -50px;
-  right: 12%;
+  bottom: -120px;
+  right: 15%;
   animation-delay: 2s;
 }
 
@@ -127,18 +124,14 @@
 
 @media (max-width: 768px) {
   .hero__visual {
-    min-height: 320px;
-  }
-
-  .floating-card {
-    position: relative;
-    width: 100%;
-    margin-bottom: 14px;
-    left: auto;
-    right: auto;
+    display: none;
   }
 
   .orb {
+    display: none;
+  }
+
+  .floating-card.desktop-only {
     display: none;
   }
 }

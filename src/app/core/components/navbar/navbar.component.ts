@@ -26,6 +26,7 @@ export class NavbarComponent {
   ];
 
   logoUrl = 'assets/logo.webp';
+  isMenuOpen = false;
 
   constructor(
     private readonly router: Router,
@@ -36,6 +37,7 @@ export class NavbarComponent {
 
   navigate(section: string): void {
     this.router.navigate([section === 'home' ? '/' : `/${section}`]);
+    this.isMenuOpen = false;
   }
 
   toggleTheme(): void {
@@ -52,5 +54,9 @@ export class NavbarComponent {
 
   get currentLanguage(): string {
     return this.translateService.currentLang || 'en';
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }
