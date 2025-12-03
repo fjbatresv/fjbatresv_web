@@ -36,7 +36,7 @@ describe('ThemeService', () => {
   it('should respect stored theme', () => {
     localStorage.setItem('fj-theme', 'dark');
     mockMatchMedia(true);
-    const storedService = new ThemeService(document);
+    const storedService = TestBed.runInInjectionContext(() => new ThemeService());
     expect(storedService.theme).toBe('dark');
     expect(document.body.classList.contains('theme-dark')).toBeTrue();
   });

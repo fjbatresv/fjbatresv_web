@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -27,13 +27,10 @@ export class NavbarComponent {
 
   logoUrl = 'assets/logo.webp';
   isMenuOpen = false;
-
-  constructor(
-    private readonly router: Router,
-    private readonly themeService: ThemeService,
-    private readonly translationService: TranslationService,
-    private readonly translateService: TranslateService
-  ) {}
+  private readonly router = inject(Router);
+  private readonly themeService = inject(ThemeService);
+  private readonly translationService = inject(TranslationService);
+  private readonly translateService = inject(TranslateService);
 
   navigate(section: string): void {
     this.router.navigate([section === 'home' ? '/' : `/${section}`]);

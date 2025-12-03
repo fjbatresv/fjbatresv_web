@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,12 +16,9 @@ import { TranslationService } from './core/services/translation.service';
 })
 export class AppComponent implements OnInit {
   readonly currentYear = new Date().getFullYear();
-
-  constructor(
-    private readonly title: Title,
-    private readonly meta: Meta,
-    private readonly translationService: TranslationService
-  ) {}
+  private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
+  private readonly translationService = inject(TranslationService);
 
   ngOnInit(): void {
     // Initialize language first to set <html lang=""> dynamically

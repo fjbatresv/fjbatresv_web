@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -7,13 +7,17 @@ export class TranslationService {
   private readonly storageKey = 'fj-lang';
   private readonly supported: Array<'en' | 'es'> = ['en', 'es'];
 
-  constructor(
-    private readonly translate: TranslateService,
-    @Inject(DOCUMENT) private readonly document: Document
-  ) {}
+  private readonly translate = inject(TranslateService);
+  private readonly document = inject(DOCUMENT);
 
   init(): void {
-    const stored = localStorage.getItem(this.storageKey) as 'en' | 'es' | null;
+    let stored: 'en' | 'es' | null = null;
+    try {
+      stored = localStorage.getItem(this.storageKey) as 'en' | 'es' | null;
+    } catch (err) {
+      // Ignore storage access errors
+      stored = null;
+    }
     const browserLang = navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
     const lang = stored && this.supported.includes(stored) ? stored : browserLang;
     this.setLanguage(lang);
@@ -22,7 +26,11 @@ export class TranslationService {
   setLanguage(lang: 'en' | 'es'): void {
     this.translate.use(lang);
     this.translate.setDefaultLang(lang);
-    localStorage.setItem(this.storageKey, lang);
+    try {
+      localStorage.setItem(this.storageKey, lang);
+    } catch (err) {
+      // Ignore storage access errors
+    }
     this.document.documentElement.lang = lang;
   }
 }

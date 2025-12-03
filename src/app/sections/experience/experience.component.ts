@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 interface ExperienceItem {
-  company: string;
-  roleKey: string;
-  period: string;
-  bullets: string[];
+  readonly company: string;
+  readonly roleKey: string;
+  readonly period: string;
+  readonly bullets: readonly string[];
 }
 
 @Component({
@@ -18,11 +18,11 @@ interface ExperienceItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExperienceComponent {
-  experiences: ExperienceItem[] = [
+  readonly experiences: readonly ExperienceItem[] = [
     {
       company: 'Banco G&T Continental',
       roleKey: 'experience.gtc.role',
-      period: '2025-Present',
+      period: '2025 – Present',
       bullets: ['experience.gtc.b1', 'experience.gtc.b2', 'experience.gtc.b3', 'experience.gtc.b4'],
     },
     {

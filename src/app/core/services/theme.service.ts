@@ -1,13 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly storageKey = 'fj-theme';
-  theme: 'light' | 'dark' = 'light';
+  private readonly document = inject(DOCUMENT);
+  theme: 'light' | 'dark' = this.getInitialTheme();
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {
-    this.theme = this.getInitialTheme();
+  constructor() {
     this.applyThemeClass();
   }
 

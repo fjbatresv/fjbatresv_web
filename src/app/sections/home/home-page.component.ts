@@ -36,11 +36,8 @@ import { WritingComponent } from '../writing/writing.component';
 })
 export class HomePageComponent implements AfterViewInit {
   private readonly destroyRef = inject(DestroyRef);
-
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly router: Router
-  ) {}
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   ngAfterViewInit(): void {
     this.scrollToSection();
