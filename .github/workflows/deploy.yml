@@ -26,7 +26,7 @@ jobs:
 
       - name: Optimize images (lossless)
         run: |
-          npx svgo -q -f src/assets --config=svgo.config.js
+          npx svgo -q -f src/assets --config=svgo.config.cjs
 
       - name: Inject environment (Sentry)
         env:
