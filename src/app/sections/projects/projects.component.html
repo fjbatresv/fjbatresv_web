@@ -1,0 +1,27 @@
+<section id="projects" aria-labelledby="projects-title">
+  <div class="container">
+    <p class="tagline">{{ 'projects.tagline' | translate }}</p>
+    <h2 id="projects-title">{{ 'projects.title' | translate }}</h2>
+    <div class="grid grid-2">
+      <div class="card project" *ngFor="let project of projects">
+        <div class="project__header">
+          <h3>{{ project.titleKey | translate }}</h3>
+          <a
+            *ngIf="project.link"
+            [href]="project.link"
+            target="_blank"
+            rel="noreferrer"
+            class="link-inline"
+          >
+            {{ 'projects.view' | translate }}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <p>{{ project.descriptionKey | translate }}</p>
+        <div class="chips">
+          <span class="badge" *ngFor="let tag of project.tags">{{ tag | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

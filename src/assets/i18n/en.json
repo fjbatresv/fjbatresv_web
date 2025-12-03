@@ -1,0 +1,226 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "career": "Career",
+    "toolkit": "Toolkit",
+    "highlights": "Highlights",
+    "notes": "Notes",
+    "contact": "Contact",
+    "theme": "Toggle theme"
+  },
+  "hero": {
+    "tagline": "Cloud architecture, code, and coffee",
+    "subtitle": "Solutions Architect · Senior Full Stack Engineer · Tech Lead",
+    "summary": "Javier designs and ships scalable software for enterprises—cloud-first architectures, reliable backends, and frontends that feel effortless.",
+    "cta": {
+      "experience": "View experience",
+      "projects": "View projects"
+    },
+    "badges": {
+      "cloud": "Cloud & DevOps",
+      "fullstack": "NestJS & Angular",
+      "cloudmix": "AWS / Azure",
+      "quality": "CI/CD & Observability"
+    },
+    "cards": {
+      "cloud": {
+        "title": "Architecture",
+        "desc": "Event-driven flows, high-availability patterns, and governance tuned for banking and healthtech."
+      },
+      "coffee": {
+        "title": "Coffee & Curiosity",
+        "desc": "Espresso tinkerer, gamer, and researcher. Often paired with Gaia, the family Newfoundland."
+      }
+    }
+  },
+  "about": {
+    "tagline": "Profile",
+    "title": "About Javier",
+    "body": {
+      "one": "I'm Fernando Javier Batres Velásquez, a Guatemalan solutions architect with 10+ years building software for banking, healthtech, and enterprise teams.",
+      "two": "I focus on backend and cloud platforms—NestJS, Angular, AWS, Azure—and I lead teams through microservices, event-driven designs, and CI/CD that ships safely.",
+      "three": "Outside work, I'm a barista hobbyist, gamer, and deep researcher who loves exploring with my wife and our Newfoundland dog, Gaia.",
+      "four": "I align architecture with business outcomes, shape engineering culture, and pair mentorship with hands-on delivery."
+    },
+    "list": {
+      "title": "What drives him",
+      "items": {
+        "cloud": "Cloud foundations",
+        "devops": "Automation & DevOps",
+        "architecture": "Architecture decisions",
+        "mentoring": "Mentoring squads"
+      }
+    },
+    "highlights": {
+      "years": { "label": "Experience", "value": "years shipping enterprise software" },
+      "mentoring": { "label": "Mentoring", "value": "Coaches engineers and leads delivery teams" },
+      "personal": { "label": "Human", "value": "Coffee, games, research, and Gaia" }
+    }
+  },
+  "experience": {
+    "tagline": "Career",
+    "title": "Selected Experience",
+    "gtc": {
+      "role": "Solutions Architect",
+      "b1": "Led Journey to Cloud with Azure landing zones, governance, and DevOps blueprints.",
+      "b2": "Designed hybrid integrations and observability for critical banking services.",
+      "b3": "Guided engineering teams on security, compliance, and scalability patterns.",
+      "b4": "Partnered with leadership to align roadmaps, budgets, and architecture runway."
+    },
+    "halo": {
+      "role": "Senior Full Stack Developer",
+      "b1": "Built NestJS + Angular platforms on AWS with MongoDB and event-driven pipelines.",
+      "b2": "Implemented CI/CD with GitHub Actions and quality gates with SonarQube.",
+      "b3": "Optimized performance and reliability for media-rich enterprise apps."
+    },
+    "truelogic": {
+      "role": "Senior Full Stack Lead Developer",
+      "b1": "Led React + NestJS delivery for blockchain/NFT initiatives.",
+      "b2": "Architected AWS workloads with queues, lambdas, and secure APIs.",
+      "b3": "Mentored squads and enforced engineering best practices."
+    },
+    "yalutec": {
+      "role": "Tech Lead",
+      "b1": "Delivered payment solutions and Migo integrations with resilient services.",
+      "b2": "Coordinated cross-functional teams and technical decision-making.",
+      "b3": "Improved deployment reliability with automated pipelines."
+    },
+    "paypal": {
+      "role": "Senior Full Stack Developer",
+      "b1": "Contributed to large-scale fintech services with a focus on quality and security.",
+      "b2": "Enhanced observability and performance across critical flows.",
+      "b3": "Collaborated with global teams on feature delivery."
+    },
+    "early": {
+      "role": "Developer & Mentor",
+      "b1": "Built platforms at Novuskills, Progrentis, and early-stage teams.",
+      "b2": "Introduced testing, automation, and documentation habits.",
+      "b3": "Shipped full-stack features while growing engineering culture."
+    }
+  },
+  "skills": {
+    "tagline": "Toolkit",
+    "title": "Skills & Stack",
+    "cloud": "Cloud & DevOps",
+    "backend": "Backend",
+    "frontend": "Frontend",
+    "databases": "Databases",
+    "devops": "Pipelines & Quality",
+    "soft": "Leadership & Soft Skills",
+    "items": {
+      "aws": "AWS",
+      "azure": "Azure basics",
+      "lambdas": "Lambdas",
+      "eventbridge": "EventBridge",
+      "sqs": "SQS",
+      "cloudwatch": "CloudWatch",
+      "xray": "X-Ray",
+      "node": "Node.js",
+      "nest": "NestJS",
+      "ts": "TypeScript",
+      "python": "Python (Lambdas)",
+      "rest": "REST APIs",
+      "microservices": "Microservices",
+      "angular": "Angular",
+      "react": "React",
+      "nx": "Nx monorepos",
+      "mongodb": "MongoDB",
+      "mysql": "MySQL",
+      "dynamodb": "DynamoDB",
+      "rds": "RDS",
+      "redis": "Redis",
+      "cicd": "CI/CD",
+      "github": "GitHub Actions",
+      "sonarqube": "SonarQube",
+      "observability": "Observability",
+      "docker": "Docker",
+      "kubernetes": "Kubernetes basics",
+      "architecture": "Architecture decisions",
+      "mentoring": "Mentoring",
+      "leadership": "Leadership",
+      "writing": "Technical writing"
+    }
+  },
+  "projects": {
+    "tagline": "Highlights",
+    "title": "Featured Projects",
+    "view": "Open",
+    "titles": {
+      "journey": "Journey to Cloud",
+      "vip": "Mercer VIP",
+      "peto": "Peto",
+      "sinergia": "Sinergia Dorada GT",
+      "capriccio": "Hecho Capriccio",
+      "sar": "SAR Platform",
+      "ascend": "Ascend (Novuskills)"
+    },
+    "journey": "Banking cloud migration program with governance, observability, and resilient data flows.",
+    "vip": "Enterprise platform for Mercer using NestJS + Angular + AWS with queue-driven workflows.",
+    "peto": "Pet-care SaaS keeping health records, reminders, and analytics across devices.",
+    "sinergia": "Corporate site for Sinergia Dorada GT with dynamic content, cloud hosting, and analytics.",
+    "capriccio": "E-commerce experience for Hecho Capriccio with performant Angular + NestJS stack.",
+    "sar": "Cloud-native platform on AWS with serverless automation, secure auth middleware, and deep observability (X-Ray, Sentry, CloudWatch). Nx monorepo with shared libs and custom CI/CD tasks.",
+    "ascend": "Ascend MVPs across mobile/desktop/web: Flutter apps, GCP integrations (SQL/NoSQL), and neuroscience-based experiences with BrainCo and Dale Carnegie.",
+    "tags": {
+      "banking": "Banking",
+      "azure": "Azure",
+      "governance": "Governance",
+      "nestjs": "NestJS",
+      "angular": "Angular",
+      "aws": "AWS",
+      "queues": "Queues",
+      "event": "Events",
+      "health": "Health",
+      "saas": "SaaS",
+      "ai": "AI",
+      "automation": "Automation",
+      "openapi": "OpenAPI",
+      "coffee": "Coffee",
+      "brand": "Brand",
+      "content": "Content",
+      "lambdas": "Lambdas",
+      "nx": "Nx",
+      "flutter": "Flutter",
+      "gcp": "GCP",
+      "mobile": "Mobile",
+      "nosql": "NoSQL"
+    }
+  },
+  "writing": {
+    "tagline": "Notes",
+    "title": "Writing & Talks",
+    "read": "Read more",
+    "item1": {
+      "title": "Designing observable event-driven systems",
+      "summary": "Patterns for tracing and debugging message-driven architectures across teams. (Medium)"
+    },
+    "item2": {
+      "title": "CI/CD guardrails in regulated environments",
+      "summary": "How to ship faster while meeting governance for banking and healthtech. (dev.to)"
+    },
+    "item3": {
+      "title": "Brewing better engineering cultures",
+      "summary": "Lessons from mentoring teams and pairing leadership with craftsmanship. (Medium)"
+    }
+  },
+  "contact": {
+    "tagline": "Let’s collaborate",
+    "title": "Ready for your next build",
+    "body": "Open to consulting, architecture reviews, and product delivery across cloud and full stack.",
+    "cta": "Email me",
+    "fun": "Bring coffee questions, architecture puzzles, or a new game recommendation.",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "footer": {
+    "copy": "© 2024 Javier Batres. Built with Angular.",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
+    }
+  }
+}

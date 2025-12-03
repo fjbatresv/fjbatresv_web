@@ -1,0 +1,91 @@
+name: Build and Deploy to S3
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --registry=https://registry.npmjs.org
+
+      - name: Optimize images (lossless)
+        run: npx imagemin "src/assets/**/*.{png,jpg,jpeg,svg}" --out-dir=src/assets
+
+      - name: Inject environment (Sentry)
+        env:
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        run: |
+          cat > src/environments/environment.ts <<'EOF'
+          export const environment = {
+            production: false,
+            sentryDsn: '${SENTRY_DSN}'
+          };
+          EOF
+          cat > src/environments/environment.prod.ts <<'EOF'
+          export const environment = {
+            production: true,
+            sentryDsn: '${SENTRY_DSN}'
+          };
+          EOF
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test -- --watch=false
+
+      - name: Build (production, optimized)
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Sentry upload sourcemaps & release
+        if: ${{ secrets.SENTRY_AUTH_TOKEN != '' && secrets.SENTRY_ORG != '' && secrets.SENTRY_PROJECT != '' }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          RELEASE: ${{ github.sha }}
+        run: |
+          npx @sentry/cli releases new "$RELEASE"
+          npx @sentry/cli releases files "$RELEASE" upload-sourcemaps dist/javier-batres-site --url-prefix "~/"
+          npx @sentry/cli releases finalize "$RELEASE"
+
+      - name: Remove sourcemaps before deploy
+        run: find dist/javier-batres-site -name "*.map" -type f -delete
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync dist/javier-batres-site/ s3://${{ secrets.S3_BUCKET }}/ --delete --cache-control "public, max-age=31536000" --exclude "index.html"
+          aws s3 cp dist/javier-batres-site/index.html s3://${{ secrets.S3_BUCKET }}/index.html --cache-control "no-cache, no-store, must-revalidate"
+
+      - name: Output artifact size
+        run: du -sh dist/javier-batres-site
+
+      - name: Invalidate CloudFront
+        if: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        env:
+          DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*"
