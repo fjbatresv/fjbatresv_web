@@ -5,7 +5,7 @@
 </div>
 
 ![CI](https://img.shields.io/github/actions/workflow/status/fjbatresv/javier-batres-site/ci.yml?branch=develop&label=CI&logo=github)
-![Coverage](https://img.shields.io/badge/coverage-local%20(run%20npm%20run%20test:coverage)-blue?logo=jest)
+![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen?logo=jest)
 ![Angular](https://img.shields.io/badge/Angular-21.x-dd0031?logo=angular)
 ![Node](https://img.shields.io/badge/Node-24.x-026e00?logo=node.js)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
@@ -58,6 +58,12 @@ npm run lint
 npm run test:coverage
 ```
 Coverage report will be generated under `coverage/`.
+
+Last local coverage run (headless):
+- Statements: 92.30%
+- Branches: 58.82%
+- Functions: 86.66%
+- Lines: 92.15%
 
 ## Build
 ```bash

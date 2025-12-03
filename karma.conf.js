@@ -20,7 +20,9 @@ module.exports = function (config) {
       reporters: [{ type: 'html' }, { type: 'text-summary' }]
     },
     reporters: ['progress', 'kjhtml'],
-    port: 9876,
+    port: 9877,
+    hostname: '127.0.0.1',
+    listenAddress: '127.0.0.1',
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
