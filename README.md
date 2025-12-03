@@ -105,7 +105,7 @@ npx http-server dist/javier-batres-site -p 8080
    - `AWS_REGION`
    - `S3_BUCKET` (name of your static site bucket)
 2) Push to `main` and the workflow will:
-   - Use Node 20 with npm cache
+   - Use Node from `.nvmrc` with npm cache
    - Install deps with `npm ci --registry=https://registry.npmjs.org`
    - Run `npm run lint` and `npm test`
    - Build optimized artifacts (`ng build --configuration production`)
@@ -118,6 +118,16 @@ If you need CloudFront cache invalidation, add `DISTRIBUTION_ID` and extend the 
 ## Notes
 - Images live in `src/assets/` and are referenced locally (no external fetch needed).
 - Build uses Angular production optimizations (AOT, build optimizer, tree shaking).
+- Commits use gitmoji; a commit-msg hook enforces gitmoji or `:emoji:` prefix (e.g., `✨ add hero animations`, `:bug: fix navbar overlap`). Install hooks with `npm run prepare` after `npm install`.
+
+### Gitmoji quick reference
+- `✨` / `:sparkles:` — Feature
+- `🐛` / `:bug:` — Fix
+- `🧪` / `:test_tube:` — Tests/coverage
+- `📚` / `:books:` — Docs/README
+- `🎨` / `:art:` — UI/UX/Styling
+- `🔧` / `:wrench:` — Chore/tooling
+- `🚀` / `:rocket:` — Performance/deploy
 
 ## Lighthouse (latest local run)
 - Performance: 92
