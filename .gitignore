@@ -6,3 +6,8 @@ coverage
 .DS_Store
 npm-debug.log*
 .angular/cache
+/.angular/
+coverage/
+dist/
+node_modules/
+package-lock.json
