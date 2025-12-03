@@ -21,13 +21,14 @@ if (sentryDsn) {
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration({
-        maskAllText: false,
-        blockAllMedia: false,
+        // Safer defaults; unmask selectively if required
+        maskAllText: true,
+        blockAllMedia: true,
       }),
     ],
     tracesSampleRate: 0.3,
-    replaysSessionSampleRate: 1.0,
-    replaysOnErrorSampleRate: 1.0,
+    replaysSessionSampleRate: 0.3,
+    replaysOnErrorSampleRate: 0.8,
     environment: environment.production ? 'production' : 'development',
   });
 }
