@@ -1,0 +1,24 @@
+<section id="contact">
+  <div class="container card contact-card">
+    <div>
+      <p class="tagline">{{ 'contact.tagline' | translate }}</p>
+      <h2>{{ 'contact.title' | translate }}</h2>
+      <p>{{ 'contact.body' | translate }}</p>
+      <div class="contact-links">
+        <a class="button" [href]="emailLink">{{ 'contact.cta' | translate }}</a>
+        <div class="secondary-links">
+          <a href="https://github.com/fjbatresv" target="_blank" rel="noopener noreferrer">{{
+            'contact.links.github' | translate
+          }}</a>
+          <a href="https://www.linkedin.com/in/fjbatresv" target="_blank" rel="noopener noreferrer">{{
+            'contact.links.linkedin' | translate
+          }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-fun">
+      <div class="emoji">☕️</div>
+      <p>{{ 'contact.fun' | translate }}</p>
+    </div>
+  </div>
+</section>

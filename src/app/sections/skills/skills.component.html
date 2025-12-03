@@ -1,0 +1,14 @@
+<section id="skills" aria-labelledby="skills-title">
+  <div class="container">
+    <p class="tagline">{{ 'skills.tagline' | translate }}</p>
+    <h2 id="skills-title">{{ 'skills.title' | translate }}</h2>
+    <div class="grid grid-3">
+      <div class="card" *ngFor="let category of categories">
+        <h3>{{ category.titleKey | translate }}</h3>
+        <div class="chips">
+          <span class="badge" *ngFor="let item of category.items">{{ item | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

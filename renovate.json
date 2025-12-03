@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "baseBranches": ["develop"],
+  "labels": ["deps", "automated"],
+  "timezone": "UTC",
+  "schedule": ["after 06:00 on monday"],
+  "rangeStrategy": "bump",
+  "npm": {
+    "automerge": false
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["npm", "github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": false
+    }
+  ]
+}

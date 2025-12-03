@@ -1,0 +1,148 @@
+<header class="navbar">
+  <div class="container navbar__content">
+    <button class="navbar__brand" type="button" (click)="navigate('home')" aria-label="Go home">
+      <img
+        [src]="logoUrl"
+        alt="Javier Batres logo"
+        class="brand-logo"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="brand-name">Javier Batres</div>
+    </button>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu"
+      [attr.aria-expanded]="isMenuOpen"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar__links" aria-label="Primary">
+      <button
+        *ngFor="let item of navItems"
+        type="button"
+        (click)="navigate(item.section)"
+        class="navbar__link"
+        [ngClass]="{ contact: item.section === 'contact' }"
+      >
+        {{ item.labelKey | translate }}
+      </button>
+    </nav>
+
+    <div class="navbar__actions">
+      <button
+        class="icon-button"
+        (click)="toggleTheme()"
+        [attr.aria-label]="'nav.theme' | translate"
+      >
+        <svg *ngIf="currentTheme === 'light'" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M9 21h6M12 2a6 6 0 0 0-6 6c0 2.22 1.2 4.16 3 5.2V15a3 3 0 0 0 6 0v-1.8c1.8-1.04 3-2.98 3-5.2a6 6 0 0 0-6-6Z"
+            stroke="currentColor"
+            stroke-width="1.6"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <circle cx="12" cy="8" r="1.4" fill="currentColor" />
+        </svg>
+        <svg *ngIf="currentTheme === 'dark'" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M9 21h6M12 2a6 6 0 0 0-6 6c0 2.22 1.2 4.16 3 5.2V15a3 3 0 0 0 6 0v-1.8c1.8-1.04 3-2.98 3-5.2a6 6 0 0 0-6-6Z"
+            stroke="currentColor"
+            stroke-width="1.6"
+            fill="currentColor"
+            fill-opacity="0.18"
+            stroke-linecap="round"
+          />
+          <circle cx="12" cy="8" r="1.4" fill="currentColor" />
+        </svg>
+      </button>
+      <div class="language-switch">
+        <button
+          class="lang-btn"
+          [class.active]="currentLanguage === 'en'"
+          (click)="setLanguage('en')"
+        >
+          EN
+        </button>
+        <span class="divider">|</span>
+        <button
+          class="lang-btn"
+          [class.active]="currentLanguage === 'es'"
+          (click)="setLanguage('es')"
+        >
+          ES
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu" *ngIf="isMenuOpen">
+    <nav aria-label="Mobile primary">
+      <button
+        *ngFor="let item of navItems"
+        class="mobile-menu__link"
+        type="button"
+        [class.contact]="item.section === 'contact'"
+        (click)="navigate(item.section)"
+      >
+        {{ item.labelKey | translate }}
+      </button>
+    </nav>
+    <div class="mobile-menu__actions">
+      <div class="mobile__lang">
+        <button
+          class="lang-btn"
+          [class.active]="currentLanguage === 'en'"
+          (click)="setLanguage('en')"
+          type="button"
+        >
+          EN
+        </button>
+        <span class="divider">|</span>
+        <button
+          class="lang-btn"
+          [class.active]="currentLanguage === 'es'"
+          (click)="setLanguage('es')"
+          type="button"
+        >
+          ES
+        </button>
+      </div>
+      <button
+        class="icon-button"
+        (click)="toggleTheme()"
+        [attr.aria-label]="'nav.theme' | translate"
+        type="button"
+      >
+        <svg *ngIf="currentTheme === 'light'" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M9 21h6M12 2a6 6 0 0 0-6 6c0 2.22 1.2 4.16 3 5.2V15a3 3 0 0 0 6 0v-1.8c1.8-1.04 3-2.98 3-5.2a6 6 0 0 0-6-6Z"
+            stroke="currentColor"
+            stroke-width="1.6"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <circle cx="12" cy="8" r="1.4" fill="currentColor" />
+        </svg>
+        <svg *ngIf="currentTheme === 'dark'" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M9 21h6M12 2a6 6 0 0 0-6 6c0 2.22 1.2 4.16 3 5.2V15a3 3 0 0 0 6 0v-1.8c1.8-1.04 3-2.98 3-5.2a6 6 0 0 0-6-6Z"
+            stroke="currentColor"
+            stroke-width="1.6"
+            fill="currentColor"
+            fill-opacity="0.18"
+            stroke-linecap="round"
+          />
+          <circle cx="12" cy="8" r="1.4" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>

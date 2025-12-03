@@ -1,0 +1,229 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "career": "Carrera",
+    "toolkit": "Toolkit",
+    "highlights": "Destacados",
+    "notes": "Notas",
+    "contact": "Contacto",
+    "theme": "Cambiar tema"
+  },
+  "hero": {
+    "tagline": "Arquitectura en la nube, código y café",
+    "subtitle": "Arquitecto de Soluciones · Sr Full Stack Engineer · Tech Lead",
+    "summary": "Javier diseña y entrega software escalable para empresas: arquitecturas cloud-first, backends confiables y frontends que se sienten fluidos.",
+    "cta": {
+      "experience": "Ver experiencia",
+      "projects": "Ver proyectos"
+    },
+    "badges": {
+      "cloud": "Cloud y DevOps",
+      "fullstack": "NestJS y Angular",
+      "cloudmix": "AWS / Azure",
+      "quality": "CI/CD y Observabilidad"
+    },
+    "cards": {
+      "cloud": {
+        "title": "Arquitectura",
+        "desc": "Flujos event-driven, alta disponibilidad y gobierno para banca y healthtech."
+      },
+      "coffee": {
+        "title": "Café y curiosidad",
+        "desc": "Barista aficionado, gamer e investigador. Siempre acompañado de Gaia, la Newfoundland de la familia."
+      }
+    }
+  },
+  "about": {
+    "tagline": "Perfil",
+    "title": "Sobre Javier",
+    "body": {
+      "one": "Soy Fernando Javier Batres Velásquez, arquitecto de soluciones guatemalteco con más de 10 años construyendo software para banca, healthtech y equipos enterprise.",
+      "two": "Me enfoco en backend y plataformas cloud—NestJS, Angular, AWS, Azure—y lidero equipos con microservicios, diseños event-driven y CI/CD que entrega con seguridad.",
+      "three": "Fuera de la tecnología soy barista, gamer e investigador; disfruto explorar con mi esposa y nuestro perro Newfoundland, Gaia.",
+      "four": "Alineo arquitectura con resultados de negocio, formo cultura de ingeniería y combino mentoría con delivery práctico."
+    },
+    "list": {
+      "title": "Lo que lo mueve",
+      "items": {
+        "cloud": "Fundamentos cloud",
+        "devops": "Automatización y DevOps",
+        "architecture": "Decisiones de arquitectura",
+        "mentoring": "Mentoría de equipos"
+      }
+    },
+    "highlights": {
+      "years": { "label": "Experiencia", "value": "años entregando software enterprise" },
+      "mentoring": {
+        "label": "Mentoría",
+        "value": "Forma ingenieros y lidera equipos de delivery"
+      },
+      "personal": { "label": "Humano", "value": "Café, juegos, investigación y Gaia" }
+    }
+  },
+  "experience": {
+    "tagline": "Carrera",
+    "title": "Experiencia seleccionada",
+    "gtc": {
+      "role": "Arquitecto de Soluciones",
+      "b1": "Lideró Journey to Cloud con landing zones en Azure, gobierno y plantillas DevOps.",
+      "b2": "Diseñó integraciones híbridas y observabilidad para servicios bancarios críticos.",
+      "b3": "Guió equipos en seguridad, cumplimiento y patrones de escalabilidad.",
+      "b4": "Trabajó con liderazgo para alinear roadmap, presupuesto y arquitectura."
+    },
+    "halo": {
+      "role": "Sr Full Stack Developer",
+      "b1": "Construyó plataformas NestJS + Angular en AWS con MongoDB y pipelines event-driven.",
+      "b2": "Implementó CI/CD con GitHub Actions y calidad con SonarQube.",
+      "b3": "Optimizó rendimiento y confiabilidad en apps enterprise ricas en media."
+    },
+    "truelogic": {
+      "role": "Sr Full Stack Lead Developer",
+      "b1": "Lideró delivery en React + NestJS para iniciativas blockchain/NFT.",
+      "b2": "Arquitectó cargas en AWS con colas, lambdas y APIs seguras.",
+      "b3": "Mentoró escuadras y reforzó buenas prácticas."
+    },
+    "yalutec": {
+      "role": "Tech Lead",
+      "b1": "Entregó soluciones de pago e integraciones Migo con servicios resilientes.",
+      "b2": "Coordinó equipos multifuncionales y decisiones técnicas.",
+      "b3": "Mejoró la confiabilidad de despliegues con pipelines automatizados."
+    },
+    "paypal": {
+      "role": "Sr Full Stack Developer",
+      "b1": "Contribuyó a servicios fintech a gran escala con enfoque en calidad y seguridad.",
+      "b2": "Mejoró observabilidad y rendimiento en flujos críticos.",
+      "b3": "Colaboró con equipos globales para entregar features."
+    },
+    "early": {
+      "role": "Developer y Mentor",
+      "b1": "Construyó plataformas en Novuskills, Progrentis y equipos early-stage.",
+      "b2": "Introdujo hábitos de pruebas, automatización y documentación.",
+      "b3": "Entregó features full stack mientras fortalecía la cultura técnica."
+    }
+  },
+  "skills": {
+    "tagline": "Toolkit",
+    "title": "Habilidades y stack",
+    "cloud": "Cloud y DevOps",
+    "backend": "Backend",
+    "frontend": "Frontend",
+    "databases": "Bases de datos",
+    "devops": "Pipelines y calidad",
+    "soft": "Liderazgo y soft skills",
+    "items": {
+      "aws": "AWS",
+      "azure": "Azure básico",
+      "lambdas": "Lambdas",
+      "eventbridge": "EventBridge",
+      "sqs": "SQS",
+      "cloudwatch": "CloudWatch",
+      "xray": "X-Ray",
+      "node": "Node.js",
+      "nest": "NestJS",
+      "ts": "TypeScript",
+      "python": "Python (Lambdas)",
+      "rest": "APIs REST",
+      "microservices": "Microservicios",
+      "angular": "Angular",
+      "react": "React",
+      "nx": "Monorepos con Nx",
+      "mongodb": "MongoDB",
+      "mysql": "MySQL",
+      "dynamodb": "DynamoDB",
+      "rds": "RDS",
+      "redis": "Redis",
+      "cicd": "CI/CD",
+      "github": "GitHub Actions",
+      "sonarqube": "SonarQube",
+      "observability": "Observabilidad",
+      "docker": "Docker",
+      "kubernetes": "Kubernetes básico",
+      "architecture": "Decisiones de arquitectura",
+      "mentoring": "Mentoría",
+      "leadership": "Liderazgo",
+      "writing": "Redacción técnica"
+    }
+  },
+  "projects": {
+    "tagline": "Destacados",
+    "title": "Proyectos destacados",
+    "view": "Abrir",
+    "titles": {
+      "journey": "Journey to Cloud",
+      "vip": "Mercer VIP",
+      "peto": "Peto",
+      "sinergia": "Sinergia Dorada GT",
+      "capriccio": "Hecho Capriccio",
+      "sar": "Plataforma SAR",
+      "ascend": "Ascend (Novuskills)"
+    },
+    "journey": "Programa de migración a la nube bancaria con gobierno, observabilidad y flujos de datos resilientes.",
+    "vip": "Plataforma enterprise para Mercer con NestJS + Angular + AWS y flujos orquestados con colas.",
+    "peto": "SaaS de cuidado de mascotas con historiales de salud, recordatorios y analítica.",
+    "sinergia": "Sitio corporativo para Sinergia Dorada GT con contenido dinámico, hosting en la nube y analítica.",
+    "capriccio": "Experiencia e-commerce para Hecho Capriccio con un stack Angular + NestJS de alto rendimiento.",
+    "sar": "Plataforma cloud-native en AWS con automatización serverless, middleware de autenticación seguro y observabilidad (X-Ray, Sentry, CloudWatch). Monorepo Nx con librerías compartidas y CI/CD a medida.",
+    "ascend": "MVPs de Ascend en móvil/escritorio/web: apps Flutter, integraciones GCP (SQL/NoSQL) y experiencias basadas en neurociencia con BrainCo y Dale Carnegie.",
+    "tags": {
+      "banking": "Banca",
+      "azure": "Azure",
+      "governance": "Gobernanza",
+      "nestjs": "NestJS",
+      "angular": "Angular",
+      "aws": "AWS",
+      "queues": "Colas",
+      "event": "Eventos",
+      "health": "Salud",
+      "saas": "SaaS",
+      "ai": "IA",
+      "automation": "Automatización",
+      "openapi": "OpenAPI",
+      "coffee": "Café",
+      "brand": "Marca",
+      "content": "Contenido",
+      "lambdas": "Lambdas",
+      "nx": "Nx",
+      "flutter": "Flutter",
+      "gcp": "GCP",
+      "mobile": "Móvil",
+      "nosql": "NoSQL"
+    }
+  },
+  "writing": {
+    "tagline": "Notas",
+    "title": "Escritura y charlas",
+    "read": "Leer más",
+    "item1": {
+      "title": "Diseñando sistemas event-driven observables",
+      "summary": "Patrones para rastrear y depurar arquitecturas de mensajes entre equipos. (Medium)"
+    },
+    "item2": {
+      "title": "Guardrails de CI/CD en entornos regulados",
+      "summary": "Cómo entregar más rápido cumpliendo gobierno para banca y healthtech. (dev.to)"
+    },
+    "item3": {
+      "title": "Preparando mejores culturas de ingeniería",
+      "summary": "Lecciones de mentoría y de unir liderazgo con craft. (Medium)"
+    }
+  },
+  "contact": {
+    "tagline": "Colaboremos",
+    "title": "Listo para tu siguiente build",
+    "body": "Disponible para consultoría, revisiones de arquitectura y delivery de productos en cloud y full stack.",
+    "cta": "Escríbeme",
+    "fun": "Hablemos de café, retos de arquitectura o el próximo juego que quieres probar.",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "footer": {
+    "copy": "Javier Batres. Construido con Angular.",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
+    }
+  }
+}
