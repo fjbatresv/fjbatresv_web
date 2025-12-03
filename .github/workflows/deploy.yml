@@ -45,6 +45,7 @@ jobs:
             sentryDsn: '${SENTRY_DSN}'
           };
           EOF
+          npx prettier --write "src/environments/*.ts"
 
       - name: Lint
         run: npm run lint
