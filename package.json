@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "gitmoji-cli": "^9.7.0",
     "husky": "^9.1.6",
-    "jasmine-core": "~5.1.1",
+    "jasmine-core": "~5.13.0",
     "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
