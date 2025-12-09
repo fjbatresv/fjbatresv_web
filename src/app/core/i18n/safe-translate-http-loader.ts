@@ -4,6 +4,15 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import * as Sentry from '@sentry/browser';
 
+/**
+ * Report a translation file load failure to the error tracking system.
+ *
+ * Sends a warning-level message with the key "Translation load failed" and includes
+ * the language and HTTP error metadata as extra context.
+ *
+ * @param lang - The language code whose translation failed to load (e.g., "en", "fr").
+ * @param error - HTTP error details; may include `status` (HTTP status code), `statusText`, and the requested `url`.
+ */
 export function reportTranslationLoadFailure(
   lang: string,
   error: { status?: number; statusText?: string; url?: string }
