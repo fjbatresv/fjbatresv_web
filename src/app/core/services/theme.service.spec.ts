@@ -48,4 +48,11 @@ describe('ThemeService', () => {
     expect(localStorage.getItem('fj-theme')).toBe(service.theme);
     expect(document.body.classList.contains(`theme-${service.theme}`)).toBeTrue();
   });
+
+  it('should fall back to light when storage is unavailable', () => {
+    spyOnProperty(window, 'localStorage', 'get').and.throwError('denied');
+
+    const blockedService = TestBed.runInInjectionContext(() => new ThemeService());
+    expect(blockedService.theme).toBe('light');
+  });
 });
