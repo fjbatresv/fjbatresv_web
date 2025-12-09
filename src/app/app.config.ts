@@ -10,6 +10,11 @@ import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 import { SafeTranslateHttpLoader } from './core/i18n/safe-translate-http-loader';
 
+/**
+ * Creates a TranslateLoader that loads translation JSON files from ./assets/i18n/.
+ *
+ * @returns A TranslateLoader that loads locale files from './assets/i18n/' using the '.json' suffix
+ */
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new SafeTranslateHttpLoader(http, './assets/i18n/', '.json');
 }
