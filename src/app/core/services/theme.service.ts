@@ -13,12 +13,14 @@ export class ThemeService {
 
   toggleTheme(): void {
     this.theme = this.theme === 'light' ? 'dark' : 'light';
-    localStorage.setItem(this.storageKey, this.theme);
+    const storage = this.getStorage();
+    storage?.setItem?.(this.storageKey, this.theme);
     this.applyThemeClass();
   }
 
   private getInitialTheme(): 'light' | 'dark' {
-    const stored = localStorage.getItem(this.storageKey) as 'light' | 'dark' | null;
+    const storage = this.getStorage();
+    const stored = storage?.getItem?.(this.storageKey) as 'light' | 'dark' | null;
     if (stored) {
       return stored;
     }
@@ -31,5 +33,13 @@ export class ThemeService {
   private applyThemeClass(): void {
     this.document.body.classList.remove('theme-light', 'theme-dark');
     this.document.body.classList.add(`theme-${this.theme}`);
+  }
+
+  private getStorage(): Storage | null {
+    try {
+      return typeof localStorage !== 'undefined' ? localStorage : null;
+    } catch {
+      return null;
+    }
   }
 }
