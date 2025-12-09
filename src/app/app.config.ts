@@ -3,15 +3,15 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import * as Sentry from '@sentry/browser';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
+import { SafeTranslateHttpLoader } from './core/i18n/safe-translate-http-loader';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new SafeTranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const sentryDsn = environment.sentryDsn;
