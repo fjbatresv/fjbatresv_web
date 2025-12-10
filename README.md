@@ -1,11 +1,7 @@
 # Javier Batres – Personal Site (Angular)
 
-<!-- markdownlint-disable-next-line MD033 -->
-<div align="center">
-  <img src="src/assets/logo.webp" alt="Javier Batres logo" width="96" height="96" />
-</div>
-
-![CI](https://img.shields.io/github/actions/workflow/status/fjbatresv/fjbatresv_web/ci.yml?branch=develop&label=CI&logo=github)
+[![CI (lint & test)](https://github.com/fjbatresv/fjbatresv_web/actions/workflows/ci.yml/badge.svg)](https://github.com/fjbatresv/fjbatresv_web/actions/workflows/ci.yml)
+[![Build and Deploy to S3](https://github.com/fjbatresv/fjbatresv_web/actions/workflows/deploy.yml/badge.svg)](https://github.com/fjbatresv/fjbatresv_web/actions/workflows/deploy.yml)
 ![Angular](https://img.shields.io/badge/Angular-21.x-dd0031?logo=angular)
 ![Node](https://img.shields.io/badge/Node-24.x-026e00?logo=node.js)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)

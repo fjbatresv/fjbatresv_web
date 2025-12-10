@@ -4,20 +4,46 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import * as Sentry from '@sentry/browser';
 
+export const runtimeContext = {
+  hasKarma: (): boolean => {
+    const globalObj = globalThis as typeof globalThis & { __karma__?: unknown };
+    return Boolean(globalObj.__karma__);
+  },
+  hasJasmine: (): boolean => {
+    const globalObj = globalThis as typeof globalThis & { jasmine?: unknown };
+    return Boolean(globalObj.jasmine);
+  },
+  pathname: (): string => (typeof location === 'undefined' ? '' : location.pathname),
+};
+
+const isTestRun = (): boolean =>
+  runtimeContext.hasKarma() ||
+  runtimeContext.hasJasmine() ||
+  runtimeContext.pathname().includes('context.html');
+
+export const sentryClient = {
+  captureMessage: Sentry.captureMessage.bind(Sentry),
+};
+
 /**
  * Report a translation file load failure to the error tracking system.
  *
- * Sends a warning-level message with the key "Translation load failed" and includes
- * the language and HTTP error metadata as extra context.
+ * Does nothing when running in a test environment; otherwise sends a warning-level
+ * message labeled "Translation load failed" with the language and HTTP error metadata
+ * included as extra context.
  *
- * @param lang - The language code whose translation failed to load (e.g., "en", "fr").
- * @param error - HTTP error details; may include `status` (HTTP status code), `statusText`, and the requested `url`.
+ * @param lang - Language code whose translation failed to load (e.g., "en", "fr")
+ * @param error - HTTP error details; may include `status`, `statusText`, and `url`
  */
 export function reportTranslationLoadFailure(
   lang: string,
   error: { status?: number; statusText?: string; url?: string }
 ): void {
-  Sentry.captureMessage('Translation load failed', {
+  if (isTestRun()) {
+    return;
+  }
+
+  sentryClient.captureMessage('Translation load failed', {
     level: 'warning',
     extra: {
       lang,

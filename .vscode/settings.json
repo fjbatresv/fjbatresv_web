@@ -6,5 +6,10 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "fjbatresv",
         "projectKey": "fjbatresv_fjbatresv_web"
-    }
+    },
+    "cSpell.words": [
+        "sonarcloud",
+        "sourcemaps",
+        "theming"
+    ]
 }

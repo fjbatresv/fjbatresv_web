@@ -9,8 +9,18 @@ import { appConfig } from './app/app.config';
  * @param bootstrapFn - Optional custom bootstrap function to initialize the root component; defaults to Angular's `bootstrapApplication`.
  * @returns The value produced by the bootstrap function when successful, or `undefined` if bootstrapping fails (errors are logged to the console).
  */
+export const bootstrapAdapter = {
+  bootstrap: bootstrapApplication,
+};
+
+/**
+ * Start the Angular application using the provided bootstrap function.
+ *
+ * @param bootstrapFn - Function used to bootstrap the root `AppComponent`; defaults to `bootstrapAdapter.bootstrap`.
+ * @returns The value produced by the bootstrap function, or `undefined` if an error occurred.
+ */
 export function bootstrapApp(
-  bootstrapFn: typeof bootstrapApplication = bootstrapApplication
+  bootstrapFn: typeof bootstrapApplication = bootstrapAdapter.bootstrap
 ): Promise<unknown> {
   return bootstrapFn(AppComponent, appConfig).catch((err) => console.error(err));
 }
