@@ -9,6 +9,7 @@
 ![Angular](https://img.shields.io/badge/Angular-21.x-dd0031?logo=angular)
 ![Node](https://img.shields.io/badge/Node-24.x-026e00?logo=node.js)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=fjbatresv_fjbatresv_web)](https://sonarcloud.io/summary/new_code?id=fjbatresv_fjbatresv_web)
 
 Front-end-only personal website for Fernando Javier Batres Velásquez (Javier). Built with Angular, TypeScript, ngx-translate (EN/ES), and light/dark theming. Static-host ready.
 
