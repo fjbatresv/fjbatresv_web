@@ -17,7 +17,11 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/javier-batres-site'),
       subdir: '.',
-      reporters: [{ type: 'html' }, { type: 'text-summary' }]
+      reporters: [
+        { type: 'html' },
+        { type: 'text-summary' },
+        { type: 'lcovonly' }
+      ]
     },
     reporters: ['progress', 'kjhtml'],
     port: 9877,
