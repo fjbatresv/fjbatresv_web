@@ -12,7 +12,12 @@ describe('NavbarComponent', () => {
     theme: 'light' as 'light' | 'dark',
     toggleTheme: jasmine.createSpy('toggleTheme'),
   };
-  const translationServiceMock = { setLanguage: jasmine.createSpy('setLanguage') };
+  const translationServiceMock = {
+    language: 'es' as 'en' | 'es' | undefined,
+    setLanguage: jasmine.createSpy('setLanguage').and.callFake((lang: 'en' | 'es') => {
+      translationServiceMock.language = lang;
+    }),
+  };
   const translateServiceMock = { currentLang: 'es' };
 
   beforeEach(async () => {
@@ -29,6 +34,7 @@ describe('NavbarComponent', () => {
     themeServiceMock.toggleTheme.calls.reset();
     translationServiceMock.setLanguage.calls.reset();
     translateServiceMock.currentLang = 'es';
+    translationServiceMock.language = 'es';
   });
 
   it('navigates and closes menu', () => {
@@ -58,7 +64,7 @@ describe('NavbarComponent', () => {
   });
 
   it('falls back to default language when none set', () => {
-    translateServiceMock.currentLang = undefined as any;
+    translationServiceMock.language = undefined;
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     expect(component.currentLanguage).toBe('en');
   });

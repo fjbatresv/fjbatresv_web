@@ -69,6 +69,22 @@ describe('TranslationService', () => {
     expect(setLanguageSpy).toHaveBeenCalledWith('es');
   });
 
+  it('setLanguage still works when localStorage is unavailable', () => {
+    spyOnProperty(window, 'localStorage', 'get').and.returnValue(undefined as unknown as Storage);
+
+    service.setLanguage('en');
+
+    expect(translateSpy.use).toHaveBeenCalledWith('en');
+    expect(translateSpy.setFallbackLang).toHaveBeenCalledWith('en');
+    expect(docMock.documentElement.lang).toBe('en');
+  });
+
+  it('exposes the current language through the getter', () => {
+    service.setLanguage('es');
+
+    expect(service.language).toBe('es');
+  });
+
   it('handles storage access errors gracefully', () => {
     spyOnProperty(window, 'localStorage', 'get').and.throwError('blocked');
     const consoleSpy = spyOn(console, 'warn');

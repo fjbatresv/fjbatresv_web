@@ -1,7 +1,6 @@
 import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import * as Sentry from '@sentry/browser';
 
@@ -53,11 +52,9 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })
     ),
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimationsAsync(),
     { provide: ErrorHandler, useClass: SentryErrorHandler },
     importProvidersFrom(
       TranslateModule.forRoot({
-        defaultLanguage: 'en',
         fallbackLang: 'en',
         loader: {
           provide: TranslateLoader,
