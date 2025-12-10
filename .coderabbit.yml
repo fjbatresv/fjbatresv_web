@@ -1,6 +1,5 @@
-version: 1
 language: es
-
+early_access: true
 reviews:
   auto_review:
     enabled: true
@@ -13,6 +12,9 @@ reviews:
       - "Draft"
   high_level_summary: true
   request_changes_workflow: true
+  review_status: true
+  poem: true
+  collapse_walkthrough: false
   path_filters:
     - "!node_modules/**"
     - "!dist/**"
