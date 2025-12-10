@@ -13,6 +13,12 @@ export const bootstrapAdapter = {
   bootstrap: bootstrapApplication,
 };
 
+/**
+ * Start the Angular application using the provided bootstrap function.
+ *
+ * @param bootstrapFn - Function used to bootstrap the root `AppComponent`; defaults to `bootstrapAdapter.bootstrap`.
+ * @returns The value produced by the bootstrap function, or `undefined` if an error occurred.
+ */
 export function bootstrapApp(
   bootstrapFn: typeof bootstrapApplication = bootstrapAdapter.bootstrap
 ): Promise<unknown> {
