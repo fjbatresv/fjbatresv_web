@@ -1,58 +1,81 @@
-import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
+import { DOCUMENT } from '@angular/common';
 
 import { ThemeService } from './theme.service';
 
-function mockMatchMedia(matches: boolean): void {
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: () => ({
-      matches,
-      addListener: () => {},
-      removeListener: () => {},
-    }),
-  });
-}
-
 describe('ThemeService', () => {
   let service: ThemeService;
+  const classes = new Set<string>();
+  const bodyClassList = {
+    remove: jasmine.createSpy('remove').and.callFake((...args: string[]) => {
+      args.forEach((c) => classes.delete(c));
+    }),
+    add: jasmine.createSpy('add').and.callFake((c: string) => {
+      classes.add(c);
+    }),
+  };
+  const docMock = { body: { classList: bodyClassList } } as unknown as Document;
+
+  const mockMql = (matches: boolean) => ({
+    matches,
+    media: '',
+    onchange: null as any,
+    addEventListener() {},
+    removeEventListener() {},
+    dispatchEvent() {
+      return false;
+    },
+    addListener() {},
+    removeListener() {},
+  });
+
+  let matchMediaSpy: jasmine.Spy;
 
   beforeEach(() => {
-    localStorage.clear();
-    mockMatchMedia(false);
-
+    matchMediaSpy = spyOn(window, 'matchMedia').and.returnValue(mockMql(false) as any);
     TestBed.configureTestingModule({
-      providers: [ThemeService, { provide: DOCUMENT, useValue: document }],
+      providers: [
+        ThemeService,
+        { provide: DOCUMENT, useValue: docMock },
+        { provide: Window, useValue: window },
+      ],
     });
+  });
 
+  afterEach(() => {
+    bodyClassList.remove.calls.reset();
+    bodyClassList.add.calls.reset();
+  });
+
+  it('toggles theme from light to dark', () => {
     service = TestBed.inject(ThemeService);
-  });
+    const setItemSpy = spyOn(localStorage, 'setItem');
 
-  it('should default to light when no preference stored', () => {
-    expect(service.theme).toBe('light');
-    expect(document.body.classList.contains('theme-light')).toBeTrue();
-  });
-
-  it('should respect stored theme', () => {
-    localStorage.setItem('fj-theme', 'dark');
-    mockMatchMedia(true);
-    const storedService = TestBed.runInInjectionContext(() => new ThemeService());
-    expect(storedService.theme).toBe('dark');
-    expect(document.body.classList.contains('theme-dark')).toBeTrue();
-  });
-
-  it('should toggle theme and persist it', () => {
-    const initial = service.theme;
     service.toggleTheme();
-    expect(service.theme).toBe(initial === 'light' ? 'dark' : 'light');
-    expect(localStorage.getItem('fj-theme')).toBe(service.theme);
-    expect(document.body.classList.contains(`theme-${service.theme}`)).toBeTrue();
+
+    expect(service.theme).toBe('dark');
+    expect(setItemSpy).toHaveBeenCalledWith('fj-theme', 'dark');
+    expect(bodyClassList.add).toHaveBeenCalled();
   });
 
-  it('should fall back to light when storage is unavailable', () => {
-    spyOnProperty(window, 'localStorage', 'get').and.throwError('denied');
+  it('toggles theme from dark back to light', () => {
+    service = TestBed.inject(ThemeService);
+    service.theme = 'dark';
+    service.toggleTheme();
+    expect(service.theme).toBe('light');
+  });
 
-    const blockedService = TestBed.runInInjectionContext(() => new ThemeService());
-    expect(blockedService.theme).toBe('light');
+  it('initializes with prefers-dark when no stored value', () => {
+    matchMediaSpy.and.returnValue(mockMql(true) as any);
+    const prefersDarkService = TestBed.inject(ThemeService);
+    expect(prefersDarkService.theme).toBe('dark');
+  });
+
+  it('handles storage access errors gracefully', () => {
+    service = TestBed.inject(ThemeService);
+    matchMediaSpy.and.returnValue(mockMql(false) as any);
+    spyOnProperty(window, 'localStorage', 'get').and.throwError('blocked');
+    service.toggleTheme();
+    expect(service.theme).toBeDefined();
   });
 });

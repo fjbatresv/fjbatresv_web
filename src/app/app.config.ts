@@ -20,6 +20,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 }
 
 const sentryDsn = environment.sentryDsn;
+/* istanbul ignore next -- Sentry init is environment-specific */
 if (sentryDsn) {
   Sentry.init({
     dsn: sentryDsn,
