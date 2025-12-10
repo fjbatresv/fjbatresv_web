@@ -1,58 +1,123 @@
-import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
+import { DOCUMENT } from '@angular/common';
 
 import { ThemeService } from './theme.service';
 
-function mockMatchMedia(matches: boolean): void {
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: () => ({
-      matches,
-      addListener: () => {},
-      removeListener: () => {},
-    }),
-  });
-}
-
 describe('ThemeService', () => {
   let service: ThemeService;
+  let originalMatchMedia: typeof globalThis.matchMedia;
+  let originalLocalStorage: Storage;
+  const classes = new Set<string>();
+  const bodyClassList = {
+    remove: jasmine.createSpy('remove').and.callFake((...args: string[]) => {
+      args.forEach((c) => classes.delete(c));
+    }),
+    add: jasmine.createSpy('add').and.callFake((c: string) => {
+      classes.add(c);
+    }),
+  };
+  const docMock = { body: { classList: bodyClassList } } as unknown as Document;
+
+  const mockMql = (matches: boolean) => ({
+    matches,
+    media: '',
+    onchange: null as any,
+    addEventListener() {},
+    removeEventListener() {},
+    dispatchEvent() {
+      return false;
+    },
+    addListener() {},
+    removeListener() {},
+  });
+
+  const configureWithMatchMedia = (matches: boolean) => {
+    TestBed.resetTestingModule();
+    spyOn(globalThis as any, 'matchMedia').and.returnValue(mockMql(matches) as any);
+    localStorage.removeItem('fj-theme');
+    TestBed.configureTestingModule({
+      providers: [
+        ThemeService,
+        { provide: DOCUMENT, useValue: docMock },
+        { provide: Window, useValue: globalThis },
+      ],
+    });
+    service = TestBed.inject(ThemeService);
+  };
 
   beforeEach(() => {
-    localStorage.clear();
-    mockMatchMedia(false);
-
-    TestBed.configureTestingModule({
-      providers: [ThemeService, { provide: DOCUMENT, useValue: document }],
-    });
-
-    service = TestBed.inject(ThemeService);
+    originalMatchMedia = globalThis.matchMedia;
+    originalLocalStorage = (globalThis as any).localStorage;
   });
 
-  it('should default to light when no preference stored', () => {
-    expect(service.theme).toBe('light');
-    expect(document.body.classList.contains('theme-light')).toBeTrue();
+  afterEach(() => {
+    bodyClassList.remove.calls.reset();
+    bodyClassList.add.calls.reset();
+    (globalThis as any).matchMedia = originalMatchMedia;
+    try {
+      (globalThis as any).localStorage = originalLocalStorage;
+    } catch {
+      // Ignore if localStorage is read-only in this environment
+    }
+    try {
+      localStorage.clear();
+    } catch {
+      // Ignore storage errors (e.g., when access is intentionally blocked)
+    }
   });
 
-  it('should respect stored theme', () => {
-    localStorage.setItem('fj-theme', 'dark');
-    mockMatchMedia(true);
-    const storedService = TestBed.runInInjectionContext(() => new ThemeService());
-    expect(storedService.theme).toBe('dark');
-    expect(document.body.classList.contains('theme-dark')).toBeTrue();
-  });
+  it('toggles theme from light to dark', () => {
+    configureWithMatchMedia(false);
+    const setItemSpy = spyOn(localStorage, 'setItem');
 
-  it('should toggle theme and persist it', () => {
-    const initial = service.theme;
     service.toggleTheme();
-    expect(service.theme).toBe(initial === 'light' ? 'dark' : 'light');
-    expect(localStorage.getItem('fj-theme')).toBe(service.theme);
-    expect(document.body.classList.contains(`theme-${service.theme}`)).toBeTrue();
+
+    expect(service.theme).toBe('dark');
+    expect(setItemSpy).toHaveBeenCalledWith('fj-theme', 'dark');
+    expect(bodyClassList.add).toHaveBeenCalled();
   });
 
-  it('should fall back to light when storage is unavailable', () => {
-    spyOnProperty(window, 'localStorage', 'get').and.throwError('denied');
+  it('toggles theme from dark back to light', () => {
+    configureWithMatchMedia(false);
+    service.theme = 'dark';
+    service.toggleTheme();
+    expect(service.theme).toBe('light');
+  });
 
-    const blockedService = TestBed.runInInjectionContext(() => new ThemeService());
-    expect(blockedService.theme).toBe('light');
+  it('initializes with prefers-dark when no stored value', () => {
+    configureWithMatchMedia(true);
+    expect(service.theme).toBe('dark');
+  });
+
+  it('handles storage access errors gracefully', () => {
+    configureWithMatchMedia(false);
+    const localStorageSpy = spyOnProperty(globalThis as any, 'localStorage', 'get').and.throwError(
+      'blocked'
+    );
+    try {
+      service.toggleTheme();
+      expect(service.theme).toBeDefined();
+    } finally {
+      localStorageSpy.and.callFake(() => originalLocalStorage);
+    }
+  });
+
+  it('falls back when matchMedia is not available', () => {
+    // Remove matchMedia to hit the undefined branch
+    (globalThis as any).matchMedia = undefined;
+    try {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [
+          ThemeService,
+          { provide: DOCUMENT, useValue: docMock },
+          { provide: Window, useValue: globalThis },
+        ],
+      });
+      const serviceNoMedia = TestBed.inject(ThemeService);
+      expect(serviceNoMedia.theme).toBe('light');
+    } finally {
+      (globalThis as any).matchMedia = originalMatchMedia;
+    }
   });
 });

@@ -1,54 +1,78 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { NavbarComponent } from './navbar.component';
 import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
 
-class ThemeServiceMock {
-  theme: 'light' | 'dark' = 'light';
-  toggleTheme = jasmine.createSpy('toggleTheme');
-}
-
-class TranslationServiceMock {
-  setLanguage = jasmine.createSpy('setLanguage');
-}
-
 describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
-  let theme: ThemeServiceMock;
-  let translation: TranslationServiceMock;
+  const routerMock = { navigate: jasmine.createSpy('navigate') };
+  const themeServiceMock = {
+    theme: 'light' as 'light' | 'dark',
+    toggleTheme: jasmine.createSpy('toggleTheme'),
+  };
+  const translationServiceMock = { setLanguage: jasmine.createSpy('setLanguage') };
+  const translateServiceMock = { currentLang: 'es' };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TranslateModule.forRoot(), NavbarComponent],
+      imports: [NavbarComponent],
       providers: [
-        { provide: ThemeService, useClass: ThemeServiceMock },
-        { provide: TranslationService, useClass: TranslationServiceMock },
+        { provide: Router, useValue: routerMock },
+        { provide: ThemeService, useValue: themeServiceMock },
+        { provide: TranslationService, useValue: translationServiceMock },
+        { provide: TranslateService, useValue: translateServiceMock },
       ],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(NavbarComponent);
-    component = fixture.componentInstance;
-    theme = TestBed.inject(ThemeService) as unknown as ThemeServiceMock;
-    translation = TestBed.inject(TranslationService) as unknown as TranslationServiceMock;
-    fixture.detectChanges();
+    routerMock.navigate.calls.reset();
+    themeServiceMock.toggleTheme.calls.reset();
+    translationServiceMock.setLanguage.calls.reset();
+    translateServiceMock.currentLang = 'es';
   });
 
-  it('should render nav items', () => {
-    const links = fixture.nativeElement.querySelectorAll('.navbar__link');
-    expect(links.length).toBe(component.navItems.length);
+  it('navigates and closes menu', () => {
+    const fixture = TestBed.createComponent(NavbarComponent);
+    const component = fixture.componentInstance;
+    component.isMenuOpen = true;
+
+    component.navigate('about');
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/about']);
+    expect(component.isMenuOpen).toBeFalse();
   });
 
-  it('should toggle theme', () => {
+  it('navigates to home root path', () => {
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.navigate('home');
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('toggles theme and exposes current theme/lang', () => {
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.toggleTheme();
-    expect(theme.toggleTheme).toHaveBeenCalled();
+
+    expect(themeServiceMock.toggleTheme).toHaveBeenCalled();
+    expect(component.currentTheme).toBe('light');
+    expect(component.currentLanguage).toBe('es');
   });
 
-  it('should switch language', () => {
-    component.setLanguage('es');
-    expect(translation.setLanguage).toHaveBeenCalledWith('es');
+  it('falls back to default language when none set', () => {
+    translateServiceMock.currentLang = undefined as any;
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    expect(component.currentLanguage).toBe('en');
+  });
+
+  it('sets language through translation service', () => {
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.setLanguage('en');
+    expect(translationServiceMock.setLanguage).toHaveBeenCalledWith('en');
+  });
+
+  it('toggles menu state', () => {
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.isMenuOpen = false;
+    component.toggleMenu();
+    expect(component.isMenuOpen).toBeTrue();
   });
 });

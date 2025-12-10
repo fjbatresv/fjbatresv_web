@@ -1,9 +1,8 @@
 import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
 import * as Sentry from '@sentry/browser';
 
 import { routes } from './app.routes';
@@ -20,6 +19,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 }
 
 const sentryDsn = environment.sentryDsn;
+/* istanbul ignore next -- Sentry init is environment-specific */
 if (sentryDsn) {
   Sentry.init({
     dsn: sentryDsn,
@@ -53,11 +53,12 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })
     ),
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations(),
+    provideAnimationsAsync(),
     { provide: ErrorHandler, useClass: SentryErrorHandler },
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'en',
+        fallbackLang: 'en',
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,

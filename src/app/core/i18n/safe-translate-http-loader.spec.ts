@@ -1,52 +1,62 @@
+import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-
 import { SafeTranslateHttpLoader } from './safe-translate-http-loader';
 
 describe('SafeTranslateHttpLoader', () => {
   let httpMock: HttpTestingController;
-  let loader: SafeTranslateHttpLoader;
+  let http: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
-
     httpMock = TestBed.inject(HttpTestingController);
-    loader = new SafeTranslateHttpLoader(TestBed.inject(HttpClient));
+    http = TestBed.inject(HttpClient);
   });
 
   afterEach(() => {
     httpMock.verify();
   });
 
-  it('returns translations when the request succeeds', () => {
-    const expected = { greeting: 'Hi' };
-    let result: Record<string, unknown> | undefined;
+  it('returns translations on success', (done) => {
+    const loader = new SafeTranslateHttpLoader(http, 'prefix/', '.json');
 
-    loader.getTranslation('en').subscribe((translations) => {
-      result = translations;
+    loader.getTranslation('en').subscribe((res) => {
+      const result = res as Record<string, unknown>;
+      expect(result).toEqual({ hello: 'hi' });
+      done();
     });
 
-    const request = httpMock.expectOne('./assets/i18n/en.json');
-    request.flush(expected);
-
-    expect(result).toEqual(expected);
+    httpMock.expectOne('prefix/en.json').flush({ hello: 'hi' });
   });
 
-  it('returns an empty object and logs when the request fails', () => {
-    const warnSpy = spyOn(console, 'warn');
-    let result: Record<string, unknown> | undefined;
+  it('uses default prefix/suffix when not provided', (done) => {
+    const loader = new SafeTranslateHttpLoader(http);
 
-    loader.getTranslation('es').subscribe((translations) => {
-      result = translations;
+    loader.getTranslation('en').subscribe((res) => {
+      const result = res as Record<string, unknown>;
+      expect(result).toEqual({});
+      done();
     });
 
-    const request = httpMock.expectOne('./assets/i18n/es.json');
-    request.error(new ProgressEvent('error'), { status: 404, statusText: 'Not Found' });
+    httpMock.expectOne('./assets/i18n/en.json').error(new ProgressEvent('error'));
+  });
 
-    expect(result).toEqual({});
-    expect(warnSpy).toHaveBeenCalled();
+  it('falls back to empty object and warns on failures', (done) => {
+    const loader = new SafeTranslateHttpLoader(http, 'prefix/', '.json');
+    const warnSpy = spyOn(console, 'warn');
+
+    loader.getTranslation('es').subscribe((res) => {
+      const result = res as Record<string, unknown>;
+      expect(result).toEqual({});
+      expect(warnSpy).toHaveBeenCalled();
+      done();
+    });
+
+    httpMock.expectOne('prefix/es.json').error(new ProgressEvent('error'), {
+      status: 404,
+      statusText: 'Not Found',
+    });
   });
 });

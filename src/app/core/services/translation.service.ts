@@ -10,14 +10,18 @@ export class TranslationService {
   private readonly translate = inject(TranslateService);
   private readonly document = inject(DOCUMENT);
 
-  init(): void {
-    let stored: 'en' | 'es' | null = null;
+  private getStorage(): Storage | null {
     try {
-      stored = localStorage.getItem(this.storageKey) as 'en' | 'es' | null;
+      return typeof localStorage !== 'undefined' ? localStorage : null;
     } catch (err) {
-      // Ignore storage access errors
-      stored = null;
+      console.warn('Local storage is not available', err);
+      return null;
     }
+  }
+
+  init(): void {
+    const storage = this.getStorage();
+    const stored = storage?.getItem?.(this.storageKey) as 'en' | 'es' | null;
     const browserLang = navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
     const lang = stored && this.supported.includes(stored) ? stored : browserLang;
     this.setLanguage(lang);
@@ -25,12 +29,9 @@ export class TranslationService {
 
   setLanguage(lang: 'en' | 'es'): void {
     this.translate.use(lang);
-    this.translate.setDefaultLang(lang);
-    try {
-      localStorage.setItem(this.storageKey, lang);
-    } catch (err) {
-      // Ignore storage access errors
-    }
+    this.translate.setFallbackLang(lang);
+    const storage = this.getStorage();
+    storage?.setItem?.(this.storageKey, lang);
     this.document.documentElement.lang = lang;
   }
 }
