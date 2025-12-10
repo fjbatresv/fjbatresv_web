@@ -1,0 +1,26 @@
+version: 1
+language: es
+
+auto_review:
+  enabled: true
+  draft: false
+  base_branches:
+    - main
+    - master
+
+reviews:
+  high_level_summary: true
+  request_changes_workflow: true
+  path_filters:
+    - "!node_modules/**"
+    - "!dist/**"
+    - "!coverage/**"
+    - "!**/*.lock"
+    - "!**/package-lock.json"
+    - "!**/*.min.*"
+  ignore_title_keywords:
+    - "WIP"
+    - "Draft"
+
+chat:
+  auto_reply: false
