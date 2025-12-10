@@ -50,7 +50,7 @@ export class NavbarComponent {
   }
 
   get currentLanguage(): string {
-    return this.translateService.getCurrentLang?.() || this.translateService.currentLang || 'en';
+    return this.translationService.language || 'en';
   }
 
   toggleMenu(): void {

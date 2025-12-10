@@ -6,13 +6,17 @@ import { DOCUMENT } from '@angular/common';
 export class TranslationService {
   private readonly storageKey = 'fj-lang';
   private readonly supported: Array<'en' | 'es'> = ['en', 'es'];
+  private currentLanguage: 'en' | 'es' = 'en';
 
   private readonly translate = inject(TranslateService);
   private readonly document = inject(DOCUMENT);
 
   private getStorage(): Storage | null {
     try {
-      return typeof localStorage !== 'undefined' ? localStorage : null;
+      if (typeof localStorage === 'undefined') {
+        return null;
+      }
+      return localStorage;
     } catch (err) {
       console.warn('Local storage is not available', err);
       return null;
@@ -28,10 +32,15 @@ export class TranslationService {
   }
 
   setLanguage(lang: 'en' | 'es'): void {
+    this.currentLanguage = lang;
     this.translate.use(lang);
     this.translate.setFallbackLang(lang);
     const storage = this.getStorage();
     storage?.setItem?.(this.storageKey, lang);
     this.document.documentElement.lang = lang;
+  }
+
+  get language(): 'en' | 'es' {
+    return this.currentLanguage;
   }
 }

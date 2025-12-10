@@ -16,15 +16,15 @@ export function bootstrapApp(
 }
 
 /* istanbul ignore next -- bootstrap is skipped in Karma environment */
-const isKarma = typeof window !== 'undefined' && (window as any).__karma__;
+const isKarma =
+  typeof globalThis !== 'undefined' &&
+  (globalThis as typeof globalThis & { __karma__?: unknown }).__karma__;
 /* istanbul ignore next -- guard only relevant in test runner */
 if (!isKarma) {
   /* istanbul ignore next -- actual bootstrap only matters outside test */
-  void (async () => {
-    try {
-      await bootstrapApp();
-    } catch (err) {
-      console.error(err);
-    }
-  })();
+  try {
+    await bootstrapApp();
+  } catch (err) {
+    console.error(err);
+  }
 }
