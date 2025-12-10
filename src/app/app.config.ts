@@ -57,6 +57,7 @@ export const appConfig: ApplicationConfig = {
     { provide: ErrorHandler, useClass: SentryErrorHandler },
     importProvidersFrom(
       TranslateModule.forRoot({
+        defaultLanguage: 'en',
         fallbackLang: 'en',
         loader: {
           provide: TranslateLoader,

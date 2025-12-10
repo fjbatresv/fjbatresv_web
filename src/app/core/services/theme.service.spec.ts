@@ -5,6 +5,8 @@ import { ThemeService } from './theme.service';
 
 describe('ThemeService', () => {
   let service: ThemeService;
+  let originalMatchMedia: typeof globalThis.matchMedia;
+  let originalLocalStorage: Storage;
   const classes = new Set<string>();
   const bodyClassList = {
     remove: jasmine.createSpy('remove').and.callFake((...args: string[]) => {
@@ -43,9 +45,25 @@ describe('ThemeService', () => {
     service = TestBed.inject(ThemeService);
   };
 
+  beforeEach(() => {
+    originalMatchMedia = globalThis.matchMedia;
+    originalLocalStorage = (globalThis as any).localStorage;
+  });
+
   afterEach(() => {
     bodyClassList.remove.calls.reset();
     bodyClassList.add.calls.reset();
+    (globalThis as any).matchMedia = originalMatchMedia;
+    try {
+      (globalThis as any).localStorage = originalLocalStorage;
+    } catch {
+      // Ignore if localStorage is read-only in this environment
+    }
+    try {
+      localStorage.clear();
+    } catch {
+      // Ignore storage errors (e.g., when access is intentionally blocked)
+    }
   });
 
   it('toggles theme from light to dark', () => {
@@ -73,25 +91,33 @@ describe('ThemeService', () => {
 
   it('handles storage access errors gracefully', () => {
     configureWithMatchMedia(false);
-    spyOnProperty(globalThis as any, 'localStorage', 'get').and.throwError('blocked');
-    service.toggleTheme();
-    expect(service.theme).toBeDefined();
+    const localStorageSpy = spyOnProperty(globalThis as any, 'localStorage', 'get').and.throwError(
+      'blocked'
+    );
+    try {
+      service.toggleTheme();
+      expect(service.theme).toBeDefined();
+    } finally {
+      localStorageSpy.and.callFake(() => originalLocalStorage);
+    }
   });
 
   it('falls back when matchMedia is not available', () => {
-    const originalMatchMedia = (globalThis as any).matchMedia;
     // Remove matchMedia to hit the undefined branch
     (globalThis as any).matchMedia = undefined;
-    TestBed.resetTestingModule();
-    TestBed.configureTestingModule({
-      providers: [
-        ThemeService,
-        { provide: DOCUMENT, useValue: docMock },
-        { provide: Window, useValue: globalThis },
-      ],
-    });
-    const serviceNoMedia = TestBed.inject(ThemeService);
-    expect(serviceNoMedia.theme).toBe('light');
-    (globalThis as any).matchMedia = originalMatchMedia;
+    try {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [
+          ThemeService,
+          { provide: DOCUMENT, useValue: docMock },
+          { provide: Window, useValue: globalThis },
+        ],
+      });
+      const serviceNoMedia = TestBed.inject(ThemeService);
+      expect(serviceNoMedia.theme).toBe('light');
+    } finally {
+      (globalThis as any).matchMedia = originalMatchMedia;
+    }
   });
 });
