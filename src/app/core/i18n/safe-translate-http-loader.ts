@@ -28,11 +28,12 @@ export const sentryClient = {
 /**
  * Report a translation file load failure to the error tracking system.
  *
- * Sends a warning-level message with the key "Translation load failed" and includes
- * the language and HTTP error metadata as extra context.
+ * Does nothing when running in a test environment; otherwise sends a warning-level
+ * message labeled "Translation load failed" with the language and HTTP error metadata
+ * included as extra context.
  *
- * @param lang - The language code whose translation failed to load (e.g., "en", "fr").
- * @param error - HTTP error details; may include `status` (HTTP status code), `statusText`, and the requested `url`.
+ * @param lang - Language code whose translation failed to load (e.g., "en", "fr")
+ * @param error - HTTP error details; may include `status`, `statusText`, and `url`
  */
 export function reportTranslationLoadFailure(
   lang: string,
