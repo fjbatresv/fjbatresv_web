@@ -3,6 +3,12 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 
+/**
+ * Bootstraps the Angular application using the provided bootstrap function.
+ *
+ * @param bootstrapFn - Optional custom bootstrap function to initialize the root component; defaults to Angular's `bootstrapApplication`.
+ * @returns The value produced by the bootstrap function when successful, or `undefined` if bootstrapping fails (errors are logged to the console).
+ */
 export function bootstrapApp(
   bootstrapFn: typeof bootstrapApplication = bootstrapApplication
 ): Promise<unknown> {
