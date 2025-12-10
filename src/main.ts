@@ -22,9 +22,5 @@ const isKarma =
 /* istanbul ignore next -- guard only relevant in test runner */
 if (!isKarma) {
   /* istanbul ignore next -- actual bootstrap only matters outside test */
-  try {
-    await bootstrapApp();
-  } catch (err) {
-    console.error(err);
-  }
+  await bootstrapApp();
 }
