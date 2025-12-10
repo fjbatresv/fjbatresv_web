@@ -7,6 +7,7 @@ import { HomePageComponent } from './home-page.component';
 
 describe('HomePageComponent', () => {
   let events$: Subject<NavigationEnd>;
+  const routeStub = { snapshot: { data: { section: 'about' } } } as unknown as ActivatedRoute;
 
   beforeEach(async () => {
     events$ = new Subject<NavigationEnd>();
@@ -14,9 +15,13 @@ describe('HomePageComponent', () => {
       imports: [HomePageComponent, TranslateModule.forRoot()],
       providers: [
         { provide: Router, useValue: { events: events$.asObservable() } },
-        { provide: ActivatedRoute, useValue: { snapshot: { data: { section: 'about' } } } },
+        { provide: ActivatedRoute, useValue: routeStub },
       ],
     }).compileComponents();
+  });
+
+  afterEach(() => {
+    routeStub.snapshot.data = { section: 'about' };
   });
 
   it('scrolls to the section defined in route data on init', () => {
@@ -49,5 +54,17 @@ describe('HomePageComponent', () => {
     const fixture = TestBed.createComponent(HomePageComponent);
     fixture.componentInstance.ngAfterViewInit();
     expect(document.getElementById).toHaveBeenCalled();
+  });
+
+  it('falls back to home section when route data is missing', () => {
+    routeStub.snapshot.data = {};
+    const scrollIntoView = jasmine.createSpy('scrollIntoView');
+    spyOn(document, 'getElementById').and.returnValue({ scrollIntoView } as any);
+
+    const fixture = TestBed.createComponent(HomePageComponent);
+    fixture.componentInstance.ngAfterViewInit();
+
+    expect(document.getElementById).toHaveBeenCalledWith('home');
+    expect(scrollIntoView).toHaveBeenCalled();
   });
 });
