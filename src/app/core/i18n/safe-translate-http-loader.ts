@@ -13,7 +13,7 @@ export const runtimeContext = {
     const globalObj = globalThis as typeof globalThis & { jasmine?: unknown };
     return Boolean(globalObj.jasmine);
   },
-  pathname: (): string => (typeof location !== 'undefined' ? location.pathname : ''),
+  pathname: (): string => (typeof location === 'undefined' ? '' : location.pathname),
 };
 
 const isTestRun = (): boolean =>
