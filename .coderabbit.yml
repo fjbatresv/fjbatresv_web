@@ -6,7 +6,7 @@ auto_review:
   draft: false
   base_branches:
     - main
-    - master
+    - develop
 
 reviews:
   high_level_summary: true
