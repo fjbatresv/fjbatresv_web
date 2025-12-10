@@ -6,13 +6,13 @@ import { TranslationService } from './translation.service';
 
 describe('TranslationService', () => {
   let service: TranslationService;
-  let translateSpy: { use: jasmine.Spy; setDefaultLang: jasmine.Spy };
+  let translateSpy: { use: jasmine.Spy; setFallbackLang: jasmine.Spy };
   const docMock = { documentElement: { lang: '' } } as Document;
 
   beforeEach(() => {
     translateSpy = {
       use: jasmine.createSpy('use'),
-      setDefaultLang: jasmine.createSpy('setDefaultLang'),
+      setFallbackLang: jasmine.createSpy('setFallbackLang'),
     };
 
     TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe('TranslationService', () => {
 
     service = TestBed.inject(TranslationService);
     translateSpy.use.calls.reset();
-    translateSpy.setDefaultLang.calls.reset();
+    translateSpy.setFallbackLang.calls.reset();
     docMock.documentElement.lang = '';
   });
 
@@ -35,7 +35,7 @@ describe('TranslationService', () => {
     service.setLanguage('es');
 
     expect(translateSpy.use).toHaveBeenCalledWith('es');
-    expect(translateSpy.setDefaultLang).toHaveBeenCalledWith('es');
+    expect(translateSpy.setFallbackLang).toHaveBeenCalledWith('es');
     expect(docMock.documentElement.lang).toBe('es');
     expect(setItemSpy).toHaveBeenCalledWith('fj-lang', 'es');
   });
@@ -67,5 +67,14 @@ describe('TranslationService', () => {
     service.init();
 
     expect(setLanguageSpy).toHaveBeenCalledWith('es');
+  });
+
+  it('handles storage access errors gracefully', () => {
+    spyOnProperty(window, 'localStorage', 'get').and.throwError('blocked');
+    const consoleSpy = spyOn(console, 'warn');
+
+    service.init();
+
+    expect(consoleSpy).toHaveBeenCalled();
   });
 });

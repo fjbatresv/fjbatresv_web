@@ -5,6 +5,10 @@ import { Injectable, inject } from '@angular/core';
 export class ThemeService {
   private readonly storageKey = 'fj-theme';
   private readonly document = inject(DOCUMENT);
+  private readonly win: Window | undefined =
+    typeof globalThis !== 'undefined' && 'matchMedia' in globalThis
+      ? (globalThis as unknown as Window)
+      : undefined;
   theme: 'light' | 'dark' = this.getInitialTheme();
 
   constructor() {
@@ -25,8 +29,7 @@ export class ThemeService {
       return stored;
     }
 
-    const prefersDark =
-      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = this.win?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
     return prefersDark ? 'dark' : 'light';
   }
 
@@ -37,7 +40,7 @@ export class ThemeService {
 
   private getStorage(): Storage | null {
     try {
-      return typeof localStorage !== 'undefined' ? localStorage : null;
+      return this.win?.localStorage ?? null;
     } catch {
       return null;
     }
