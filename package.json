@@ -40,6 +40,7 @@
     "@angular-eslint/template-parser": "^21.0.0",
     "@angular/cli": "^21.0.2",
     "@angular/compiler-cli": "^21.0.3",
+    "@sentry/cli": "^3.0.1",
     "@types/jasmine": "~5.1.4",
     "@types/node": "^24.10.1",
     "@typescript-eslint/parser": "^8.12.1",
