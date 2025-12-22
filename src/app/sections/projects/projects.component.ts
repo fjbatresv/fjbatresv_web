@@ -35,9 +35,17 @@ export class ProjectsComponent {
       ],
     },
     {
-      titleKey: 'projects.titles.peto',
-      descriptionKey: 'projects.peto',
-      tags: ['projects.tags.health', 'projects.tags.aws', 'projects.tags.saas'],
+      titleKey: 'projects.titles.pettzi',
+      descriptionKey: 'projects.pettzi',
+      tags: [
+        'projects.tags.health',
+        'projects.tags.aws',
+        'projects.tags.saas',
+        'projects.tags.angular',
+        'projects.tags.lambdas',
+        'projects.tags.nx',
+        'projects.tags.nosql',
+      ],
     },
     {
       titleKey: 'projects.titles.sinergia',
@@ -54,6 +62,7 @@ export class ProjectsComponent {
     {
       titleKey: 'projects.titles.sar',
       descriptionKey: 'projects.sar',
+      link: 'https://www.sar-latam.com/sar-back-office-2024/',
       tags: [
         'projects.tags.aws',
         'projects.tags.lambdas',

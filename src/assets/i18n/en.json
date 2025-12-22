@@ -149,7 +149,7 @@
     "titles": {
       "journey": "Journey to Cloud",
       "vip": "Mercer VIP",
-      "peto": "Peto",
+      "pettzi": "Pettzi",
       "sinergia": "Sinergia Dorada GT",
       "capriccio": "Hecho Capriccio",
       "sar": "SAR Platform",
@@ -157,7 +157,7 @@
     },
     "journey": "Banking cloud migration program with governance, observability, and resilient data flows.",
     "vip": "Enterprise platform for Mercer using NestJS + Angular + AWS with queue-driven workflows.",
-    "peto": "Pet-care SaaS keeping health records, reminders, and analytics across devices.",
+    "pettzi": "Pet-care SaaS keeping health records, reminders, and analytics across devices.",
     "sinergia": "Corporate site for Sinergia Dorada GT with dynamic content, cloud hosting, and analytics.",
     "capriccio": "E-commerce experience for Hecho Capriccio with performant Angular + NestJS stack.",
     "sar": "Cloud-native platform on AWS with serverless automation, secure auth middleware, and deep observability (X-Ray, Sentry, CloudWatch). Nx monorepo with shared libs and custom CI/CD tasks.",
