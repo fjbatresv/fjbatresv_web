@@ -75,7 +75,7 @@ jobs:
           RELEASE: ${{ github.sha }}
         run: |
           npx @sentry/cli releases new "$RELEASE"
-          npx @sentry/cli releases files "$RELEASE" upload-sourcemaps dist/javier-batres-site --url-prefix "~/"
+          npx @sentry/cli releases upload-sourcemaps "$RELEASE" dist/javier-batres-site --url-prefix "~/"
           npx @sentry/cli releases finalize "$RELEASE"
 
       - name: Remove sourcemaps before deploy
