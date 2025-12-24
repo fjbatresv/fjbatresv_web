@@ -166,6 +166,25 @@
           if (!document.cookie) {
             return;
           }
+          var hostname = window.location.hostname;
+          var domains = [''];
+          if (hostname) {
+            domains.push(hostname);
+            if (hostname.indexOf('.') > -1) {
+              domains.push('.' + hostname);
+            }
+          }
+          var paths = ['/', ''];
+          var expireCookie = function (name, domain, path) {
+            var domainPart = domain ? '; domain=' + domain : '';
+            var pathPart = path ? '; path=' + path : '';
+            document.cookie =
+              name +
+              '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT' +
+              domainPart +
+              pathPart +
+              '; SameSite=Lax';
+          };
           document.cookie.split(';').forEach(function (rawCookie) {
             var parts = rawCookie.split('=');
             var cookieName = parts[0] ? parts[0].trim() : '';
@@ -178,7 +197,11 @@
               cookieName.indexOf('_gat') === 0 ||
               cookieName.indexOf('_gcl_') === 0
             ) {
-              document.cookie = cookieName + '=; Max-Age=0; path=/;';
+              domains.forEach(function (domain) {
+                paths.forEach(function (path) {
+                  expireCookie(cookieName, domain, path);
+                });
+              });
             }
           });
         }
