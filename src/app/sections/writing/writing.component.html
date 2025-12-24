@@ -11,11 +11,7 @@
           </div>
           <p>{{ item.summaryKey | translate }}</p>
           @if (item.link) {
-            <a
-              class="link-inline"
-              [href]="item.link"
-              target="_blank"
-              rel="noopener noreferrer"
+            <a class="link-inline" [href]="item.link" target="_blank" rel="noopener noreferrer"
               >{{ 'writing.read' | translate }} <span aria-hidden="true">↗</span></a
             >
           }
