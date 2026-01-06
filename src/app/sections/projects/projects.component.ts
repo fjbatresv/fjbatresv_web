@@ -48,6 +48,21 @@ export class ProjectsComponent {
       ],
     },
     {
+      titleKey: 'projects.titles.awsArq',
+      descriptionKey: 'projects.awsArq',
+      tags: [
+        'projects.tags.aws',
+        'projects.tags.saas',
+        'projects.tags.angular',
+        'projects.tags.lambdas',
+        'projects.tags.nx',
+        'projects.tags.nosql',
+        'projects.tags.kinesis',
+        'projects.tags.firehose',
+      ],
+      link: 'https://github.com/fjbatresv/sdg19-final',
+    },
+    {
       titleKey: 'projects.titles.sinergia',
       descriptionKey: 'projects.sinergia',
       tags: ['projects.tags.angular', 'projects.tags.aws', 'projects.tags.event'],
