@@ -156,7 +156,8 @@
       "sinergia": "Sinergia Dorada GT",
       "capriccio": "Hecho Capriccio",
       "sar": "Plataforma SAR",
-      "ascend": "Ascend (Novuskills)"
+      "ascend": "Ascend (Novuskills)",
+      "awsArq": "Proyecto final Arquitecto de Soluciones AWS"
     },
     "journey": "Programa de migración a la nube bancaria con gobierno, observabilidad y flujos de datos resilientes.",
     "vip": "Plataforma enterprise para Mercer con NestJS + Angular + AWS y flujos orquestados con colas.",
@@ -165,6 +166,7 @@
     "capriccio": "Experiencia e-commerce para Hecho Capriccio con un stack Angular + NestJS de alto rendimiento.",
     "sar": "Plataforma cloud-native en AWS con automatización serverless, middleware de autenticación seguro y observabilidad (X-Ray, Sentry, CloudWatch). Monorepo Nx con librerías compartidas y CI/CD a medida.",
     "ascend": "MVPs de Ascend en móvil/escritorio/web: apps Flutter, integraciones GCP (SQL/NoSQL) y experiencias basadas en neurociencia con BrainCo y Dale Carnegie.",
+    "awsArq": "E-commerce serverless en AWS con órdenes, notificaciones por email y analítica near real-time en un data lake.",
     "tags": {
       "banking": "Banca",
       "azure": "Azure",
@@ -187,7 +189,9 @@
       "flutter": "Flutter",
       "gcp": "GCP",
       "mobile": "Móvil",
-      "nosql": "NoSQL"
+      "nosql": "NoSQL",
+      "kinesis": "Kinesis",
+      "firehose": "Firehose"
     }
   },
   "writing": {
