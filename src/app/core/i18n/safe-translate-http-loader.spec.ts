@@ -48,14 +48,12 @@ describe('SafeTranslateHttpLoader', () => {
     httpMock.expectOne('./assets/i18n/en.json').error(new ProgressEvent('error'));
   });
 
-  it('falls back to empty object and warns on failures', (done) => {
+  it('falls back to empty object on failures', (done) => {
     const loader = new SafeTranslateHttpLoader(http, 'prefix/', '.json');
-    const warnSpy = spyOn(console, 'warn');
 
     loader.getTranslation('es').subscribe((res) => {
       const result = res as Record<string, unknown>;
       expect(result).toEqual({});
-      expect(warnSpy).toHaveBeenCalled();
       done();
     });
 

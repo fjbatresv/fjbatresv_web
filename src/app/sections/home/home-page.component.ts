@@ -16,6 +16,7 @@ import { HeroComponent } from './hero.component';
 import { ProjectsComponent } from '../projects/projects.component';
 import { SkillsComponent } from '../skills/skills.component';
 import { WritingComponent } from '../writing/writing.component';
+import { DeferErrorComponent } from '../../core/components/defer-error/defer-error.component';
 
 @Component({
   selector: 'app-home-page',
@@ -29,6 +30,7 @@ import { WritingComponent } from '../writing/writing.component';
     ProjectsComponent,
     WritingComponent,
     ContactComponent,
+    DeferErrorComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],

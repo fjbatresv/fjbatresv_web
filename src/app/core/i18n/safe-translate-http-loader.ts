@@ -69,10 +69,6 @@ export class SafeTranslateHttpLoader implements TranslateLoader {
     return this.http.get<TranslationObject>(`${this.prefix}${lang}${this.suffix}`).pipe(
       catchError((error) => {
         reportTranslationLoadFailure(lang, error);
-        console.warn(
-          `Falling back to empty translations because ${lang} could not be loaded.`,
-          error
-        );
         return of({} as TranslationObject);
       })
     );

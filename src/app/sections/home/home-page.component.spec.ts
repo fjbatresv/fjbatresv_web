@@ -8,13 +8,19 @@ import { HomePageComponent } from './home-page.component';
 describe('HomePageComponent', () => {
   let events$: Subject<NavigationEnd>;
   const routeStub = { snapshot: { data: { section: 'about' } } } as unknown as ActivatedRoute;
+  let routerStub: Pick<Router, 'events' | 'createUrlTree' | 'serializeUrl'>;
 
   beforeEach(async () => {
     events$ = new Subject<NavigationEnd>();
+    routerStub = {
+      events: events$.asObservable(),
+      createUrlTree: () => ({}) as any,
+      serializeUrl: () => '/',
+    };
     await TestBed.configureTestingModule({
       imports: [HomePageComponent, TranslateModule.forRoot()],
       providers: [
-        { provide: Router, useValue: { events: events$.asObservable() } },
+        { provide: Router, useValue: routerStub },
         { provide: ActivatedRoute, useValue: routeStub },
       ],
     }).compileComponents();
