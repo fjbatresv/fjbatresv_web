@@ -37,7 +37,7 @@ export class ProjectsComponent {
     {
       titleKey: 'projects.titles.pettzi',
       descriptionKey: 'projects.pettzi',
-      link: 'https://app.pettzi.net',
+      link: 'https://github.com/fjbatresv/pettzi',
       tags: [
         'projects.tags.health',
         'projects.tags.aws',
