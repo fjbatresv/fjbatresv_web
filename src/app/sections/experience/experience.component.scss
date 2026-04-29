@@ -12,7 +12,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--color-border);
+  background: linear-gradient(to bottom, var(--color-accent) 0%, var(--color-border) 100%);
 }
 
 .timeline-item {
@@ -50,7 +50,7 @@
   color: var(--color-muted);
 }
 
-ul {
+.timeline-content ul {
   padding-left: 18px;
   color: var(--color-muted);
 }

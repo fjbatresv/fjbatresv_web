@@ -1,6 +1,7 @@
 .project {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -8,6 +9,11 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 .project p {
@@ -15,19 +21,39 @@
   margin: 0 0 12px;
 }
 
+// Top sweep gradient — extends left→right on hover
+.project::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+// Subtle background tint on hover
 .project::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(30, 136, 229, 0.08), rgba(198, 156, 109, 0.08));
+  background: linear-gradient(135deg, rgba(30, 136, 229, 0.05), rgba(198, 156, 109, 0.05));
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
   pointer-events: none;
 }
 
 .project:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+}
+
+.project:hover::before {
+  transform: scaleX(1);
 }
 
 .project:hover::after {
