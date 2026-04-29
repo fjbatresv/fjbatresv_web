@@ -29,7 +29,11 @@
           type="button"
           (click)="navigate(item.section)"
           class="navbar__link"
-          [ngClass]="{ contact: item.section === 'contact' }"
+          [ngClass]="{
+            contact: item.section === 'contact',
+            cv: item.section === 'cv',
+            active: activeSection() === item.section
+          }"
         >
           {{ item.labelKey | translate }}
         </button>
@@ -97,6 +101,8 @@
             class="mobile-menu__link"
             type="button"
             [class.contact]="item.section === 'contact'"
+            [class.cv]="item.section === 'cv'"
+            [class.active]="activeSection() === item.section"
             (click)="navigate(item.section)"
           >
             {{ item.labelKey | translate }}

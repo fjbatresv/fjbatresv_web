@@ -1,13 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
 
 import { NavbarComponent } from './navbar.component';
 import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
 
 describe('NavbarComponent', () => {
-  const routerMock = { navigate: jasmine.createSpy('navigate') };
+  const routerMock = {
+    navigate: jasmine.createSpy('navigate'),
+    url: '/',
+    events: of(),
+  };
   const themeServiceMock = {
     theme: 'light' as 'light' | 'dark',
     toggleTheme: jasmine.createSpy('toggleTheme'),

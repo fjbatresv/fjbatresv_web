@@ -64,6 +64,7 @@
     color 0.2s ease,
     transform 0.2s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .navbar__link:hover {
@@ -81,6 +82,42 @@
   transform: translateY(-2px);
   color: #0b1221;
   box-shadow: 0 10px 30px rgba(30, 136, 229, 0.32);
+}
+
+.navbar__link.cv {
+  border: 1px solid var(--color-border);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+.navbar__link.cv:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+// Active state: underline dot for regular links
+.navbar__link.active:not(.contact):not(.cv) {
+  color: var(--color-accent);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    border-radius: 999px;
+  }
+}
+
+// CV active: reinforce the border
+.navbar__link.cv.active {
+  border-color: rgba(30, 136, 229, 0.5);
+  color: var(--color-accent);
+  background: rgba(30, 136, 229, 0.07);
 }
 
 .navbar__link:focus-visible,
@@ -227,6 +264,20 @@
   .mobile-menu__link.contact {
     background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
     color: #0b1221;
+  }
+
+  .mobile-menu__link.active:not(.contact):not(.cv) {
+    color: var(--color-accent);
+    border-left: 3px solid var(--color-accent);
+    padding-left: 9px;
+  }
+
+  .mobile-menu__link.cv {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   .mobile-menu__actions {

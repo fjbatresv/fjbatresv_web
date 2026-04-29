@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { filter } from 'rxjs';
 
 import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
@@ -15,6 +17,18 @@ import { TranslationService } from '../../services/translation.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
+  readonly activeSection = signal('home');
+
+  constructor() {
+    this.activeSection.set(this.sectionFromUrl(this.router.url));
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
+      .subscribe((e) => this.activeSection.set(this.sectionFromUrl(e.urlAfterRedirects)));
+  }
+
   navItems = [
     { labelKey: 'nav.home', section: 'home' },
     { labelKey: 'nav.about', section: 'about' },
@@ -23,6 +37,7 @@ export class NavbarComponent {
     { labelKey: 'nav.highlights', section: 'projects' },
     { labelKey: 'nav.notes', section: 'writing' },
     { labelKey: 'nav.contact', section: 'contact' },
+    { labelKey: 'nav.cv', section: 'cv' },
   ];
 
   logoUrl = 'assets/logo.webp';
@@ -55,5 +70,9 @@ export class NavbarComponent {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  private sectionFromUrl(url: string): string {
+    return url.replace(/^\//, '').split('?')[0] || 'home';
   }
 }
