@@ -27,6 +27,9 @@
   background: color-mix(in srgb, var(--color-surface) 85%, transparent);
 }
 
-.contact-fun .emoji {
-  font-size: 32px;
+.contact-fun__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-accent);
+  margin-bottom: 8px;
 }

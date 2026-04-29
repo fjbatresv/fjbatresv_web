@@ -122,6 +122,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .floating-card {
+    animation: none;
+  }
+}
+
 @media (max-width: 768px) {
   .hero__visual {
     display: none;
