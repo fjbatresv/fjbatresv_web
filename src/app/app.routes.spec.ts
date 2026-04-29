@@ -2,7 +2,16 @@ import { routes } from './app.routes';
 
 describe('App routes', () => {
   it('defines sections with data and lazy components', () => {
-    const expectedPaths = ['', 'about', 'experience', 'skills', 'projects', 'writing', 'contact'];
+    const expectedPaths = [
+      '',
+      'about',
+      'experience',
+      'skills',
+      'projects',
+      'writing',
+      'contact',
+      'cv',
+    ];
     const sectionRoutes = routes.filter((route) => route.path !== '**');
 
     expect(sectionRoutes.map((r) => r.path)).toEqual(expectedPaths);
@@ -14,6 +23,7 @@ describe('App routes', () => {
       'projects',
       'writing',
       'contact',
+      undefined,
     ];
     sectionRoutes.forEach((route, index) => {
       expect(route.data?.['section']).toBe(expectedSections[index]);

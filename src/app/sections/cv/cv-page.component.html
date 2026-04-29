@@ -1,0 +1,313 @@
+<!-- ── Fixed header bar ──────────────────────────────────────────────────── -->
+<div class="cv-topbar" role="banner">
+  <div class="cv-topbar-id">
+    <span class="cv-topbar-name">Javier Batres</span>
+    <span class="cv-topbar-sep" aria-hidden="true">·</span>
+    <span class="cv-topbar-role">{{ 'cv.title' | translate }}</span>
+  </div>
+  <div class="cv-topbar-actions" role="toolbar" aria-label="CV actions">
+    <a
+      class="cv-btn cv-btn--primary"
+      href="assets/cv.pdf"
+      download="javier-batres-cv.pdf"
+      target="_blank"
+      rel="noopener"
+    >
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      {{ 'cv.download' | translate }}
+    </a>
+  </div>
+</div>
+
+<!-- pushes content below the fixed topbar -->
+<div class="cv-topbar-spacer" aria-hidden="true"></div>
+
+<!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+<header class="cv-hero reveal">
+  <div class="cv-hero-inner">
+    <div class="cv-hero-text">
+      <h1 class="cv-name">Javier <em>Batres</em></h1>
+      <p class="cv-role">{{ 'cv.title' | translate }}</p>
+      <div class="cv-stats" aria-label="Key stats">
+        <div class="cv-stat">
+          <span class="cv-stat-value">10+</span>
+          <span class="cv-stat-label">{{ 'cv.stats.years' | translate }}</span>
+        </div>
+        <span class="cv-stat-sep" aria-hidden="true"></span>
+        <div class="cv-stat">
+          <span class="cv-stat-value">AWS</span>
+          <span class="cv-stat-label">{{ 'cv.stats.cert' | translate }}</span>
+        </div>
+        <span class="cv-stat-sep" aria-hidden="true"></span>
+        <div class="cv-stat">
+          <span class="cv-stat-value">5+</span>
+          <span class="cv-stat-label">{{ 'cv.stats.opensource' | translate }}</span>
+        </div>
+      </div>
+    </div>
+    <address class="cv-contacts">
+      <span>{{ 'cv.location' | translate }}</span>
+      <a href="mailto:fjbatresv@gmail.com">fjbatresv&#64;gmail.com</a>
+      <a href="https://github.com/fjbatresv" rel="noopener" target="_blank">github.com/fjbatresv</a>
+      <a href="https://linkedin.com/in/fjbatresv" rel="noopener" target="_blank">linkedin.com/in/fjbatresv</a>
+      <a href="https://fjbatresv.com">fjbatresv.com</a>
+    </address>
+  </div>
+</header>
+
+<!-- ── Two-column layout ─────────────────────────────────────────────────── -->
+<div class="cv-layout">
+
+  <!-- ── Main column ────────────────────────────────────────────────────── -->
+  <main class="cv-main">
+
+    <!-- Summary -->
+    <section class="cv-section reveal" aria-labelledby="cv-heading-summary">
+      <h2 id="cv-heading-summary" class="cv-section-label">{{ 'cv.sections.summary' | translate }}</h2>
+      <p class="cv-summary-text" [innerHTML]="'cv.summary' | translate"></p>
+    </section>
+
+    <!-- AI Engineering — interactive pipeline -->
+    <section class="cv-section reveal" aria-labelledby="cv-heading-ai">
+      <h2 id="cv-heading-ai" class="cv-section-label">{{ 'cv.sections.ai' | translate }}</h2>
+      <div class="cv-pipeline">
+        <p class="cv-pipeline-title">{{ 'cv.ai.label' | translate }}</p>
+
+        <!-- Clickable steps -->
+        <div class="cv-pipeline-steps" role="group" aria-label="Pipeline steps">
+          @for (step of pipelineSteps; track step.id; let i = $index; let last = $last) {
+            <button
+              type="button"
+              class="cv-step-btn"
+              [class.active]="activeStep() === step.id"
+              [attr.aria-pressed]="activeStep() === step.id"
+              [attr.aria-label]="step.label"
+              (click)="setActiveStep(step.id)"
+            >
+              <span class="cv-step-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <span class="cv-step-label">{{ step.label }}</span>
+            </button>
+            @if (!last) {
+              <span
+                class="cv-step-connector"
+                [class.active]="activeStep() === step.id"
+                aria-hidden="true"
+              >›</span>
+            }
+          }
+        </div>
+
+        <!-- Description panel — animated on step change -->
+        <div
+          class="cv-step-panel"
+          [@stepChange]="activeStep()"
+          role="region"
+          aria-live="polite"
+          [attr.aria-label]="selectedStep().label"
+        >
+          <span class="cv-step-panel-label">{{ selectedStep().label }}</span>
+          <p class="cv-step-panel-desc">{{ selectedStep().descKey | translate }}</p>
+        </div>
+
+        <!-- Project references -->
+        <div class="cv-ai-refs">
+          <div class="cv-ai-ref">
+            <p class="cv-ai-ref-name">sdg19-final</p>
+            <p class="cv-ai-ref-desc">{{ 'cv.ai.sdg19' | translate }}</p>
+          </div>
+          <div class="cv-ai-ref">
+            <p class="cv-ai-ref-name">Pettzi</p>
+            <p class="cv-ai-ref-desc">{{ 'cv.ai.pettzi' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience timeline -->
+    <section class="cv-section" aria-labelledby="cv-heading-exp">
+      <h2 id="cv-heading-exp" class="cv-section-label reveal">
+        {{ 'cv.sections.experience' | translate }}
+      </h2>
+      <div class="cv-timeline">
+        @for (item of experience; track item.id) {
+          <article class="cv-timeline-item reveal">
+            <div class="cv-timeline-marker" [class.current]="item.current">
+              @if (item.current) {
+                <span class="cv-timeline-pulse" aria-hidden="true"></span>
+              }
+            </div>
+            <div class="cv-timeline-body">
+              <div class="cv-timeline-header">
+                <div>
+                  <h3 class="cv-exp-role">{{ item.roleKey | translate }}</h3>
+                  <p class="cv-exp-company">{{ item.company }} · {{ item.location }}</p>
+                </div>
+                <time class="cv-exp-period" [class.current]="item.current">
+                  {{ item.periodKey | translate }}
+                </time>
+              </div>
+              <ul class="cv-bullets">
+                @for (key of item.bulletKeys; track key) {
+                  <li>{{ key | translate }}</li>
+                }
+              </ul>
+              <div class="cv-tech">
+                @for (tag of item.tags; track tag) {
+                  <span class="cv-tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="cv-section reveal" aria-labelledby="cv-heading-projects">
+      <h2 id="cv-heading-projects" class="cv-section-label">
+        {{ 'cv.sections.projects' | translate }}
+      </h2>
+      <div class="cv-projects-grid">
+        @for (p of projects; track p.name) {
+          <a
+            class="cv-project-card"
+            [class.featured]="p.featured"
+            [href]="p.url"
+            rel="noopener"
+            target="_blank"
+          >
+            <div class="cv-project-top">
+              <span class="cv-project-name">{{ p.name }}</span>
+              <span class="cv-tag cv-tag--ghost">{{ p.urlType }}</span>
+            </div>
+            <p class="cv-project-desc">{{ p.descKey | translate }}</p>
+            <span class="cv-project-arrow" aria-hidden="true">↗</span>
+          </a>
+        }
+      </div>
+    </section>
+
+    <!-- Production deployments -->
+    <section class="cv-section reveal" aria-labelledby="cv-heading-prod">
+      <h2 id="cv-heading-prod" class="cv-section-label">
+        {{ 'cv.sections.production' | translate }}
+      </h2>
+      <div class="cv-prod-list">
+        <div class="cv-prod-item">
+          <div class="cv-prod-meta">
+            <span class="cv-prod-name">{{ 'cv.production.sinergia.name' | translate }}</span>
+            <a href="https://sinergiadoradagt.com" rel="noopener" target="_blank" class="cv-prod-url">sinergiadoradagt.com ↗</a>
+          </div>
+          <p class="cv-prod-highlights">{{ 'cv.production.sinergia.highlights' | translate }}</p>
+        </div>
+        <div class="cv-prod-item">
+          <div class="cv-prod-meta">
+            <span class="cv-prod-name">{{ 'cv.production.capriccio.name' | translate }}</span>
+            <a href="https://hechocapriccio.com" rel="noopener" target="_blank" class="cv-prod-url">hechocapriccio.com ↗</a>
+          </div>
+          <p class="cv-prod-highlights">{{ 'cv.production.capriccio.highlights' | translate }}</p>
+        </div>
+        <div class="cv-prod-item">
+          <div class="cv-prod-meta">
+            <span class="cv-prod-name">{{ 'cv.production.cdag.name' | translate }}</span>
+            <a href="https://formacioncdag.org.gt" rel="noopener" target="_blank" class="cv-prod-url">formacioncdag.org.gt ↗</a>
+          </div>
+          <p class="cv-prod-highlights">{{ 'cv.production.cdag.highlights' | translate }}</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Sticky aside ───────────────────────────────────────────────────── -->
+  <aside class="cv-aside">
+
+    <!-- Skills with interactive filter -->
+    <div class="cv-widget reveal">
+      <h2 class="cv-section-label">{{ 'cv.sections.skills' | translate }}</h2>
+      <div class="cv-filters" role="group" [attr.aria-label]="'cv.sections.skills' | translate">
+        @for (cat of filterCategories; track cat.key) {
+          <button
+            type="button"
+            class="cv-filter-btn"
+            [class.active]="activeFilter() === cat.key"
+            [attr.aria-pressed]="activeFilter() === cat.key"
+            (click)="setFilter(cat.key)"
+          >
+            {{ cat.labelKey | translate }}
+          </button>
+        }
+      </div>
+      <div class="cv-tags-grid" [@tags]="activeFilter()">
+        @for (skill of filteredSkills(); track skill.text) {
+          <span
+            class="cv-tag"
+            [class.cv-tag--accent]="skill.variant === 'accent'"
+            [class.cv-tag--warm]="skill.variant === 'warm'"
+          >{{ skill.text }}</span>
+        }
+      </div>
+    </div>
+
+    <!-- Certification -->
+    <div class="cv-widget reveal">
+      <h2 class="cv-section-label">{{ 'cv.sections.certifications' | translate }}</h2>
+      <div class="cv-cert-card">
+        <svg class="cv-cert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <div>
+          <p class="cv-cert-title">AWS Certified</p>
+          <p class="cv-cert-sub">Cloud Practitioner</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Community -->
+    <div class="cv-widget reveal">
+      <h2 class="cv-section-label">{{ 'cv.sections.community' | translate }}</h2>
+      <dl class="cv-community">
+        <div class="cv-community-item">
+          <dt class="cv-badge">{{ 'cv.community.speaker.badge' | translate }}</dt>
+          <dd class="cv-community-text">
+            {{ 'cv.community.speaker.text' | translate }}
+            — <a href="https://www.youtube.com/watch?v=IBsH63P4M8w" rel="noopener" target="_blank">YouTube ↗</a>
+          </dd>
+        </div>
+        <div class="cv-community-item">
+          <dt class="cv-badge">{{ 'cv.community.gde.badge' | translate }}</dt>
+          <dd class="cv-community-text">{{ 'cv.community.gde.text' | translate }}</dd>
+        </div>
+        <div class="cv-community-item">
+          <dt class="cv-badge">{{ 'cv.community.writer.badge' | translate }}</dt>
+          <dd class="cv-community-text">
+            {{ 'cv.community.writer.text' | translate }}
+            — <a href="https://fjbatresv.medium.com" rel="noopener" target="_blank">Medium ↗</a>
+            · <a href="https://dev.to/fjbatresv" rel="noopener" target="_blank">Dev.to ↗</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Profiles -->
+    <div class="cv-widget reveal">
+      <h2 class="cv-section-label">{{ 'cv.sections.profiles' | translate }}</h2>
+      <nav aria-label="External profiles">
+        <a class="cv-profile-link" href="https://fjbatresv.medium.com" rel="noopener" target="_blank">
+          <span>Medium</span><span aria-hidden="true">↗</span>
+        </a>
+        <a class="cv-profile-link" href="https://dev.to/fjbatresv" rel="noopener" target="_blank">
+          <span>Dev.to</span><span aria-hidden="true">↗</span>
+        </a>
+        <a class="cv-profile-link" href="https://www.youtube.com/watch?v=IBsH63P4M8w" rel="noopener" target="_blank">
+          <span>YouTube</span><span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </div>
+
+  </aside>
+</div>

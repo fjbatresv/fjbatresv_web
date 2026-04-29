@@ -7,7 +7,8 @@
     "highlights": "Destacados",
     "notes": "Notas",
     "contact": "Contacto",
-    "theme": "Cambiar tema"
+    "theme": "Cambiar tema",
+    "cv": "CV"
   },
   "hero": {
     "tagline": "Arquitectura en la nube, código y café",
@@ -220,6 +221,118 @@
     "links": {
       "github": "GitHub",
       "linkedin": "LinkedIn"
+    }
+  },
+  "cv": {
+    "download": "Descargar PDF",
+    "title": "Staff Full Stack Engineer · Arquitecto de Soluciones · Ingeniería AI-First",
+    "location": "Ciudad de Guatemala, Guatemala",
+    "stats": {
+      "years": "Años de experiencia",
+      "cert": "Certificado AWS",
+      "opensource": "Proyectos open source"
+    },
+    "sections": {
+      "summary": "Perfil",
+      "skills": "Habilidades",
+      "ai": "Ingeniería con IA",
+      "experience": "Experiencia",
+      "projects": "Proyectos",
+      "production": "Producción",
+      "community": "Comunidad",
+      "certifications": "Certificaciones",
+      "profiles": "Perfiles"
+    },
+    "filter": {
+      "all": "Todos",
+      "languages": "Lenguajes",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "aws": "AWS",
+      "azure": "Azure",
+      "devops": "DevOps",
+      "architecture": "Arquitectura"
+    },
+    "summary": "Staff Engineer y Arquitecto de Soluciones con <strong>10+ años</strong> entregando sistemas de producción en web, backend, mobile y cloud. Especializado en <strong>ingeniería AI-first</strong> — integrando LLMs en el SDLC mediante desarrollo contract-driven, generación automatizada de código y pipelines de validación multi-capa.<br><br>Trayectoria liderando modernización cloud en <strong>AWS y Azure</strong>, estandarizando CI/CD a escala y formando cultura de ingeniería. Google Developer activo, conferencista técnico y colaborador open source.",
+    "ai": {
+      "label": "Pipeline de SDLC Asistido por IA",
+      "sdg19": "SDLC completo mediante flujos asistidos por IA. Codex + Kiro + CodeRabbit + Snyk + SonarCloud + AWS CDK. Calidad de producción de extremo a extremo mediante cumplimiento automatizado.",
+      "pettzi": "OpenSpec + OpenAPI contract-first. Backend scaffoldeado con IA, arquitectura AWS event-driven, monorepo Nx. Patrón de ingeniería asistida repetible y documentado."
+    },
+    "pipeline": {
+      "openapi": "El contrato que impulsa todo. Endpoints, esquemas, modelos de request/response y reglas de validación se definen antes de escribir una sola línea de código. Se convierte en la única fuente de verdad para generación, mocking y pruebas.",
+      "codex": "La IA genera andamiaje listo para producción directamente desde el spec de OpenAPI — controladores, servicios, DTOs y pruebas unitarias. Elimina el boilerplate preservando la intención arquitectónica, reduciendo el esfuerzo inicial de coding un 60–80%.",
+      "kiro": "Valida el código generado por IA contra el spec original y los requisitos del proyecto. Detecta alucinaciones, desviaciones y comportamientos desalineados antes de la revisión de código, asegurando que el output generado coincida con lo contratado.",
+      "coderabbit": "Revisión de código potenciada por IA en cada PR. Analiza corrección lógica, riesgos de seguridad y mantenibilidad. Proporciona sugerencias inline y resúmenes en lenguaje natural para que los revisores se centren en la intención, no en la mecánica.",
+      "snyk": "Snyk detecta CVEs en dependencias y bloquea código vulnerable de fusionarse. SonarCloud impone umbrales de cobertura, code smells y presupuestos de deuda técnica en cada commit — compuertas de calidad automatizadas sin overrides manuales.",
+      "cicd": "La compuerta de cumplimiento final. Los pipelines ejecutan lint, verificaciones de tipos, pruebas, escaneos de seguridad y validación de build en cada push. Solo el código que supera todas las compuertas llega a producción — sin excepciones, sin bypasses manuales."
+    },
+    "exp": {
+      "present": "Presente",
+      "gtc": {
+        "role": "Arquitecto de Soluciones — Cloud / DevOps",
+        "period": "Mayo 2025 – Presente",
+        "b1": "Lidera la modernización cloud y transformación DevOps en varios equipos del banco más grande de Guatemala",
+        "b2": "Definió arquitecturas de referencia para AKS y Azure Container Apps; adoptadas como estándar organizacional",
+        "b3": "Estandarizó pipelines CI/CD con plantillas reutilizables, reduciendo el esfuerzo manual de despliegue",
+        "b4": "Estableció prácticas shift-left integrando pruebas, escaneo de seguridad y calidad de código en el SDLC",
+        "b5": "Introdujo flujos de trabajo asistidos por IA (ChatGPT, Copilot, CodeRabbit) en los equipos de ingeniería",
+        "b6": "Construyó estándares de observabilidad con Azure Monitor + Log Analytics, mejorando la detección de incidentes",
+        "b7": "Redactó ADRs y marcos de gobierno adoptados a nivel organizacional; asesor técnico de liderazgo"
+      },
+      "tempus": {
+        "role": "Sr Full Stack Engineer — Plataforma de IA",
+        "period": "Ago 2025 – Presente",
+        "b1": "Contribuye a una plataforma de salud con IA para seguimiento de pacientes y detección de brechas de atención",
+        "b2": "Diseñó pipelines de datos event-driven con DynamoDB Streams, SQS y Kinesis para datos médicos de alto volumen",
+        "b3": "Aseguró cumplimiento HL7/PHI, integridad de datos y seguridad en servicios distribuidos",
+        "b4": "Contribuyó en frontend React, microservicios Python y componentes móviles Kotlin",
+        "b5": "Mejoró la observabilidad mediante logging estructurado y trazabilidad distribuida"
+      },
+      "halo": {
+        "role": "Sr Full Stack Developer",
+        "period": "2023 – 2025",
+        "b1": "Construyó servicios backend TypeScript-first y frontends React para sistemas de alto rendimiento",
+        "b2": "Contribuyó a la arquitectura de monorepo Nx y librerías compartidas reutilizables",
+        "b3": "Impulsó la automatización CI/CD y buenas prácticas de ingeniería en el equipo"
+      },
+      "truelogic": {
+        "role": "Sr Full Stack Lead Developer",
+        "period": "2022 – 2023",
+        "b1": "Lideró arquitectura y entrega de una plataforma blockchain/NFT",
+        "b2": "Diseñó sistemas event-driven y procesamiento async con colas",
+        "b3": "Implementó pipelines CI/CD; mentoreó desarrolladores y mejoró la autonomía del equipo"
+      },
+      "paypal": {
+        "role": "Sr Full Stack Developer",
+        "period": "2020 – 2021",
+        "b1": "Construyó sistemas escalables para procesamiento de pagos y plataformas de caridad",
+        "b2": "Mejoró el rendimiento y confiabilidad de flujos de alta transaccionalidad"
+      },
+      "early": {
+        "role": "Tech Lead · Sr Developer · Roles anteriores",
+        "period": "2013 – 2020",
+        "b1": "7 años de experiencia progresiva en full-stack, móvil, Android nativo, diseño de APIs y liderazgo técnico",
+        "b2": "Lideró la plataforma cloud-native de RRHH/pagos en Yalutec; diseñó sistemas API-first para web y móvil"
+      }
+    },
+    "projects": {
+      "sdg19": { "desc": "Referencia AI-First SDLC: Codex → Kiro → CodeRabbit → Snyk + SonarCloud → AWS CDK. Cumplimiento de calidad de producción en cada capa." },
+      "pettzi": { "desc": "OpenSpec + OpenAPI contract-first. Backend scaffoldeado con IA, arquitectura AWS event-driven, monorepo Nx." },
+      "flutter": { "desc": "Librería open source de formularios inteligentes para Flutter. Arquitectura reutilizable, publicada para la comunidad." },
+      "web": { "desc": "Este sitio. Angular 21+, TypeScript, i18n, temas, CI/CD automatizado a AWS S3." },
+      "nfc": { "desc": "App nativa Android/Kotlin para lectura de números de serie de tags NFC. Integración de hardware en móvil." }
+    },
+    "production": {
+      "sinergia": { "name": "Sinergia Dorada", "highlights": "Angular, Google Consent Mode v2, integración GA4, proyecto cívico pro-bono (ONG perros de servicio)" },
+      "capriccio": { "name": "Hecho Capriccio", "highlights": "Plataforma full-stack de producción, arquitectura frontend y optimización" },
+      "cdag": { "name": "CDAG Formación", "highlights": "Plataforma de capacitación para la confederación nacional de deportes de Guatemala — escala institucional" }
+    },
+    "community": {
+      "speaker": { "badge": "Speaker", "text": "Charlas en conferencias y meetups sobre arquitectura, sistemas cloud e ingeniería asistida por IA" },
+      "gde": { "badge": "GDE", "text": "Google Developer activo — comunidad de desarrolladores de Ciudad de Guatemala" },
+      "writer": { "badge": "Writer", "text": "Escritura técnica sobre cloud, TypeScript, NestJS e ingeniería con IA. 57+ reacciones en NestJS Tips" }
     }
   },
   "footer": {

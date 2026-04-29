@@ -7,7 +7,8 @@
     "highlights": "Highlights",
     "notes": "Notes",
     "contact": "Contact",
-    "theme": "Toggle theme"
+    "theme": "Toggle theme",
+    "cv": "CV"
   },
   "hero": {
     "tagline": "Cloud architecture, code, and coffee",
@@ -217,6 +218,118 @@
     "links": {
       "github": "GitHub",
       "linkedin": "LinkedIn"
+    }
+  },
+  "cv": {
+    "download": "Download PDF",
+    "title": "Staff Full Stack Engineer · Solutions Architect · AI-First Engineering",
+    "location": "Guatemala City, Guatemala",
+    "stats": {
+      "years": "Years of experience",
+      "cert": "AWS Certified",
+      "opensource": "Open source projects"
+    },
+    "sections": {
+      "summary": "About",
+      "skills": "Skills",
+      "ai": "AI Engineering",
+      "experience": "Experience",
+      "projects": "Projects",
+      "production": "Production",
+      "community": "Community",
+      "certifications": "Certifications",
+      "profiles": "Profiles"
+    },
+    "filter": {
+      "all": "All",
+      "languages": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "aws": "AWS",
+      "azure": "Azure",
+      "devops": "DevOps",
+      "architecture": "Architecture"
+    },
+    "summary": "Staff Engineer and Solutions Architect with <strong>10+ years</strong> delivering production-grade systems across web, backend, mobile, and cloud. Specializes in <strong>AI-first engineering</strong> — integrating LLMs into the SDLC through contract-driven development, automated code generation, and multi-layer validation pipelines.<br><br>Proven track record leading cloud modernization across <strong>AWS and Azure</strong>, standardizing CI/CD at scale, and shaping engineering culture. Active Google Developer, Tech Speaker, and open-source contributor.",
+    "ai": {
+      "label": "End-to-end AI-Assisted SDLC Pipeline",
+      "sdg19": "Full SDLC through AI-assisted workflows. Codex + Kiro + CodeRabbit + Snyk + SonarCloud + AWS CDK. End-to-end production quality via automated enforcement.",
+      "pettzi": "OpenSpec + OpenAPI contract-first. AI-scaffolded backend, event-driven AWS architecture, Nx monorepo. Repeatable, documented AI-assisted engineering pattern."
+    },
+    "pipeline": {
+      "openapi": "The contract that drives everything. Endpoints, schemas, request/response models, and validation rules are defined before a single line of code is written. This becomes the single source of truth for generation, mocking, and testing.",
+      "codex": "AI generates production-ready scaffolding directly from the OpenAPI spec — controllers, services, DTOs, and unit tests. Eliminates boilerplate while preserving architectural intent, cutting initial coding effort by 60–80%.",
+      "kiro": "Validates AI-generated code against the original spec and project requirements. Catches hallucinations, drift, and misaligned behavior before code review, ensuring generated output actually matches what was contracted.",
+      "coderabbit": "AI-powered code review on every PR. Analyzes logic correctness, security risks, and maintainability. Provides inline suggestions and plain-language summaries so reviewers focus on intent, not mechanics.",
+      "snyk": "Snyk detects CVEs in dependencies and blocks vulnerable code from merging. SonarCloud enforces coverage thresholds, code smells, and technical debt budgets on every commit — automated quality gates with no manual overrides.",
+      "cicd": "The final enforcement gate. Pipelines run lint, type checks, tests, security scans, and build validation on every push. Only code that clears every gate reaches production — no exceptions, no manual bypasses."
+    },
+    "exp": {
+      "present": "Present",
+      "gtc": {
+        "role": "Solutions Architect — Cloud / DevOps",
+        "period": "May 2025 – Present",
+        "b1": "Leading cloud modernization and DevOps transformation across multiple teams at one of Guatemala's largest financial institutions",
+        "b2": "Defined reference architectures for AKS and Azure Container Apps; adopted as organizational standard",
+        "b3": "Standardized CI/CD pipelines with reusable templates, reducing manual deployment effort across teams",
+        "b4": "Established shift-left practices embedding testing, security scanning, and code quality early in the SDLC",
+        "b5": "Introduced AI-assisted development workflows (ChatGPT, Copilot, CodeRabbit) across engineering teams",
+        "b6": "Built observability standards with Azure Monitor + Log Analytics, improving incident detection and response",
+        "b7": "Authored ADRs and governance frameworks adopted organization-wide; served as technical advisor to leadership"
+      },
+      "tempus": {
+        "role": "Senior Full Stack Engineer — AI Platform",
+        "period": "Aug 2025 – Present",
+        "b1": "Contributing to an AI-driven healthcare platform for patient tracking and care gap detection at scale",
+        "b2": "Designed event-driven data pipelines using DynamoDB Streams, SQS, and Kinesis for high-volume healthcare data",
+        "b3": "Ensured HL7/PHI compliance, data integrity, and security across distributed services",
+        "b4": "Contributed across React frontend, Python microservices, and Kotlin mobile components",
+        "b5": "Improved distributed system observability through structured logging and distributed tracing"
+      },
+      "halo": {
+        "role": "Senior Full Stack Developer",
+        "period": "2023 – 2025",
+        "b1": "Built scalable TypeScript-first backend services and React frontends for high-throughput systems",
+        "b2": "Contributed to Nx monorepo architecture and reusable shared libraries",
+        "b3": "Drove CI/CD automation and engineering best practices across the team"
+      },
+      "truelogic": {
+        "role": "Senior Full Stack Lead Developer",
+        "period": "2022 – 2023",
+        "b1": "Led architecture and delivery of a blockchain/NFT platform",
+        "b2": "Designed event-driven systems and queue-based async processing",
+        "b3": "Implemented CI/CD pipelines; mentored developers and improved team autonomy"
+      },
+      "paypal": {
+        "role": "Senior Full Stack Developer",
+        "period": "2020 – 2021",
+        "b1": "Built scalable systems for payments processing and charity platforms",
+        "b2": "Improved performance and reliability of high-volume transaction flows"
+      },
+      "early": {
+        "role": "Tech Lead · Senior Developer · Earlier Roles",
+        "period": "2013 – 2020",
+        "b1": "7 years of progressive experience across full-stack and mobile development, native Android, API design, and team leadership",
+        "b2": "Led development of cloud-native HR/payments platform at Yalutec; designed API-first systems for web and mobile"
+      }
+    },
+    "projects": {
+      "sdg19": { "desc": "AI-First SDLC reference: Codex → Kiro → CodeRabbit → Snyk + SonarCloud → AWS CDK. Production-grade enforcement at every layer." },
+      "pettzi": { "desc": "OpenSpec + OpenAPI contract-first. AI-scaffolded backend, event-driven AWS architecture, Nx monorepo." },
+      "flutter": { "desc": "Open-source smart forms library for Flutter. Reusable architecture, published for the community." },
+      "web": { "desc": "This site. Angular 21+, TypeScript, i18n, theming, automated CI/CD to AWS S3." },
+      "nfc": { "desc": "Native Android/Kotlin app for NFC tag serial number reading. Hardware integration on mobile." }
+    },
+    "production": {
+      "sinergia": { "name": "Sinergia Dorada", "highlights": "Angular, Google Consent Mode v2, GA4 integration, pro-bono civic tech (service dogs NGO)" },
+      "capriccio": { "name": "Hecho Capriccio", "highlights": "Full-stack production platform, frontend architecture and optimization" },
+      "cdag": { "name": "CDAG Formación", "highlights": "Training platform for Guatemala's national sports confederation — institutional scale" }
+    },
+    "community": {
+      "speaker": { "badge": "Speaker", "text": "Conference and meetup talks on architecture, cloud systems, and AI-assisted development" },
+      "gde": { "badge": "GDE", "text": "Active Google Developer — Guatemala City developer community" },
+      "writer": { "badge": "Writer", "text": "Technical writing on cloud, TypeScript, NestJS, and AI engineering. 57+ reactions on NestJS Tips" }
     }
   },
   "footer": {

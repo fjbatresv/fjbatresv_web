@@ -43,5 +43,9 @@ export const routes: Routes = [
       import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
     data: { section: 'contact' },
   },
+  {
+    path: 'cv',
+    loadComponent: () => import('./sections/cv/cv-page.component').then((m) => m.CvPageComponent),
+  },
   { path: '**', redirectTo: '' },
 ];

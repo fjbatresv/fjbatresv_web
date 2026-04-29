@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javier Batres — Staff Engineer & Solutions Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --ink-light: #3a3835;
+    --ink-muted: #7a7570;
+    --paper: #faf8f5;
+    --paper-warm: #f2ede6;
+    --rule: #e0d9d0;
+    --accent: #1a3a5c;
+    --accent-bright: #c8440a;
+    --accent-mid: #2d5f8a;
+    --tag-bg: #edf2f7;
+    --tag-text: #1a3a5c;
+    --section-gap: 2.8rem;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3.5rem 4rem;
+    position: relative;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.8rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .header-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.2rem;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .header-name em {
+    font-style: italic;
+    color: var(--accent-bright);
+  }
+
+  .header-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    margin-top: 0.5rem;
+  }
+
+  .header-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .header-contacts a {
+    color: var(--accent-mid);
+    text-decoration: none;
+  }
+  .header-contacts a:hover { color: var(--accent-bright); }
+
+  /* ── LAYOUT ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 2.4fr;
+    gap: 3rem;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {}
+
+  .sidebar-block {
+    margin-bottom: 2.2rem;
+  }
+
+  .sidebar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-bright);
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .skill-group {
+    margin-bottom: 1rem;
+  }
+
+  .skill-group-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.35rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 0.67rem;
+    padding: 0.18rem 0.5rem;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .tag.accent {
+    background: var(--accent);
+    color: white;
+  }
+
+  .tag.warm {
+    background: #fce8df;
+    color: var(--accent-bright);
+  }
+
+  .sidebar-link-item {
+    display: block;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent-mid);
+    text-decoration: none;
+    margin-bottom: 0.3rem;
+    word-break: break-all;
+  }
+  .sidebar-link-item:hover { color: var(--accent-bright); }
+
+  .cert-item {
+    font-size: 0.77rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    padding: 0.5rem 0.6rem;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--accent);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  /* ── MAIN ── */
+  .main {}
+
+  .section {
+    margin-bottom: var(--section-gap);
+  }
+
+  .section-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-bright);
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .summary-text {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .summary-text strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── AI PIPELINE ── */
+  .ai-pipeline {
+    background: var(--accent);
+    color: white;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .ai-pipeline-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .pipeline-steps {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .pipeline-step {
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .pipeline-arrow {
+    color: var(--accent-bright);
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  .ai-refs {
+    margin-top: 0.9rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .ai-ref {
+    background: rgba(255,255,255,0.08);
+    padding: 0.6rem 0.8rem;
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .ai-ref-name {
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+
+  .ai-ref-desc {
+    opacity: 0.65;
+    font-size: 0.65rem;
+    line-height: 1.4;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .exp-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .exp-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-role {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    text-align: right;
+    margin-top: 0.1rem;
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent-mid);
+    margin-bottom: 0.7rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-bullets li {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent-bright);
+    font-size: 0.7rem;
+  }
+
+  .exp-tech {
+    margin-top: 0.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  /* ── PROJECTS TABLE ── */
+  .projects-grid {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.8rem;
+    align-items: start;
+    padding: 0.7rem 0.8rem;
+    background: var(--paper-warm);
+    border-left: 2px solid var(--rule);
+  }
+
+  .project-row.featured {
+    border-left-color: var(--accent);
+  }
+
+  .project-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .project-desc {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  .project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--accent-mid);
+    text-decoration: none;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .project-link:hover { color: var(--accent-bright); }
+
+  /* ── PRODUCTION TABLE ── */
+  .prod-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.77rem;
+  }
+
+  .prod-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    font-weight: 500;
+  }
+
+  .prod-table td {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-light);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+
+  .prod-table td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .prod-table td a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent-mid);
+    text-decoration: none;
+  }
+
+  .prod-table td a:hover { color: var(--accent-bright); }
+
+  /* ── COMMUNITY ── */
+  .community-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+    align-items: start;
+  }
+
+  .community-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-bright);
+    white-space: nowrap;
+    padding-top: 0.05rem;
+  }
+
+  .community-text {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .community-text a {
+    color: var(--accent-mid);
+    text-decoration: none;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .page { padding: 1.5rem 2rem; max-width: 100%; }
+    .header-name { font-size: 2.4rem; }
+    .ai-pipeline { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 700px) {
+    .page { padding: 1.5rem; }
+    .body-grid { grid-template-columns: 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .header-contacts { align-items: flex-start; }
+    .header-name { font-size: 2.2rem; }
+    .ai-refs { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <div class="header-name">Javier <em>Batres</em></div>
+      <div class="header-title">Staff Full Stack Engineer &nbsp;·&nbsp; Solutions Architect &nbsp;·&nbsp; AI-First Engineering</div>
+    </div>
+    <div class="header-contacts">
+      <span>Guatemala City, Guatemala</span>
+      <a href="mailto:fjbatresv@gmail.com">fjbatresv@gmail.com</a>
+      <a href="https://github.com/fjbatresv">github.com/fjbatresv</a>
+      <a href="https://linkedin.com/in/fjbatresv">linkedin.com/in/fjbatresv</a>
+      <a href="https://fjbatresv.com">fjbatresv.com</a>
+    </div>
+  </header>
+
+  <div class="body-grid">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Languages</div>
+        <div class="tags">
+          <span class="tag accent">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">Kotlin</span>
+          <span class="tag">Dart</span>
+          <span class="tag">Java</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Frontend</div>
+        <div class="tags">
+          <span class="tag">React</span>
+          <span class="tag">Angular 21+</span>
+          <span class="tag">RxJS</span>
+          <span class="tag">i18n</span>
+          <span class="tag">Design Systems</span>
+          <span class="tag">Performance</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Backend & APIs</div>
+        <div class="tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">NestJS</span>
+          <span class="tag">Serverless</span>
+          <span class="tag">Microservices</span>
+          <span class="tag accent">OpenAPI</span>
+          <span class="tag accent">OpenSpec</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Mobile</div>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Kotlin Android</span>
+          <span class="tag">NFC / Hardware</span>
+          <span class="tag">API-first</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Cloud — AWS</div>
+        <div class="tags">
+          <span class="tag">Lambda</span>
+          <span class="tag">API Gateway</span>
+          <span class="tag">DynamoDB</span>
+          <span class="tag">SQS</span>
+          <span class="tag">Kinesis</span>
+          <span class="tag">CDK</span>
+          <span class="tag">S3</span>
+          <span class="tag">RDS</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Cloud — Azure</div>
+        <div class="tags">
+          <span class="tag">AKS</span>
+          <span class="tag">Container Apps</span>
+          <span class="tag">API Management</span>
+          <span class="tag">Service Bus</span>
+          <span class="tag">Entra ID</span>
+          <span class="tag">Key Vault</span>
+          <span class="tag">Monitor</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">DevOps</div>
+        <div class="tags">
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Azure DevOps</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag warm">SonarCloud</span>
+          <span class="tag warm">Snyk</span>
+          <span class="tag warm">CodeRabbit</span>
+          <span class="tag warm">Kiro</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Architecture</div>
+        <div class="tags">
+          <span class="tag">C4 Model</span>
+          <span class="tag">ADRs</span>
+          <span class="tag">Event-Driven</span>
+          <span class="tag">DDD</span>
+          <span class="tag">Nx Monorepo</span>
+          <span class="tag">Shift-Left</span>
+          <span class="tag">Observability</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Certifications</div>
+        <div class="cert-item">AWS Certified<br>Cloud Practitioner</div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Profiles</div>
+        <a class="sidebar-link-item" href="https://fjbatresv.medium.com">medium.com/@fjbatresv</a>
+        <a class="sidebar-link-item" href="https://dev.to/fjbatresv">dev.to/fjbatresv</a>
+        <a class="sidebar-link-item" href="https://youtube.com/watch?v=IBsH63P4M8w">YouTube Talks</a>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- SUMMARY -->
+      <section class="section">
+        <div class="section-header">Professional Summary</div>
+        <p class="summary-text">
+          Staff Engineer and Solutions Architect with <strong>10+ years</strong> delivering production-grade systems across web, backend, mobile, and cloud. Specializes in <strong>AI-first engineering</strong> — designing structured workflows that integrate LLMs into the SDLC through contract-driven development, automated code generation, and multi-layer validation pipelines.
+          <br><br>
+          Proven track record leading cloud modernization across <strong>AWS and Azure</strong>, standardizing CI/CD at scale, and influencing engineering culture across organizations. Active Google Developer, Tech Speaker, and open-source contributor.
+        </p>
+      </section>
+
+      <!-- AI ENGINEERING -->
+      <section class="section">
+        <div class="section-header">AI Engineering — Key Differentiator</div>
+        <div class="ai-pipeline">
+          <div class="ai-pipeline-title">End-to-end production AI-Assisted SDLC Pipeline</div>
+          <div class="pipeline-steps">
+            <span class="pipeline-step">OpenAPI Contract</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">Codex Generation</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">Kiro Validation</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">CodeRabbit Review</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">Snyk + SonarCloud</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">CI/CD Enforcement</span>
+          </div>
+          <div class="ai-refs">
+            <div class="ai-ref">
+              <div class="ai-ref-name">sdg19-final</div>
+              <div class="ai-ref-desc">Full SDLC executed through AI-assisted workflows. Codex + Kiro + CodeRabbit + Snyk + SonarCloud + AWS CDK. End-to-end production quality through automated enforcement.</div>
+            </div>
+            <div class="ai-ref">
+              <div class="ai-ref-name">Pettzi</div>
+              <div class="ai-ref-desc">OpenSpec + OpenAPI contract-first. AI-scaffolded backend, event-driven AWS architecture, Nx monorepo. Repeatable, documented pattern.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="section">
+        <div class="section-header">Professional Experience</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Solutions Architect — Cloud / DevOps</div>
+            <div class="exp-period">May 2025 – Present</div>
+          </div>
+          <div class="exp-company">Banco G&T Continental · Guatemala City</div>
+          <ul class="exp-bullets">
+            <li>Leading cloud modernization and DevOps transformation across multiple teams at one of Guatemala's largest financial institutions</li>
+            <li>Defined reference architectures for AKS and Azure Container Apps; adopted as organizational standard</li>
+            <li>Standardized CI/CD pipelines with reusable templates, improving consistency and reducing manual deployment effort across teams</li>
+            <li>Established shift-left practices embedding testing, security scanning, and code quality early in the SDLC</li>
+            <li>Introduced AI-assisted development workflows (ChatGPT, Copilot, CodeRabbit) across engineering teams</li>
+            <li>Built observability standards with Azure Monitor + Log Analytics, improving incident detection and response</li>
+            <li>Authored ADRs and governance frameworks adopted organization-wide; served as technical advisor to leadership</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag">Azure</span><span class="tag">AKS</span><span class="tag">Container Apps</span><span class="tag">API Management</span><span class="tag">GitHub Actions</span><span class="tag">Azure DevOps</span><span class="tag">SonarQube</span><span class="tag">Snyk</span><span class="tag">Terraform</span>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Senior Full Stack Engineer — AI Platform</div>
+            <div class="exp-period">Aug 2025 – Present</div>
+          </div>
+          <div class="exp-company">Tempus · Deep6 AI Program · Remote</div>
+          <ul class="exp-bullets">
+            <li>Contributing to an AI-driven healthcare platform for patient tracking and care gap detection at scale</li>
+            <li>Designed event-driven data pipelines using DynamoDB Streams, SQS, and Kinesis for high-volume healthcare data</li>
+            <li>Ensured HL7/PHI compliance, data integrity, and security across distributed services</li>
+            <li>Contributed across React frontend, Python microservices, and Kotlin mobile components</li>
+            <li>Improved distributed system observability through structured logging, error handling, and tracing</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag">AWS</span><span class="tag">DynamoDB</span><span class="tag">SQS</span><span class="tag">Kinesis</span><span class="tag">React</span><span class="tag">Python</span><span class="tag">Kotlin</span><span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Senior Full Stack Developer</div>
+            <div class="exp-period">2023 – 2025</div>
+          </div>
+          <div class="exp-company">Halo Media · Remote</div>
+          <ul class="exp-bullets">
+            <li>Built scalable TypeScript-first backend services and React frontends for high-throughput systems</li>
+            <li>Improved API performance and data access patterns under production load</li>
+            <li>Contributed to Nx monorepo architecture and reusable shared libraries</li>
+            <li>Drove CI/CD automation and engineering best practices across the team</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">AWS</span><span class="tag">Nx</span><span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Senior Full Stack Lead Developer</div>
+            <div class="exp-period">2022 – 2023</div>
+          </div>
+          <div class="exp-company">Truelogic · Remote</div>
+          <ul class="exp-bullets">
+            <li>Led architecture and delivery of a blockchain/NFT platform</li>
+            <li>Designed event-driven systems and queue-based async processing</li>
+            <li>Implemented CI/CD pipelines; mentored developers and improved team autonomy</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Senior Full Stack Developer</div>
+            <div class="exp-period">2020 – 2021</div>
+          </div>
+          <div class="exp-company">PayPal · Remote</div>
+          <ul class="exp-bullets">
+            <li>Built scalable systems for payments processing and charity platforms</li>
+            <li>Improved performance and reliability of high-volume transaction flows</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Tech Lead · Senior Developer · Earlier Roles</div>
+            <div class="exp-period">2013 – 2020</div>
+          </div>
+          <div class="exp-company">Yalutec · Infonet / Novuskills · Guatemala</div>
+          <ul class="exp-bullets">
+            <li>7 years of progressive experience across full-stack and mobile development, native Android, API design, and team leadership</li>
+            <li>Led development of cloud-native HR/payments platform at Yalutec; designed API-first systems for web and mobile</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="section">
+        <div class="section-header">Open Source & Selected Projects</div>
+        <div class="projects-grid">
+          <div class="project-row featured">
+            <div class="project-name">sdg19-final</div>
+            <div class="project-desc">AI-First SDLC reference: Codex generation → Kiro validation → CodeRabbit review → Snyk + SonarCloud → AWS CDK. Fully AI-programmed, production-grade enforcement at every layer.</div>
+            <a class="project-link" href="https://github.com/fjbatresv/sdg19-final">github ↗</a>
+          </div>
+          <div class="project-row featured">
+            <div class="project-name">Pettzi</div>
+            <div class="project-desc">OpenSpec + OpenAPI contract-first. AI-scaffolded backend, event-driven AWS architecture, Nx monorepo. Repeatable AI-assisted engineering pattern.</div>
+            <a class="project-link" href="https://github.com/fjbatresv/pettzi">github ↗</a>
+          </div>
+          <div class="project-row">
+            <div class="project-name">flutter_smart_forms</div>
+            <div class="project-desc">Open-source smart forms library for Flutter. Reusable architecture, published for the Flutter community.</div>
+            <a class="project-link" href="https://github.com/fjbatresv/flutter_smart_forms">github ↗</a>
+          </div>
+          <div class="project-row">
+            <div class="project-name">fjbatresv_web</div>
+            <div class="project-desc">Personal site in Angular 21+. TypeScript-first, i18n, theming, automated CI/CD to AWS.</div>
+            <a class="project-link" href="https://fjbatresv.com">live ↗</a>
+          </div>
+          <div class="project-row">
+            <div class="project-name">SerialNFC</div>
+            <div class="project-desc">Native Android/Kotlin app for NFC tag serial number reading. Hardware integration on mobile.</div>
+            <a class="project-link" href="https://github.com/fjbatresv/SerialNFC">github ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTION -->
+      <section class="section">
+        <div class="section-header">Production Deployments</div>
+        <table class="prod-table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>URL</th>
+              <th>Highlights</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sinergia Dorada</td>
+              <td><a href="https://sinergiadoradagt.com">sinergiadoradagt.com</a></td>
+              <td>Angular, Google Consent Mode v2, GA4 integration, pro-bono civic tech (service dogs NGO)</td>
+            </tr>
+            <tr>
+              <td>Hecho Capriccio</td>
+              <td><a href="https://hechocapriccio.com">hechocapriccio.com</a></td>
+              <td>Full-stack production platform, frontend architecture and optimization</td>
+            </tr>
+            <tr>
+              <td>CDAG Formación</td>
+              <td><a href="https://formacioncdag.org.gt">formacioncdag.org.gt</a></td>
+              <td>Training platform for Guatemala's national sports confederation — institutional scale</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- COMMUNITY -->
+      <section class="section">
+        <div class="section-header">Community & Technical Content</div>
+        <div class="community-item">
+          <div class="community-badge">Speaker</div>
+          <div class="community-text">Conference and meetup talks on architecture, cloud systems, and AI-assisted development — <a href="https://www.youtube.com/watch?v=IBsH63P4M8w">YouTube</a></div>
+        </div>
+        <div class="community-item">
+          <div class="community-badge">GDE</div>
+          <div class="community-text">Active Google Developer — Guatemala City developer community</div>
+        </div>
+        <div class="community-item">
+          <div class="community-badge">Writer</div>
+          <div class="community-text">Technical writing on cloud, TypeScript, NestJS, and AI engineering — <a href="https://fjbatresv.medium.com">Medium</a> · <a href="https://dev.to/fjbatresv">Dev.to</a> (57+ reactions on NestJS Tips)</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
