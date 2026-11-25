@@ -9,7 +9,7 @@ AWS=(aws --profile "$AWS_PROFILE")
 TMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TMP_DIR"' EXIT
 
-jq --arg report "$SENTRY_CSP_REPORT_URI" '(.ResponseHeadersPolicyConfig.CustomHeadersConfig.Items[] | select(.Header == "Content-Security-Policy-Report-Only").Value) |= sub("__SENTRY_CSP_REPORT_URI__"; $report)' infra/cloudfront/security-headers-policy.json > "$TMP_DIR/headers.json"
+jq --arg report "$SENTRY_CSP_REPORT_URI" '.ResponseHeadersPolicyConfig | (.CustomHeadersConfig.Items[] | select(.Header == "Content-Security-Policy-Report-Only" or .Header == "Content-Security-Policy").Value) |= sub("__SENTRY_CSP_REPORT_URI__"; $report)' infra/cloudfront/security-headers-policy.json > "$TMP_DIR/headers.json"
 
 DIST=$("${AWS[@]}" cloudfront get-distribution-config --id E2EV9RW3Q35Z60)
 DIST_ETAG=$(jq -r '.ETag' <<< "$DIST")
