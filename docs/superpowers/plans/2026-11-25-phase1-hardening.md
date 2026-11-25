@@ -143,9 +143,9 @@
 
 ### Task 8: Verification + PR
 
-- [ ] **Step 1:** `npm ci && npm run lint && npm run test:coverage && npm run test:infra && npm run build` → all green; paste coverage summary.
-- [ ] **Step 2:** Serve `dist/javier-batres-site/browser` with `npx http-server -p 4310` (simulating rewrite is not needed locally — open `/projects/index.html` and `/es/contact/index.html`). Screenshot EN/ES × light/dark × 390px/1440px of `/` and compare to production `https://fjbatresv.com/` — expect no visible differences. Browser console: no errors.
-- [ ] **Step 3:** Push branch `fjbatresv/hardening`, open PR to `main` (gitmoji title `🔒️ Phase 1: hardening`), body: summary, audit before/after numbers, leftover advisories (from Task 2), test-runner choice, screenshots, and checklist:
+- [x] **Step 1:** `npm ci && npm run lint && npm run test:coverage && npm run test:infra && npm run build` → all green; paste coverage summary.
+- [x] **Step 2:** Serve `dist/javier-batres-site/browser` with `npx http-server -p 4310` (simulating rewrite is not needed locally — open `/projects/index.html` and `/es/contact/index.html`). Screenshot EN/ES × light/dark × 390px/1440px of `/` and compare to production `https://fjbatresv.com/` — expect no visible differences. Browser console: no errors.
+- [x] **Step 3:** Push branch `fjbatresv/hardening`, open PR to `main` (gitmoji title `🔒️ Phase 1: hardening`), body: summary, audit before/after numbers, leftover advisories (from Task 2), test-runner choice, screenshots, and checklist:
   - [ ] Claude: `infra/apply.sh --dry-run` reviewed, then applied after merge+deploy
   - [ ] Claude: verify `curl -I https://fjbatresv.com/projects` 200, headers present, `/nope` 404
   - [ ] Javier: GitHub secrets `AWS_ACCESS_KEY_ID/SECRET` removed after first green OIDC deploy; Claude deactivates `fjbatresv-web` key
