@@ -70,7 +70,6 @@
               ]
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
               "sourceMap": true,
               "extractLicenses": false
