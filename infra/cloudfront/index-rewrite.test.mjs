@@ -11,13 +11,21 @@ test('rewrites extensionless routes to their prerendered index', () => {
     ['/projects', '/projects/index.html'],
     ['/projects/', '/projects/index.html'],
     ['/es', '/es/index.html'],
+    ['/es/', '/es/index.html'],
+    ['/assets/i18n.v2/', '/assets/i18n.v2/index.html'],
     ['/es/contact', '/es/contact/index.html'],
   ]) assert.equal(handler({ request: { uri } }).uri, expected);
 });
 
 test('leaves files and query strings unchanged', () => {
   const querystring = { a: { value: '1' } };
-  for (const uri of ['/main-ABC123.js', '/assets/logo.webp', '/privacy-policy.pdf', '/robots.txt']) {
+  for (const uri of [
+    '/main-ABC123.js',
+    '/assets/logo.webp',
+    '/assets/i18n.v2/x.json',
+    '/privacy-policy.pdf',
+    '/robots.txt',
+  ]) {
     const request = { uri, querystring };
     const result = handler({ request });
     assert.equal(result.uri, uri);
