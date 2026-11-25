@@ -1,5 +1,8 @@
 name: Build and Deploy to S3
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: ["main"]
@@ -13,10 +16,10 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Use Node.js from .nvmrc
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -60,10 +63,9 @@ jobs:
         run: npm run build
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@cabfdba3510de1431bac9dba27511d97497fc100 # v5
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::605134457500:role/fjbatresv-web-gha-deploy
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sentry upload sourcemaps & release
@@ -75,7 +77,7 @@ jobs:
           RELEASE: ${{ github.sha }}
         run: |
           npx @sentry/cli releases new "$RELEASE"
-          npx @sentry/cli sourcemaps upload --release="$RELEASE" dist/javier-batres-site --url-prefix="~/"
+          npx @sentry/cli sourcemaps upload --release="$RELEASE" dist/javier-batres-site/browser --url-prefix="~/"
           npx @sentry/cli releases finalize "$RELEASE"
 
       - name: Remove sourcemaps before deploy
@@ -83,8 +85,10 @@ jobs:
 
       - name: Sync to S3
         run: |
-          aws s3 sync dist/javier-batres-site/ s3://${{ secrets.S3_BUCKET }}/ --delete --cache-control "public, max-age=31536000" --exclude "index.html"
-          aws s3 cp dist/javier-batres-site/index.html s3://${{ secrets.S3_BUCKET }}/index.html --cache-control "no-cache, no-store, must-revalidate"
+          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --delete --exclude "*.html" --cache-control "public, max-age=31536000, immutable"
+          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --exclude "*" --include "*.html" --cache-control "no-cache" --content-type "text/html"
+          aws s3 cp dist/javier-batres-site/browser/robots.txt s3://${{ secrets.S3_BUCKET }}/robots.txt --cache-control "no-cache" --content-type "text/plain"
+          aws s3 cp dist/javier-batres-site/browser/sitemap.xml s3://${{ secrets.S3_BUCKET }}/sitemap.xml --cache-control "no-cache" --content-type "application/xml"
 
       - name: Output artifact size
         run: du -sh dist/javier-batres-site

@@ -136,10 +136,10 @@
 
 **Files:** Modify `.github/workflows/deploy.yml`, `.github/workflows/ci.yml`, `.github/workflows/sonarcloud.yml`; Create `.github/PULL_REQUEST_TEMPLATE` checklist line if template exists.
 
-- [ ] **Step 1:** `deploy.yml`: `configure-aws-credentials` with `role-to-assume: arn:aws:iam::605134457500:role/fjbatresv-web-gha-deploy`, `aws-region: ${{ secrets.AWS_REGION }}`; remove access-key inputs. Paths now `dist/javier-batres-site/browser`. Sync: `aws s3 sync … --delete --exclude "*.html" --cache-control "public, max-age=31536000, immutable"` then `aws s3 sync … --exclude "*" --include "*.html" --include "robots.txt" --include "sitemap.xml" --cache-control "no-cache"` (with `--content-type text/html` only for html). Sentry upload path updated. Keep invalidation.
-- [ ] **Step 2:** All workflows: top-level `permissions: contents: read` (deploy adds `id-token: write`); pin every third-party action to a full commit SHA with `# vX.Y.Z` comment. `ci.yml` adds `npm audit --omit=dev --audit-level=high` and `npm run test:infra`; its `paths` filter adds `public/**`, `infra/**`, `scripts/**`.
-- [ ] **Step 3:** Validate with `npx --yes action-validator .github/workflows/*.yml` (or `actionlint` if available) → no errors.
-- [ ] **Step 4:** Commit `👷 Deploy via GitHub OIDC, pin actions, add audit gate`.
+- [x] **Step 1:** `deploy.yml`: `configure-aws-credentials` with `role-to-assume: arn:aws:iam::605134457500:role/fjbatresv-web-gha-deploy`, `aws-region: ${{ secrets.AWS_REGION }}`; remove access-key inputs. Paths now `dist/javier-batres-site/browser`. Sync: `aws s3 sync … --delete --exclude "*.html" --cache-control "public, max-age=31536000, immutable"` then `aws s3 sync … --exclude "*" --include "*.html" --include "robots.txt" --include "sitemap.xml" --cache-control "no-cache"` (with `--content-type text/html` only for html). Sentry upload path updated. Keep invalidation.
+- [x] **Step 2:** All workflows: top-level `permissions: contents: read` (deploy adds `id-token: write`); pin every third-party action to a full commit SHA with `# vX.Y.Z` comment. `ci.yml` adds `npm audit --omit=dev --audit-level=high` and `npm run test:infra`; its `paths` filter adds `public/**`, `infra/**`, `scripts/**`.
+- [x] **Step 3:** Validate with `npx --yes action-validator .github/workflows/*.yml` (or `actionlint` if available) → no errors.
+- [x] **Step 4:** Commit `👷 Deploy via GitHub OIDC, pin actions, add audit gate`.
 
 ### Task 8: Verification + PR
 

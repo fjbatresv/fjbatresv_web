@@ -1,10 +1,16 @@
 name: CI (lint & test)
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     branches: ["develop", "main"]
     paths:
       - "src/**"
+      - "public/**"
+      - "infra/**"
+      - "scripts/**"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/ci.yml"
@@ -18,10 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Use Node.js from .nvmrc
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: '.nvmrc'
           cache: "npm"
@@ -37,3 +43,6 @@ jobs:
 
       - name: Test infrastructure
         run: npm run test:infra
+
+      - name: Audit runtime dependencies
+        run: npm audit --omit=dev --audit-level=high
