@@ -14,7 +14,7 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": ">=24"
+    "node": ">=24.15.0"
   },
   "dependencies": {
     "@angular/animations": "22.3.0",
