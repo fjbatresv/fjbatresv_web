@@ -26,7 +26,8 @@
                 "glob": "privacy-policy.pdf",
                 "input": "docs",
                 "output": "."
-              }
+              },
+              { "glob": "**/*", "input": "public", "output": "." }
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],
@@ -99,7 +100,11 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              { "glob": "**/*", "input": "public", "output": "public" }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": []
           }

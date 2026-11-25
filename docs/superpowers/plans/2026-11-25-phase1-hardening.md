@@ -94,11 +94,11 @@
 - `index.html` head: `<script src="/consent.js" defer></script>`; first child of `<body>`: `<script src="/theme-init.js"></script>` (synchronous, sets `theme-light|theme-dark` on `document.body` from `localStorage['fj-theme']` or `prefers-color-scheme`, same keys `ThemeService` uses).
 - `consent.js` keeps behavior of today's inline IIFE (measurement ID `G-MSCC45EHNV`, cookie `analytics_consent`, 365 days, EN/ES text) but builds the policy link with `document.createElement('a')` + `textContent` — no `innerHTML`.
 
-- [ ] **Step 1: Failing tests:** consent — no stored cookie → banner visible; click accept → cookie `analytics_consent=accepted` and a `script[src*="googletagmanager.com/gtag/js?id=G-MSCC45EHNV"]` exists; click reject → `_ga` test cookie cleared and gtag script removed; `<html lang="es">` → button text `Aceptar`; message node contains an `<a href="/privacy-policy.pdf">` and `innerHTML` was never used (spy on `Element.prototype` setter). theme-init — stored `dark` → `body.classList.contains('theme-dark')`; nothing stored + matchMedia dark → `theme-dark`.
-- [ ] **Step 2:** Run → FAIL.
-- [ ] **Step 3:** Implement the two files and edit `index.html`.
-- [ ] **Step 4:** Create `scripts/check-inline-scripts.mjs`: walks `dist/javier-batres-site/browser/**/*.html`, fails (exit 1, listing file + snippet) on any `<script>` without `src` whose `type` is not `application/json`/`application/ld+json`, and on any attribute matching `/\son[a-z]+=/i`. Wire into `package.json` `build` after postbuild. Run `npm run build` → exits 0.
-- [ ] **Step 5:** `npm run test:coverage` PASS. Commit `🔒️ Move consent and theme bootstrap out of inline scripts`.
+- [x] **Step 1: Failing tests:** consent — no stored cookie → banner visible; click accept → cookie `analytics_consent=accepted` and a `script[src*="googletagmanager.com/gtag/js?id=G-MSCC45EHNV"]` exists; click reject → `_ga` test cookie cleared and gtag script removed; `<html lang="es">` → button text `Aceptar`; message node contains an `<a href="/privacy-policy.pdf">` and `innerHTML` was never used (spy on `Element.prototype` setter). theme-init — stored `dark` → `body.classList.contains('theme-dark')`; nothing stored + matchMedia dark → `theme-dark`.
+- [x] **Step 2:** Run → FAIL.
+- [x] **Step 3:** Implement the two files and edit `index.html`.
+- [x] **Step 4:** Create `scripts/check-inline-scripts.mjs`: walks `dist/javier-batres-site/browser/**/*.html`, fails (exit 1, listing file + snippet) on any `<script>` without `src` whose `type` is not `application/json`/`application/ld+json`, and on any attribute matching `/\son[a-z]+=/i`. Wire into `package.json` `build` after postbuild. Run `npm run build` → exits 0.
+- [x] **Step 5:** `npm run test:coverage` PASS. Commit `🔒️ Move consent and theme bootstrap out of inline scripts`.
 
 ### Task 5: robots.txt + sitemap.xml
 

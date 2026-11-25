@@ -3,6 +3,7 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
+    files: [{ pattern: 'public/*.js', included: false, served: true }],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
