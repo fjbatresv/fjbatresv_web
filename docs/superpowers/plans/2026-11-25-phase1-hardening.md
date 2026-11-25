@@ -41,22 +41,22 @@
 **Interfaces:**
 - Produces: `npm run build` emits `dist/javier-batres-site/browser/**`; `npm test`, `npm run test:coverage`, `npm run lint` keep working with same names.
 
-- [ ] **Step 1:** `npx ng update @angular/core@22 @angular/cli@22` then `npx ng update @angular-eslint/schematics` (or bump angular-eslint packages to the 22-compatible major). Accept the official migrations, including the builder migration to `@angular/build:application`. Remove `@angular-devkit/build-angular`. Bump TypeScript to the version Angular 22 requires.
-- [ ] **Step 2:** In `angular.json` production config keep budgets (initial warn 900kb / error 1mb; anyComponentStyle 4kb/8kb), hidden sourcemaps, `outputHashing: "all"`, fileReplacements. Set `"optimization": { "scripts": true, "styles": { "minify": true, "inlineCritical": false }, "fonts": true }` (inlineCritical emits an inline `onload` handler that CSP would block).
-- [ ] **Step 3:** Test runner: keep Karma via `@angular/build:karma` if it works; otherwise move to Angular 22's default runner. Either way `npm run test:coverage` must write `coverage/javier-batres-site/lcov.info`. Note the choice in the PR.
-- [ ] **Step 4:** Remove unused runtime deps `lodash` and `tar` from `dependencies` (no imports in `src/`; verify with `grep -rn "lodash\|'tar'" src`).
-- [ ] **Step 5:** Run `npm run lint && npm run test:coverage && npm run build`. Expected: all pass, coverage ≥ Global Constraints, no budget error.
-- [ ] **Step 6:** Commit `⬆️ Upgrade to Angular 22 and application builder`.
+- [x] **Step 1:** `npx ng update @angular/core@22 @angular/cli@22` then `npx ng update @angular-eslint/schematics` (or bump angular-eslint packages to the 22-compatible major). Accept the official migrations, including the builder migration to `@angular/build:application`. Remove `@angular-devkit/build-angular`. Bump TypeScript to the version Angular 22 requires.
+- [x] **Step 2:** In `angular.json` production config keep budgets (initial warn 900kb / error 1mb; anyComponentStyle 4kb/8kb), hidden sourcemaps, `outputHashing: "all"`, fileReplacements. Set `"optimization": { "scripts": true, "styles": { "minify": true, "inlineCritical": false }, "fonts": true }` (inlineCritical emits an inline `onload` handler that CSP would block).
+- [x] **Step 3:** Test runner: keep Karma via `@angular/build:karma` if it works; otherwise move to Angular 22's default runner. Either way `npm run test:coverage` must write `coverage/javier-batres-site/lcov.info`. Note the choice in the PR.
+- [x] **Step 4:** Remove unused runtime deps `lodash` and `tar` from `dependencies` (no imports in `src/`; verify with `grep -rn "lodash\|'tar'" src`).
+- [x] **Step 5:** Run `npm run lint && npm run test:coverage && npm run build`. Expected: all pass, coverage ≥ Global Constraints, no budget error.
+- [x] **Step 6:** Commit `⬆️ Upgrade to Angular 22 and application builder`.
 
 ### Task 2: Dependency audit cleanup
 
 **Files:** `package.json`, `package-lock.json`
 
-- [ ] **Step 1:** `npx npm-check-updates -u --target minor` for non-Angular deps, then majors one by one where compatible (ngx-translate, @sentry/browser, @sentry/cli, eslint plugins, svgo, husky, gitmoji-cli). `npm install`.
-- [ ] **Step 2:** For each `overrides` entry: delete it, `npm install`, `npm audit`. If the advisory is gone, leave it deleted (and its metadata). If not, restore with today's `verifiedOn: "2026-11-25"`. Add new pins only for remaining high/critical with a fixed version available, each with full metadata.
-- [ ] **Step 3:** Run `npm audit --omit=dev` → expected `found 0 vulnerabilities`. Run `npm audit --audit-level=high` → expected exit 0, or list leftovers (package, advisory, dev-only reason) in `docs/security/audit-2026-11-25.md` for the PR body.
-- [ ] **Step 4:** `npm run lint && npm run test:coverage && npm run build` pass.
-- [ ] **Step 5:** Commit `🔒️ Resolve dependency vulnerabilities and refresh override pins`.
+- [x] **Step 1:** `npx npm-check-updates -u --target minor` for non-Angular deps, then majors one by one where compatible (ngx-translate, @sentry/browser, @sentry/cli, eslint plugins, svgo, husky, gitmoji-cli). `npm install`.
+- [x] **Step 2:** For each `overrides` entry: delete it, `npm install`, `npm audit`. If the advisory is gone, leave it deleted (and its metadata). If not, restore with today's `verifiedOn: "2026-11-25"`. Add new pins only for remaining high/critical with a fixed version available, each with full metadata.
+- [x] **Step 3:** Run `npm audit --omit=dev` → expected `found 0 vulnerabilities`. Run `npm audit --audit-level=high` → expected exit 0, or list leftovers (package, advisory, dev-only reason) in `docs/security/audit-2026-11-25.md` for the PR body.
+- [x] **Step 4:** `npm run lint && npm run test:coverage && npm run build` pass.
+- [x] **Step 5:** Commit `🔒️ Resolve dependency vulnerabilities and refresh override pins`.
 
 ### Task 3: SSG with EN + `/es/` routes, SSR-safe code
 
@@ -77,12 +77,12 @@
   - `NavbarComponent.setLanguage(lang)` navigates to `localizedPath(currentSection, lang)`; `navigate(section)` uses `localizedPath(section, currentLanguage)`.
 - First-visit behavior: **no automatic redirect** to `/es/` (decided: protects LCP; URL is the source of truth).
 
-- [ ] **Step 1: Failing tests** in `lang.spec.ts`: `langFromUrl('/es') === 'es'`, `langFromUrl('/es/contact?x=1') === 'es'`, `langFromUrl('/estimate') === 'en'`, `langFromUrl('/') === 'en'`; `localizedPath` table above. In `app.routes.spec.ts`: 15 routes; every `es/*` route has `data.lang === 'es'`; `'**'` loads NotFoundComponent. In `json-import-translate-loader.spec.ts`: `getTranslation('es')` emits object with `nav.home === 'Inicio'` (whatever es.json holds); unknown lang emits `{}`. In `home-page.component.spec.ts` / `defer-error` spec: with `PLATFORM_ID = 'server'`, no `document.getElementById`/`location.reload`/`sessionStorage` access (spy asserts not called).
-- [ ] **Step 2:** Run `npm test` → new tests FAIL.
-- [ ] **Step 3:** `npx ng add @angular/ssr` then set `"outputMode": "static"` and `"prerender": true` in `angular.json`; `app.routes.server.ts` = `[{ path: '**', renderMode: RenderMode.Prerender }]` with the 404 route prerendered so the build emits `browser/404.html` (if Angular names it `404/index.html`, add a post-build copy step in `package.json` `build` script: `ng build --configuration production && node scripts/postbuild.mjs`, which copies it to `browser/404.html`). Use `provideClientHydration()` **without** `withEventReplay()` (event replay injects an inline script).
-- [ ] **Step 4:** Implement `lang.ts`, the loader, routes, service/component changes. Guard browser-only code with `isPlatformBrowser(inject(PLATFORM_ID))` or `afterNextRender`. Move Sentry `init` behind a browser check (still `/* istanbul ignore next */`). `ThemeService` reads `localStorage`/`matchMedia` only in the browser.
-- [ ] **Step 5:** `npm run test:coverage` → PASS, coverage ≥ constraints. `npm run build` → `ls dist/javier-batres-site/browser/{index.html,projects/index.html,es/index.html,es/contact/index.html,404.html}` all exist; `grep -c 'Featured Projects' dist/javier-batres-site/browser/projects/index.html` ≥ 1; `grep -c 'lang="es"' dist/javier-batres-site/browser/es/index.html` = 1.
-- [ ] **Step 6:** Commit `✨ Prerender EN and /es routes with SSR-safe services`.
+- [x] **Step 1: Failing tests** in `lang.spec.ts`: `langFromUrl('/es') === 'es'`, `langFromUrl('/es/contact?x=1') === 'es'`, `langFromUrl('/estimate') === 'en'`, `langFromUrl('/') === 'en'`; `localizedPath` table above. In `app.routes.spec.ts`: 15 routes; every `es/*` route has `data.lang === 'es'`; `'**'` loads NotFoundComponent. In `json-import-translate-loader.spec.ts`: `getTranslation('es')` emits object with `nav.home === 'Inicio'` (whatever es.json holds); unknown lang emits `{}`. In `home-page.component.spec.ts` / `defer-error` spec: with `PLATFORM_ID = 'server'`, no `document.getElementById`/`location.reload`/`sessionStorage` access (spy asserts not called).
+- [x] **Step 2:** Run `npm test` → new tests FAIL.
+- [x] **Step 3:** `npx ng add @angular/ssr` then set `"outputMode": "static"` and `"prerender": true` in `angular.json`; `app.routes.server.ts` = `[{ path: '**', renderMode: RenderMode.Prerender }]` with the 404 route prerendered so the build emits `browser/404.html` (if Angular names it `404/index.html`, add a post-build copy step in `package.json` `build` script: `ng build --configuration production && node scripts/postbuild.mjs`, which copies it to `browser/404.html`). Use `provideClientHydration()` **without** `withEventReplay()` (event replay injects an inline script).
+- [x] **Step 4:** Implement `lang.ts`, the loader, routes, service/component changes. Guard browser-only code with `isPlatformBrowser(inject(PLATFORM_ID))` or `afterNextRender`. Move Sentry `init` behind a browser check (still `/* istanbul ignore next */`). `ThemeService` reads `localStorage`/`matchMedia` only in the browser.
+- [x] **Step 5:** `npm run test:coverage` → PASS, coverage ≥ constraints. `npm run build` → `ls dist/javier-batres-site/browser/{index.html,projects/index.html,es/index.html,es/contact/index.html,404.html}` all exist; `grep -c 'Featured Projects' dist/javier-batres-site/browser/projects/index.html` ≥ 1; `grep -c 'lang="es"' dist/javier-batres-site/browser/es/index.html` = 1.
+- [x] **Step 6:** Commit `✨ Prerender EN and /es routes with SSR-safe services`.
 
 ### Task 4: Externalize consent + theme bootstrap scripts
 

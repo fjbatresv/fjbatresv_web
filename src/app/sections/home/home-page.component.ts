@@ -4,7 +4,9 @@ import {
   AfterViewInit,
   DestroyRef,
   inject,
+  PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -40,8 +42,14 @@ export class HomePageComponent implements AfterViewInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
+
+  get section(): string {
+    return (this.route.snapshot.data['section'] as string) || 'home';
+  }
 
   ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.scrollToSection();
     this.router.events
       .pipe(
@@ -54,7 +62,7 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   private scrollToSection(): void {
-    const section = (this.route.snapshot.data['section'] as string) || 'home';
+    const section = this.section;
     const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -222,6 +222,11 @@
       "linkedin": "LinkedIn"
     }
   },
+  "notFound": {
+    "title": "Página no encontrada",
+    "body": "La página solicitada no existe.",
+    "cta": "Volver al inicio"
+  },
   "footer": {
     "copy": "Javier Batres. Construido con Angular.",
     "links": {

@@ -28,10 +28,11 @@
                 "output": "."
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "styles": ["src/styles.scss"],
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "outputMode": "static",
+            "prerender": { "format": "directory" }
           },
           "configurations": {
             "production": {
@@ -48,7 +49,11 @@
                 }
               ],
               "outputHashing": "all",
-              "optimization": { "scripts": true, "styles": { "minify": true, "inlineCritical": false }, "fonts": true },
+              "optimization": {
+                "scripts": true,
+                "styles": { "minify": true, "inlineCritical": false },
+                "fonts": true
+              },
               "sourceMap": {
                 "scripts": true,
                 "styles": true,
@@ -94,23 +99,15 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
