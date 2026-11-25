@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 interface WritingItem {
   titleKey: string;
@@ -12,7 +12,7 @@ interface WritingItem {
 @Component({
   selector: 'app-writing',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './writing.component.html',
   styleUrls: ['./writing.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

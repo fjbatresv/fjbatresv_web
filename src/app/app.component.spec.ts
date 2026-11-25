@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
 import { TranslationService } from './core/services/translation.service';
@@ -23,8 +23,9 @@ describe('AppComponent', () => {
     metaMock.addTags.calls.reset();
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TranslateModule.forRoot(), AppComponent],
+      imports: [RouterTestingModule, AppComponent],
       providers: [
+        provideTranslateService(),
         { provide: TranslationService, useValue: translationServiceMock },
         { provide: Title, useValue: titleMock },
         { provide: Meta, useValue: metaMock },

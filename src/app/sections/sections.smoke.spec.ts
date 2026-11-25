@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { ContactComponent } from './contact/contact.component';
 import { ExperienceComponent } from './experience/experience.component';
@@ -11,13 +11,13 @@ describe('Section components', () => {
   it('create standalone section components', async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TranslateModule.forRoot(),
         ContactComponent,
         ExperienceComponent,
         ProjectsComponent,
         SkillsComponent,
         WritingComponent,
       ],
+      providers: [provideTranslateService()],
     }).compileComponents();
 
     expect(TestBed.createComponent(ContactComponent).componentInstance).toBeTruthy();

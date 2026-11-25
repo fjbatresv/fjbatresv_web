@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { TranslationService } from './core/services/translation.service';
@@ -9,7 +9,7 @@ import { TranslationService } from './core/services/translation.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, TranslateModule],
+  imports: [RouterOutlet, NavbarComponent, TranslatePipe],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

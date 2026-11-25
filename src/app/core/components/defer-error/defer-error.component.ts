@@ -6,7 +6,7 @@ const reloadFlag = '__deferReloaded';
 @Component({
   selector: 'app-defer-error',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="skeleton-section">
       <div class="container skeleton-card"></div>

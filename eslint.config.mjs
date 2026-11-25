@@ -1,32 +1,24 @@
-import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import eslint from '@eslint/js';
+import angular from 'angular-eslint';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-const compat = new FlatCompat({ baseDirectory: dirname(fileURLToPath(import.meta.url)), recommendedConfig: js.configs.recommended, allConfig: js.configs.all });
-
-export default compat.config(
+export default tseslint.config(
+  { ignores: ['projects/**/*'] },
   {
-    root: true,
-    ignorePatterns: ['projects/**/*'],
-    env: { browser: true, es2022: true, jasmine: true },
-    overrides: [
-      {
-        files: ['*.ts'],
-        parserOptions: { project: ['tsconfig.json'], createDefaultProgram: false },
-        extends: [
-          'plugin:@angular-eslint/recommended',
-          'plugin:@angular-eslint/template/process-inline-templates',
-          'eslint:recommended',
-          'plugin:prettier/recommended',
-        ],
-        rules: {
-          '@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'app', style: 'camelCase' }],
-          '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'app', style: 'kebab-case' }],
-          'no-unused-vars': 'off',
-        },
-      },
-      { files: ['*.html'], extends: ['plugin:@angular-eslint/template/recommended'] },
-    ],
+    files: ['src/**/*.ts'],
+    extends: [eslint.configs.recommended, ...angular.configs.tsRecommended, prettierRecommended],
+    processor: angular.createProcessor(),
+    languageOptions: { globals: { ...globals.browser, ...globals.jasmine } },
+    rules: {
+      '@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'app', style: 'camelCase' }],
+      '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'app', style: 'kebab-case' }],
+      'no-unused-vars': 'off',
+    },
+  },
+  {
+    files: ['src/app/**/*.html'],
+    extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility, prettierRecommended],
   },
 );

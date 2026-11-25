@@ -1,4 +1,4 @@
-import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, inject } from '@angular/core';
 import {
   HttpClient,
   provideHttpClient,
@@ -6,7 +6,11 @@ import {
   withXhr,
 } from '@angular/common/http';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  provideTranslateLoader,
+  provideTranslateService,
+} from '@ngx-translate/core';
 import * as Sentry from '@sentry/browser';
 
 import { routes } from './app.routes';
@@ -58,15 +62,9 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withXhr(), withInterceptorsFromDi()),
     { provide: ErrorHandler, useClass: SentryErrorHandler },
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        fallbackLang: 'en',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
-      })
-    ),
+    provideTranslateService({
+      fallbackLang: 'en',
+      loader: provideTranslateLoader(() => HttpLoaderFactory(inject(HttpClient))),
+    }),
   ],
 };

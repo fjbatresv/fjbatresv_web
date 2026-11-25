@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { HomePageComponent } from './home-page.component';
 
@@ -18,8 +18,9 @@ describe('HomePageComponent', () => {
       serializeUrl: () => '/',
     };
     await TestBed.configureTestingModule({
-      imports: [HomePageComponent, TranslateModule.forRoot()],
+      imports: [HomePageComponent],
       providers: [
+        provideTranslateService(),
         { provide: Router, useValue: routerStub },
         { provide: ActivatedRoute, useValue: routeStub },
       ],
