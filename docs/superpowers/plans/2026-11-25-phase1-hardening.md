@@ -126,11 +126,11 @@
 - `gha-deploy-policy.json`: exactly the current `fjbatresv_gh_action_deploy` document: `cloudfront:CreateInvalidation` on `arn:aws:cloudfront::605134457500:distribution/E2EV9RW3Q35Z60`; `s3:ListBucket`,`s3:PutObject`,`s3:DeleteObject` on `arn:aws:s3:::fjbatresv-web` and `/*`.
 - `apply.sh [--dry-run]`: `set -euo pipefail`; requires `AWS_PROFILE`, `SENTRY_CSP_REPORT_URI`. Idempotent create-or-update of: function `fjbatresv-index-rewrite` (+ publish), headers policy, role `fjbatresv-web-gha-deploy` with inline policy `deploy`; then `get-distribution-config` → `jq` to set on DefaultCacheBehavior `FunctionAssociations` (viewer-request) + `ResponseHeadersPolicyId`, and `CustomErrorResponses` 403 and 404 → `ResponsePagePath=/404.html`, `ResponseCode=404`, `ErrorCachingMinTTL=60` → `update-distribution --if-match`. `--dry-run` prints the diff of the distribution config and every intended call without executing writes.
 
-- [ ] **Step 1: Failing tests** (`index-rewrite.test.mjs`): `/`→`/`; `/projects`→`/projects/index.html`; `/projects/`→`/projects/index.html`; `/es`→`/es/index.html`; `/es/contact`→`/es/contact/index.html`; `/main-ABC123.js`, `/assets/logo.webp`, `/privacy-policy.pdf`, `/robots.txt` unchanged; querystring object identical after rewrite.
-- [ ] **Step 2:** `npm run test:infra` → FAIL. Implement → PASS.
-- [ ] **Step 3:** `bash -n infra/apply.sh` and `shellcheck infra/apply.sh` (if installed) clean; all JSON valid via `jq . file`.
-- [ ] **Step 4:** `infra/README.md`: what each file does, rollout order (deploy build → `apply.sh --dry-run` → `apply.sh` → verify → invalidate), how to flip CSP from Report-Only to enforced (rename header in JSON, re-run).
-- [ ] **Step 5:** Commit `🔧 Add CloudFront function, headers policy and OIDC role as code`.
+- [x] **Step 1: Failing tests** (`index-rewrite.test.mjs`): `/`→`/`; `/projects`→`/projects/index.html`; `/projects/`→`/projects/index.html`; `/es`→`/es/index.html`; `/es/contact`→`/es/contact/index.html`; `/main-ABC123.js`, `/assets/logo.webp`, `/privacy-policy.pdf`, `/robots.txt` unchanged; querystring object identical after rewrite.
+- [x] **Step 2:** `npm run test:infra` → FAIL. Implement → PASS.
+- [x] **Step 3:** `bash -n infra/apply.sh` and `shellcheck infra/apply.sh` (if installed) clean; all JSON valid via `jq . file`.
+- [x] **Step 4:** `infra/README.md`: what each file does, rollout order (deploy build → `apply.sh --dry-run` → `apply.sh` → verify → invalidate), how to flip CSP from Report-Only to enforced (rename header in JSON, re-run).
+- [x] **Step 5:** Commit `🔧 Add CloudFront function, headers policy and OIDC role as code`.
 
 ### Task 7: Deploy/CI workflows
 

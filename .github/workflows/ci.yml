@@ -34,3 +34,6 @@ jobs:
 
       - name: Test
         run: npm run test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Test infrastructure
+        run: npm run test:infra
