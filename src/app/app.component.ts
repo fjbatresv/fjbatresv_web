@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { NavbarComponent } from './core/components/navbar/navbar.component';
+import { SeoLinksService } from './core/services/seo-links.service';
 import { TranslationService } from './core/services/translation.service';
 
 @Component({
@@ -19,10 +20,12 @@ export class AppComponent implements OnInit {
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
   private readonly translationService = inject(TranslationService);
+  private readonly seoLinksService = inject(SeoLinksService);
 
   ngOnInit(): void {
     // Initialize language first to set <html lang=""> dynamically
     this.translationService.init();
+    this.seoLinksService.init();
 
     this.title.setTitle('Javier Batres');
     this.meta.addTags([
