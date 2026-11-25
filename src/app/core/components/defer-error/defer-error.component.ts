@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as Sentry from '@sentry/browser';
 
 const reloadFlag = '__deferReloaded';
@@ -6,6 +6,7 @@ const reloadFlag = '__deferReloaded';
 @Component({
   selector: 'app-defer-error',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <section class="skeleton-section">
       <div class="container skeleton-card"></div>
