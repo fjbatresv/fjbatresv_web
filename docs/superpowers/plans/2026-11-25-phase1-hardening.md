@@ -104,9 +104,9 @@
 
 **Files:** Create `public/robots.txt`, `public/sitemap.xml`
 
-- [ ] **Step 1:** `robots.txt`: `User-agent: *`, `Allow: /`, `Sitemap: https://fjbatresv.com/sitemap.xml`.
-- [ ] **Step 2:** `sitemap.xml`: URLs for the 14 locale routes (`https://fjbatresv.com/`, `/about` … and `/es`, `/es/about` …) with `xhtml:link rel="alternate" hreflang="en|es|x-default"` per pair. (Phase 2 replaces it.)
-- [ ] **Step 3:** `npm run build` → both files in `dist/.../browser/`. Validate XML with `xmllint --noout public/sitemap.xml`. Commit `🔍️ Add robots.txt and sitemap.xml`.
+- [x] **Step 1:** `robots.txt`: `User-agent: *`, `Allow: /`, `Sitemap: https://fjbatresv.com/sitemap.xml`.
+- [x] **Step 2:** `sitemap.xml`: URLs for the 14 locale routes (`https://fjbatresv.com/`, `/about` … and `/es`, `/es/about` …) with `xhtml:link rel="alternate" hreflang="en|es|x-default"` per pair. (Phase 2 replaces it.)
+- [x] **Step 3:** `npm run build` → both files in `dist/.../browser/`. Validate XML with `xmllint --noout public/sitemap.xml`. Commit `🔍️ Add robots.txt and sitemap.xml`.
 
 ### Task 6: CloudFront + IAM as code
 
