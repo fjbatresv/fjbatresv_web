@@ -85,10 +85,12 @@ jobs:
 
       - name: Sync to S3
         run: |
-          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --delete --exclude "*.html" --cache-control "public, max-age=31536000, immutable"
-          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --exclude "*" --include "*.html" --cache-control "no-cache" --content-type "text/html"
-          aws s3 cp dist/javier-batres-site/browser/robots.txt s3://${{ secrets.S3_BUCKET }}/robots.txt --cache-control "no-cache" --content-type "text/plain"
-          aws s3 cp dist/javier-batres-site/browser/sitemap.xml s3://${{ secrets.S3_BUCKET }}/sitemap.xml --cache-control "no-cache" --content-type "application/xml"
+          # esbuild emits an eight-character hash between each built asset's final hyphen and extension.
+          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --delete --exclude "*" --include "*-????????.*" --exclude "*.html" --exclude "index.csr.html" --cache-control "public, max-age=31536000, immutable"
+          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --delete --exclude "*" --include "*" --exclude "*-????????.*" --exclude "*.html" --exclude "index.csr.html" --cache-control "public, max-age=3600"
+          aws s3 sync dist/javier-batres-site/browser/ s3://${{ secrets.S3_BUCKET }}/ --delete --exclude "*" --include "*.html" --exclude "index.csr.html" --cache-control "no-cache" --content-type "text/html"
+          aws s3 cp dist/javier-batres-site/browser/robots.txt s3://${{ secrets.S3_BUCKET }}/robots.txt --cache-control "public, max-age=3600" --content-type "text/plain"
+          aws s3 cp dist/javier-batres-site/browser/sitemap.xml s3://${{ secrets.S3_BUCKET }}/sitemap.xml --cache-control "public, max-age=3600" --content-type "application/xml"
 
       - name: Output artifact size
         run: du -sh dist/javier-batres-site
