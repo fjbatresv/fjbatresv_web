@@ -160,8 +160,9 @@ Commits use gitmoji (Husky `commit-msg`). PRs target `main` and pass CI + SonarC
 
 ### 6.5 Phase 1 acceptance
 
+- The OIDC role `fjbatresv-web-gha-deploy` was created ahead of merge by Claude (2026-11-25).
 - Lint, tests, coverage ≥ current, Sonar gate green, production build within budgets.
-- `curl -I https://fjbatresv.com/projects` → 200 with HTML containing section content.
+- `curl -s https://fjbatresv.com/projects | grep -q 'Featured Projects'` confirms section content, and `curl -sI https://fjbatresv.com/projects` confirms status and headers.
 - securityheaders.com grade ≥ A; CSP enforced with no console violations (GA accepted/rejected,
   Sentry, theme, language toggle all work).
 - No visible UI change vs production (screenshots EN/ES, light/dark, mobile/desktop).
