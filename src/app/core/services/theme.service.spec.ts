@@ -112,6 +112,18 @@ describe('ThemeService', () => {
     }
   });
 
+  it('uses the system preference when browser storage is unavailable', () => {
+    const localStorageSpy = spyOnProperty(globalThis as any, 'localStorage', 'get').and.returnValue(
+      null
+    );
+    try {
+      configureWithMatchMedia(true);
+      expect(service.theme).toBe('dark');
+    } finally {
+      localStorageSpy.and.callFake(() => originalLocalStorage);
+    }
+  });
+
   it('falls back when matchMedia is not available', () => {
     // Remove matchMedia to hit the undefined branch
     (globalThis as any).matchMedia = undefined;

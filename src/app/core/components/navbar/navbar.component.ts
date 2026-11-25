@@ -33,7 +33,7 @@ export class NavbarComponent {
   private readonly translationService = inject(TranslationService);
 
   navigate(section: string): void {
-    this.router.navigateByUrl(localizedPath(section, this.currentLanguage));
+    void this.router.navigateByUrl(localizedPath(section, this.currentLanguage));
     this.isMenuOpen = false;
   }
 
@@ -42,7 +42,7 @@ export class NavbarComponent {
   }
 
   setLanguage(lang: Lang): void {
-    this.router.navigateByUrl(localizedPath(this.currentSection, lang));
+    void this.router.navigateByUrl(localizedPath(this.currentSection, lang));
   }
 
   get currentTheme(): 'light' | 'dark' {

@@ -10,17 +10,23 @@ const sections = [
   'contact',
 ] as const;
 
+function routePath(section: (typeof sections)[number], lang: 'en' | 'es'): string {
+  if (lang === 'es') {
+    if (section === 'home') {
+      return 'es';
+    }
+    return `es/${section}`;
+  }
+  if (section === 'home') {
+    return '';
+  }
+  return section;
+}
+
 export const routes: Routes = [
   ...(['en', 'es'] as const).flatMap((lang) =>
     sections.map((section) => ({
-      path:
-        lang === 'es'
-          ? section === 'home'
-            ? 'es'
-            : `es/${section}`
-          : section === 'home'
-            ? ''
-            : section,
+      path: routePath(section, lang),
       loadComponent: () =>
         import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
       data: { section, lang },

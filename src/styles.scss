@@ -10,9 +10,15 @@ html {
   width: 100%;
   height: 100%;
   font-family: var(--font-body);
-  scroll-behavior: smooth;
   position: relative;
   overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
 }
 
 body.theme-light {
@@ -112,10 +118,6 @@ section {
   color: #0b1221;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
 }
 
 .button.alt {
@@ -124,10 +126,19 @@ section {
   border-color: var(--color-border);
 }
 
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(30, 136, 229, 0.2);
-  filter: brightness(1.02);
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(30, 136, 229, 0.2);
+    filter: brightness(1.02);
+  }
 }
 
 .badge {

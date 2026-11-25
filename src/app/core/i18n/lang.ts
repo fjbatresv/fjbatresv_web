@@ -2,10 +2,21 @@ export type Lang = 'en' | 'es';
 export const SUPPORTED_LANGS: readonly Lang[] = ['en', 'es'];
 
 export function langFromUrl(url: string): Lang {
-  return /^\/es(?:\/|$)/.test(url.split(/[?#]/, 1)[0]) ? 'es' : 'en';
+  if (/^\/es(?:\/|$)/.test(url.split(/[?#]/, 1)[0])) {
+    return 'es';
+  }
+  return 'en';
 }
 
 export function localizedPath(section: string, lang: Lang): string {
-  const path = section === 'home' ? '' : `/${section}`;
-  return lang === 'es' ? (path ? `/es${path}` : '/es') : path || '/';
+  if (lang === 'es') {
+    if (section === 'home') {
+      return '/es';
+    }
+    return `/es/${section}`;
+  }
+  if (section === 'home') {
+    return '/';
+  }
+  return `/${section}`;
 }
