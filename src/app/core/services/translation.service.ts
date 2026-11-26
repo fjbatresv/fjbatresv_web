@@ -31,10 +31,13 @@ export class TranslationService {
 
   private normalizeSpanishRoot(): void {
     if (this.router.url.split(/[?#]/, 1)[0] !== '/es') return;
-    const history = this.document.defaultView?.history;
-    if (typeof history?.replaceState === 'function') {
-      history.replaceState(history.state, '', '/es/');
-    }
+    const window = this.document.defaultView;
+    if (!window || typeof window.history.replaceState !== 'function') return;
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `/es/${window.location.search}${window.location.hash}`
+    );
   }
 
   setLanguage(lang: Lang): void {
