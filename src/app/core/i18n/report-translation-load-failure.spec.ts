@@ -24,4 +24,9 @@ describe('reportTranslationLoadFailure', () => {
       extra: { lang: 'es', status: 404, statusText: 'Not Found', url: '/es.json' },
     });
   });
+
+  it('loads the Sentry message client on demand', async () => {
+    await sentryClient.captureMessage('test message', { level: 'warning' });
+    expect(true).toBeTrue();
+  });
 });

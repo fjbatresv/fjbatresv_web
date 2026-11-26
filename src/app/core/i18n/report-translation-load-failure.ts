@@ -12,8 +12,12 @@ const isTestRun = (): boolean =>
   runtimeContext.pathname().includes('context.html');
 
 export const sentryClient = {
-  captureMessage: (...args: Parameters<typeof import('@sentry/browser').captureMessage>): void => {
-    void import('@sentry/browser').then((Sentry) => Sentry.captureMessage(...args));
+  captureMessage: (
+    ...args: Parameters<typeof import('@sentry/browser').captureMessage>
+  ): Promise<void> => {
+    return import('@sentry/browser').then((Sentry) => {
+      Sentry.captureMessage(...args);
+    });
   },
 };
 

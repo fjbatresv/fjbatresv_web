@@ -15,8 +15,10 @@ import { environment } from '../environments/environment';
 import { JsonImportTranslateLoader } from './core/i18n/json-import-translate-loader';
 
 export const sentryErrorClient = {
-  captureException: (error: unknown): void => {
-    void import('@sentry/browser').then((Sentry) => Sentry.captureException(error));
+  captureException: (error: unknown): Promise<void> => {
+    return import('@sentry/browser').then((Sentry) => {
+      Sentry.captureException(error);
+    });
   },
 };
 
@@ -29,7 +31,6 @@ export class SentryErrorHandler implements ErrorHandler {
 
 export async function initializeSentry(): Promise<void> {
   if (!isPlatformBrowser(inject(PLATFORM_ID)) || !environment.sentryDsn) return;
-  /* istanbul ignore next -- Sentry init depends on browser environment configuration */
   const Sentry = await import('@sentry/browser');
   Sentry.init({
     dsn: environment.sentryDsn,
