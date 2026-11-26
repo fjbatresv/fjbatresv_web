@@ -5,7 +5,7 @@
   "description": "Personal website for Fernando Javier Batres Velásquez (Javier Batres) built with Angular.",
   "scripts": {
     "start": "ng serve --host=127.0.0.1 --port=4300",
-    "build": "ng build --configuration production && node scripts/postbuild.mjs && node scripts/check-inline-scripts.mjs",
+    "build": "ng build --configuration production && node scripts/postbuild.mjs && node scripts/check-inline-scripts.mjs && node scripts/check-seo.mjs",
     "test": "ng test --watch=false",
     "test:infra": "node --test infra/*.test.mjs infra/**/*.test.mjs scripts/*.test.mjs",
     "lint": "ng lint",
