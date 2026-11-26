@@ -48,7 +48,26 @@
   },
   "experience": {
     "tagline": "Carrera",
-    "title": "Experiencia seleccionada",
+    "title": "Experiencia",
+    "companies": {
+      "gtc": "Banco G&T Continental",
+      "halo": "Halo Media",
+      "truelogic": "Truelogic",
+      "yalutec": "Yalutec",
+      "paypal": "PayPal",
+      "early": "Trayectoria inicial"
+    },
+    "periods": {
+      "current": "2025 – presente",
+      "halo": "2023 – 2025",
+      "truelogic": "2022 – 2023",
+      "yalutec": "2021 – 2022",
+      "paypal": "2020 – 2021",
+      "early": "2013 – 2020"
+    },
+    "stack": "Stack",
+    "sectors": "Sectores: banca, eventos a gran escala, identidad digital, mensajería transaccional, aplicaciones móviles, blockchain, pasarelas de pago, telecomunicaciones e investigación médica.",
+    "hire": "Busco una oportunidad laboral",
     "gtc": {
       "role": "Arquitecto de Soluciones",
       "b1": "Lideró Journey to Cloud con landing zones en Azure, gobierno y plantillas DevOps.",
@@ -154,14 +173,46 @@
     "ascend": "MVPs de Ascend en móvil/escritorio/web: apps Flutter, integraciones GCP (SQL/NoSQL) y experiencias basadas en neurociencia con BrainCo y Dale Carnegie.",
     "awsArq": "E-commerce serverless en AWS con órdenes, notificaciones por email y analítica near real-time en un data lake.",
     "items": {
-      "sdg19": { "title": "SDG19", "summary": "E-commerce serverless y orientado a eventos en AWS, con procesamiento de órdenes y un data lake Parquet.", "role": "Arquitectura · Angular · Nx · AWS CDK" },
-      "guso": { "title": "Guso", "summary": "Una aplicación de salud centrada en pacientes para citas, recetas e historial clínico.", "role": "Arquitectura de producto · Flutter · NestJS" },
-      "sinergia": { "title": "Sinergia Dorada", "summary": "Un sitio de una ONG editable por voluntarios, sobre infraestructura rápida y accesible.", "role": "Ingeniería web · Angular · AWS" },
-      "rockers": { "title": "Rockers 502 MC", "summary": "Un caso de estudio sobre las decisiones y el proceso detrás del sitio del club.", "role": "Arquitectura · Web estática" },
-      "pettzi": { "title": "Pettzi", "summary": "Una plataforma serverless de cuidado animal y referencia pública de su arquitectura.", "role": "Full stack · Nx · Angular · AWS CDK" },
-      "sar": { "title": "SAR", "summary": "Una plataforma para restaurantes con inventario, caja, ventas, eventos e informes.", "role": "Ingeniería de plataforma · AWS · Nx" },
-      "migo": { "title": "Migo Payments", "summary": "Una plataforma de pagos para Centroamérica y Latinoamérica, dirigida entre 2021 y 2022.", "role": "Arquitectura de soluciones · Pagos" },
-      "pdei": { "title": "Pdei+", "summary": "Un portal de inversión convertido desde lineamientos financieros en una librería UI probada.", "role": "Ingeniería de producto · UI vanilla" }
+      "sdg19": {
+        "title": "SDG19",
+        "summary": "E-commerce serverless y orientado a eventos en AWS, con procesamiento de órdenes y un data lake Parquet.",
+        "role": "Arquitectura · Angular · Nx · AWS CDK"
+      },
+      "guso": {
+        "title": "Guso",
+        "summary": "Una aplicación de salud centrada en pacientes para citas, recetas e historial clínico.",
+        "role": "Arquitectura de producto · Flutter · NestJS"
+      },
+      "sinergia": {
+        "title": "Sinergia Dorada",
+        "summary": "Un sitio de una ONG editable por voluntarios, sobre infraestructura rápida y accesible.",
+        "role": "Ingeniería web · Angular · AWS"
+      },
+      "rockers": {
+        "title": "Rockers 502 MC",
+        "summary": "Un caso de estudio sobre las decisiones y el proceso detrás del sitio del club.",
+        "role": "Arquitectura · Web estática"
+      },
+      "pettzi": {
+        "title": "Pettzi",
+        "summary": "Una plataforma serverless de cuidado animal y referencia pública de su arquitectura.",
+        "role": "Full stack · Nx · Angular · AWS CDK"
+      },
+      "sar": {
+        "title": "SAR",
+        "summary": "Una plataforma para restaurantes con inventario, caja, ventas, eventos e informes.",
+        "role": "Ingeniería de plataforma · AWS · Nx"
+      },
+      "migo": {
+        "title": "Migo Payments",
+        "summary": "Una plataforma de pagos para Centroamérica y Latinoamérica, dirigida entre 2021 y 2022.",
+        "role": "Arquitectura de soluciones · Pagos"
+      },
+      "pdei": {
+        "title": "Pdei+",
+        "summary": "Un portal de inversión convertido desde lineamientos financieros en una librería UI probada.",
+        "role": "Ingeniería de producto · UI vanilla"
+      }
     },
     "tags": {
       "banking": "Banca",
@@ -205,6 +256,19 @@
     "item3": {
       "title": "Preparando mejores culturas de ingeniería",
       "summary": "Lecciones de mentoría y de unir liderazgo con craft. (Medium)"
+    }
+  },
+  "verde": {
+    "label": "Mi framework",
+    "title": "Verde",
+    "summary": "Vault-Driven Development: un framework para desarrollar aplicaciones con agentes de IA, con roles fijos, memoria fuera del chat y nada integrado sin evidencia.",
+    "cta": "Conocer Verde ↗",
+    "steps": {
+      "vault": "Vault",
+      "brief": "Encargo",
+      "review": "Revisión",
+      "decision": "Decisión",
+      "evidence": "Evidencia"
     }
   },
   "contact": {

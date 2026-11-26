@@ -45,7 +45,26 @@
   },
   "experience": {
     "tagline": "Career",
-    "title": "Selected Experience",
+    "title": "Experience",
+    "companies": {
+      "gtc": "Banco G&T Continental",
+      "halo": "Halo Media",
+      "truelogic": "Truelogic",
+      "yalutec": "Yalutec",
+      "paypal": "PayPal",
+      "early": "Early journey"
+    },
+    "periods": {
+      "current": "2025 – present",
+      "halo": "2023 – 2025",
+      "truelogic": "2022 – 2023",
+      "yalutec": "2021 – 2022",
+      "paypal": "2020 – 2021",
+      "early": "2013 – 2020"
+    },
+    "stack": "Stack",
+    "sectors": "Sectors: banking, large-scale events, digital identity, transactional messaging, mobile apps, blockchain, payment platforms, telecom, and medical research.",
+    "hire": "I’m looking for a role",
     "gtc": {
       "role": "Solutions Architect",
       "b1": "Led Journey to Cloud with Azure landing zones, governance, and DevOps blueprints.",
@@ -151,14 +170,46 @@
     "ascend": "Ascend MVPs across mobile/desktop/web: Flutter apps, GCP integrations (SQL/NoSQL), and neuroscience-based experiences with BrainCo and Dale Carnegie.",
     "awsArq": "Serverless AWS e-commerce with orders, email notifications, and near real-time analytics into a data lake.",
     "items": {
-      "sdg19": { "title": "SDG19", "summary": "Event-driven serverless e-commerce on AWS, with order processing and a Parquet data lake.", "role": "Architecture · Angular · Nx · AWS CDK" },
-      "guso": { "title": "Guso", "summary": "A patient-first healthcare app for appointments, prescriptions, and health records.", "role": "Product architecture · Flutter · NestJS" },
-      "sinergia": { "title": "Sinergia Dorada", "summary": "A volunteer-editable nonprofit site built on fast, accessible infrastructure.", "role": "Web engineering · Angular · AWS" },
-      "rockers": { "title": "Rockers 502 MC", "summary": "An engineering case study on the decisions and process behind the club’s website.", "role": "Architecture · Static web" },
-      "pettzi": { "title": "Pettzi", "summary": "A serverless pet-care platform and public reference for its software architecture.", "role": "Full stack · Nx · Angular · AWS CDK" },
-      "sar": { "title": "SAR", "summary": "A multi-location restaurant platform for inventory, cash, sales, events, and reporting.", "role": "Platform engineering · AWS · Nx" },
-      "migo": { "title": "Migo Payments", "summary": "A payment platform for Central America and Latin America, architected and led from 2021 to 2022.", "role": "Solutions architecture · Payments" },
-      "pdei": { "title": "Pdei+", "summary": "An investment portal shaped from financial brand guidelines into a tested UI library.", "role": "Product engineering · Vanilla UI" }
+      "sdg19": {
+        "title": "SDG19",
+        "summary": "Event-driven serverless e-commerce on AWS, with order processing and a Parquet data lake.",
+        "role": "Architecture · Angular · Nx · AWS CDK"
+      },
+      "guso": {
+        "title": "Guso",
+        "summary": "A patient-first healthcare app for appointments, prescriptions, and health records.",
+        "role": "Product architecture · Flutter · NestJS"
+      },
+      "sinergia": {
+        "title": "Sinergia Dorada",
+        "summary": "A volunteer-editable nonprofit site built on fast, accessible infrastructure.",
+        "role": "Web engineering · Angular · AWS"
+      },
+      "rockers": {
+        "title": "Rockers 502 MC",
+        "summary": "An engineering case study on the decisions and process behind the club’s website.",
+        "role": "Architecture · Static web"
+      },
+      "pettzi": {
+        "title": "Pettzi",
+        "summary": "A serverless pet-care platform and public reference for its software architecture.",
+        "role": "Full stack · Nx · Angular · AWS CDK"
+      },
+      "sar": {
+        "title": "SAR",
+        "summary": "A multi-location restaurant platform for inventory, cash, sales, events, and reporting.",
+        "role": "Platform engineering · AWS · Nx"
+      },
+      "migo": {
+        "title": "Migo Payments",
+        "summary": "A payment platform for Central America and Latin America, architected and led from 2021 to 2022.",
+        "role": "Solutions architecture · Payments"
+      },
+      "pdei": {
+        "title": "Pdei+",
+        "summary": "An investment portal shaped from financial brand guidelines into a tested UI library.",
+        "role": "Product engineering · Vanilla UI"
+      }
     },
     "tags": {
       "banking": "Banking",
@@ -202,6 +253,19 @@
     "item3": {
       "title": "Brewing better engineering cultures",
       "summary": "Lessons from mentoring teams and pairing leadership with craftsmanship. (Medium)"
+    }
+  },
+  "verde": {
+    "label": "My framework",
+    "title": "Verde",
+    "summary": "Vault-Driven Development: a framework for building applications with AI agents, fixed roles, memory outside the chat, and nothing integrated without evidence.",
+    "cta": "Explore Verde ↗",
+    "steps": {
+      "vault": "Vault",
+      "brief": "Brief",
+      "review": "Review",
+      "decision": "Decision",
+      "evidence": "Evidence"
     }
   },
   "contact": {
