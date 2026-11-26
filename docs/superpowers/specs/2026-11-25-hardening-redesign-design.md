@@ -263,3 +263,31 @@ checks; if none, drop the section and its route.
 - Claude's calls (correct if wrong): HSTS without subdomains/preload; CSP Report-Only → enforce
   after ~1 week; 404 page with real 404 status; single canonical page per locale with 301s from old
   section routes; rollout order; OIDC role replaces deploy keys.
+
+## 10. Phase 2 decisions (2026-11-26)
+
+Supersede §7 where they differ.
+
+- **Brand** (manual de marca, Nov 2026): Poppins only; palette turquesa `#4dbec5`, menta `#def5ed`,
+  teal `#689b9e`, gris `#82908f`, antracita `#283232`; isotipo JB (single continuous stroke in a
+  circle). Concept "Dureza técnica, suavidad humana". 12 years of experience. Logo rules: only the
+  circular container, no distortion, no low-contrast backgrounds. Never white text on turquoise.
+- **Visual direction: "2 · Antracita"** (canvas https://claude.ai/artifact/Xet942bjNU3jxnQriCDF4m,
+  artboard Antracita). Dark (antracita) is the default theme; light theme uses the menta palette.
+  Toggle stays. *Decided by Javier.*
+- **Pending from the designer (do not block):** isotipo as SVG, and the dark-background variant
+  (antracita circle + menta stroke). Ship with the PNG isotipo behind one `<app-logo>` component so the
+  swap is one file.
+- **Sections (single page per locale, in order):** Hero (dual path) → Proyectos (8) → Verde →
+  Experiencia (timeline + client achievements incl. Journey to Cloud, Mercer VIP, Hecho Capriccio,
+  Ascend; stack chips replace the old Skills section) → Cómo trabajo (engagement types, for the
+  project path) → Contacto (email, LinkedIn, Notion Calendar). About/Skills/Writing sections and
+  their routes are removed. No CV.
+- **Deferred loading:** content sections render in the prerendered HTML (SEO) without `@defer`;
+  only images lazy-load. Incremental hydration is not used because its jsaction inline script
+  conflicts with the CSP. This closes the Phase 1 carry-over: the home chunk is small (<30 kB).
+  *Claude's call.*
+- **Fonts self-hosted** (Poppins 400/500/600/700, latin + latin-ext woff2) → Google Fonts origins
+  are removed from the CSP. *Claude's call.*
+- **Copy** drafted EN + ES from each project's live landing (title/description) and flagged in the
+  PR for Javier's review.

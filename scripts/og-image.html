@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      @font-face {
+        font-family: Poppins;
+        font-weight: 400;
+        src: url('{{FONT400}}') format('woff2');
+      }
+      @font-face {
+        font-family: Poppins;
+        font-weight: 600;
+        src: url('{{FONT600}}') format('woff2');
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+      }
+      body {
+        background: #283232;
+        color: #def5ed;
+        font-family: Poppins, Arial, sans-serif;
+      }
+      main {
+        width: 1200px;
+        height: 630px;
+        display: flex;
+        align-items: center;
+        gap: 54px;
+        padding: 88px;
+        border: 1px solid #3a4848;
+      }
+      img {
+        width: 180px;
+        height: 180px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: #4dbec5;
+        font-size: 25px;
+        font-weight: 600;
+      }
+      h1 {
+        margin: 0 0 14px;
+        font-size: 72px;
+        line-height: 1;
+        letter-spacing: -3px;
+      }
+      h2 {
+        margin: 0;
+        color: #b5c9c4;
+        font-size: 30px;
+        font-weight: 400;
+      }
+      .rule {
+        width: 72px;
+        height: 4px;
+        background: #4dbec5;
+        margin-top: 34px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="{{LOGO}}" alt="" />
+      <div>
+        <p>fjbatresv.com</p>
+        <h1>Javier Batres</h1>
+        <h2>{{ROLE}}</h2>
+        <div class="rule"></div>
+      </div>
+    </main>
+  </body>
+</html>

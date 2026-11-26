@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AnalyticsService } from '../../core/services/analytics.service';
+import { TranslationService } from '../../core/services/translation.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,5 +12,13 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent {
-  emailLink = 'mailto:fjbatresv@gmail.com?subject=Contact%20from%20website';
+  private readonly translation = inject(TranslationService);
+  private readonly analytics = inject(AnalyticsService);
+  get emailLink(): string {
+    const subject = this.translation.language === 'es' ? 'Proyecto: ' : 'Project: ';
+    return `mailto:fjbatresv@gmail.com?subject=${encodeURIComponent(subject)}`;
+  }
+  track(event: 'contact_email' | 'contact_linkedin' | 'contact_calendar' | 'contact_github'): void {
+    this.analytics.track(event);
+  }
 }

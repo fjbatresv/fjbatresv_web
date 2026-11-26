@@ -5,6 +5,20 @@
   flex-direction: column;
 }
 
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 50;
+  padding: 12px 16px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  transform: translateY(-160%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 main {
   flex: 1;
   padding-top: 88px;
@@ -34,10 +48,13 @@ main {
 .footer__links a {
   color: var(--color-text);
   font-weight: 600;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer__links a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-strong);
 }
 
 @media (max-width: 768px) {

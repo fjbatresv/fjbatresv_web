@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/browser';
+import { sentryLoader } from '../sentry-loader';
 
 export const runtimeContext = {
   hasKarma: (): boolean =>
@@ -13,7 +13,18 @@ const isTestRun = (): boolean =>
   runtimeContext.hasJasmine() ||
   runtimeContext.pathname().includes('context.html');
 
-export const sentryClient = { captureMessage: Sentry.captureMessage.bind(Sentry) };
+export const sentryClient = {
+  captureMessage: (
+    ...args: Parameters<typeof import('@sentry/browser').captureMessage>
+  ): Promise<void> => {
+    return sentryLoader
+      .load()
+      .then((Sentry) => {
+        Sentry.captureMessage(...args);
+      })
+      .catch((error: unknown) => console.error(error));
+  },
+};
 
 export function reportTranslationLoadFailure(
   lang: string,
@@ -21,7 +32,7 @@ export function reportTranslationLoadFailure(
 ): void {
   if (isTestRun()) return;
 
-  sentryClient.captureMessage('Translation load failed', {
+  void sentryClient.captureMessage('Translation load failed', {
     level: 'warning',
     extra: { lang, status: error?.status, statusText: error?.statusText, url: error?.url },
   });

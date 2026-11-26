@@ -5,7 +5,7 @@
   } catch {
     stored = null;
   }
-  var dark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var dark = stored !== 'light';
   document.body.classList.remove('theme-light', 'theme-dark');
   document.body.classList.add(dark ? 'theme-dark' : 'theme-light');
 })();

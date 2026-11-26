@@ -70,27 +70,33 @@ describe('ThemeService', () => {
     }
   });
 
-  it('toggles theme from light to dark', () => {
+  it('toggles theme from dark to light', () => {
     configureWithMatchMedia(false);
     const setItemSpy = spyOn(localStorage, 'setItem');
 
     service.toggleTheme();
 
-    expect(service.theme).toBe('dark');
-    expect(setItemSpy).toHaveBeenCalledWith('fj-theme', 'dark');
+    expect(service.theme).toBe('light');
+    expect(setItemSpy).toHaveBeenCalledWith('fj-theme', 'light');
     expect(bodyClassList.add).toHaveBeenCalled();
   });
 
-  it('toggles theme from dark back to light', () => {
+  it('toggles theme from light back to dark', () => {
     configureWithMatchMedia(false);
-    service.theme = 'dark';
+    service.theme = 'light';
     service.toggleTheme();
-    expect(service.theme).toBe('light');
+    expect(service.theme).toBe('dark');
   });
 
-  it('initializes with prefers-dark when no stored value', () => {
+  it('initializes dark when no stored value', () => {
     configureWithMatchMedia(true);
     expect(service.theme).toBe('dark');
+  });
+
+  it('uses stored light before system preference', () => {
+    localStorage.setItem('fj-theme', 'light');
+    configureWithMatchMedia(true);
+    expect(service.theme).toBe('light');
   });
 
   it('uses a stored theme before the system preference', () => {
@@ -124,7 +130,7 @@ describe('ThemeService', () => {
     }
   });
 
-  it('falls back when matchMedia is not available', () => {
+  it('defaults dark when matchMedia is not available', () => {
     // Remove matchMedia to hit the undefined branch
     (globalThis as any).matchMedia = undefined;
     try {
@@ -137,7 +143,7 @@ describe('ThemeService', () => {
         ],
       });
       const serviceNoMedia = TestBed.inject(ThemeService);
-      expect(serviceNoMedia.theme).toBe('light');
+      expect(serviceNoMedia.theme).toBe('dark');
     } finally {
       (globalThis as any).matchMedia = originalMatchMedia;
     }
@@ -156,7 +162,7 @@ describe('ThemeService', () => {
       ],
     });
     service = TestBed.inject(ThemeService);
-    expect(service.theme).toBe('light');
+    expect(service.theme).toBe('dark');
     expect(storage).not.toHaveBeenCalled();
     expect(matchMedia).not.toHaveBeenCalled();
   });

@@ -1,59 +1,96 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AnalyticsService } from '../../core/services/analytics.service';
+import { TranslationService } from '../../core/services/translation.service';
 
 interface ExperienceItem {
   readonly company: string;
   readonly roleKey: string;
   readonly period: string;
   readonly bullets: readonly string[];
+  readonly achievements?: { title: string; summary: string }[];
 }
 
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExperienceComponent {
+  private readonly translation = inject(TranslationService);
+  private readonly analytics = inject(AnalyticsService);
+  readonly stack = [
+    'AWS',
+    'Azure',
+    'NestJS',
+    'Angular',
+    'Node.js',
+    'TypeScript',
+    'Python',
+    'Nx',
+    'DynamoDB',
+    'MongoDB',
+    'PostgreSQL/MySQL',
+    'Redis',
+    'GitHub Actions',
+    'SonarQube',
+    'Observability',
+  ];
   readonly experiences: readonly ExperienceItem[] = [
     {
-      company: 'Banco G&T Continental',
+      company: 'experience.companies.gtc',
       roleKey: 'experience.gtc.role',
-      period: '2025 – Present',
-      bullets: ['experience.gtc.b1', 'experience.gtc.b2', 'experience.gtc.b3', 'experience.gtc.b4'],
+      period: 'experience.periods.current',
+      bullets: ['experience.gtc.b1', 'experience.gtc.b2'],
+      achievements: [{ title: 'projects.titles.journey', summary: 'projects.journey' }],
     },
     {
-      company: 'Halo Media',
+      company: 'experience.companies.halo',
       roleKey: 'experience.halo.role',
-      period: '2023 – 2025',
-      bullets: ['experience.halo.b1', 'experience.halo.b2', 'experience.halo.b3'],
+      period: 'experience.periods.halo',
+      bullets: ['experience.halo.b1', 'experience.halo.b2'],
+      achievements: [{ title: 'projects.titles.vip', summary: 'projects.vip' }],
     },
     {
-      company: 'Truelogic',
+      company: 'experience.companies.truelogic',
       roleKey: 'experience.truelogic.role',
-      period: '2022 – 2023',
-      bullets: ['experience.truelogic.b1', 'experience.truelogic.b2', 'experience.truelogic.b3'],
+      period: 'experience.periods.truelogic',
+      bullets: ['experience.truelogic.b1', 'experience.truelogic.b2'],
     },
     {
-      company: 'Yalutec',
+      company: 'experience.companies.yalutec',
       roleKey: 'experience.yalutec.role',
-      period: '2021 – 2022',
-      bullets: ['experience.yalutec.b1', 'experience.yalutec.b2', 'experience.yalutec.b3'],
+      period: 'experience.periods.yalutec',
+      bullets: ['experience.yalutec.b1', 'experience.yalutec.b2'],
     },
     {
-      company: 'PayPal',
+      company: 'experience.companies.paypal',
       roleKey: 'experience.paypal.role',
-      period: '2020 – 2021',
-      bullets: ['experience.paypal.b1', 'experience.paypal.b2', 'experience.paypal.b3'],
+      period: 'experience.periods.paypal',
+      bullets: ['experience.paypal.b1', 'experience.paypal.b2'],
     },
     {
-      company: 'Early Journey',
+      company: 'experience.companies.early',
       roleKey: 'experience.early.role',
-      period: '2013 – 2020',
-      bullets: ['experience.early.b1', 'experience.early.b2', 'experience.early.b3'],
+      period: 'experience.periods.early',
+      bullets: ['experience.early.b1', 'experience.early.b2'],
+      achievements: [
+        { title: 'projects.titles.capriccio', summary: 'projects.capriccio' },
+        { title: 'projects.titles.ascend', summary: 'projects.ascend' },
+      ],
     },
   ];
+
+  get hireLink(): string {
+    const subject =
+      this.translation.language === 'es' ? 'Oportunidad laboral: ' : 'Job opportunity: ';
+    return `mailto:fjbatresv@gmail.com?subject=${encodeURIComponent(subject)}`;
+  }
+
+  trackHire(): void {
+    this.analytics.track('contact_email', { path: 'hire' });
+  }
 }

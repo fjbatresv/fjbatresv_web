@@ -1,32 +1,45 @@
-.contact-card {
+.contact {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr auto;
+  gap: 28px;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  padding-top: 36px;
+  padding-bottom: 48px;
+}
+.contact h2 {
+  font-size: clamp(38px, 6vw, 64px);
+}
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   align-items: center;
 }
-
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.contact__actions a,
+.contact__github {
+  min-height: 44px;
+  display: inline-flex;
   align-items: center;
-  margin-top: 14px;
+  font-weight: 600;
 }
-
-.secondary-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.contact__primary {
+  padding: 12px 18px;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  gap: 8px;
 }
-
-.contact-fun {
-  text-align: center;
-  border: 1px dashed var(--color-border);
-  border-radius: 12px;
-  padding: 16px;
-  background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+.contact__github {
+  grid-column: 2;
+  justify-self: end;
+  color: var(--color-muted);
 }
-
-.contact-fun .emoji {
-  font-size: 32px;
+@media (max-width: 720px) {
+  .contact {
+    grid-template-columns: 1fr;
+  }
+  .contact__github {
+    grid-column: auto;
+    justify-self: start;
+  }
 }

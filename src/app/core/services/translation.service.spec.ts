@@ -10,7 +10,15 @@ describe('TranslationService', () => {
   let events: Subject<NavigationEnd>;
   let currentUrl: string;
   const translateSpy = { use: jasmine.createSpy('use') };
-  const docMock = { documentElement: { lang: '' } } as Document;
+  const history = { state: { navigationId: 1 }, replaceState: jasmine.createSpy('replaceState') };
+  const location = { search: '', hash: '' };
+  let browserWindow: Window | null = { history, location } as unknown as Window;
+  const docMock = {
+    documentElement: { lang: '' },
+    get defaultView() {
+      return browserWindow;
+    },
+  } as unknown as Document;
 
   beforeEach(() => {
     events = new Subject<NavigationEnd>();
@@ -33,6 +41,10 @@ describe('TranslationService', () => {
     });
     service = TestBed.inject(TranslationService);
     translateSpy.use.calls.reset();
+    history.replaceState.calls.reset();
+    location.search = '';
+    location.hash = '';
+    browserWindow = { history, location } as unknown as Window;
     docMock.documentElement.lang = '';
   });
 
@@ -53,6 +65,45 @@ describe('TranslationService', () => {
     events.next(new NavigationEnd(1, '/es/contact', '/projects'));
     expect(service.language).toBe('en');
     expect(translateSpy.use).toHaveBeenCalledWith('en');
+  });
+
+  it('restores the trailing slash on the Spanish root for fragment-only navigation', () => {
+    currentUrl = '/es';
+    service.init();
+    expect(history.replaceState).toHaveBeenCalledWith(history.state, '', '/es/');
+  });
+
+  it('keeps the query and fragment while normalizing the Spanish root', () => {
+    currentUrl = '/es?ref=linkedin#contact';
+    location.search = '?ref=linkedin';
+    location.hash = '#contact';
+    service.init();
+    expect(history.replaceState).toHaveBeenCalledWith(
+      history.state,
+      '',
+      '/es/?ref=linkedin#contact'
+    );
+  });
+
+  it('does not replace an already-normalized Spanish root', () => {
+    currentUrl = '/es/';
+    service.init();
+    expect(history.replaceState).not.toHaveBeenCalled();
+  });
+
+  it('does not normalize the Spanish root on the server', () => {
+    currentUrl = '/es';
+    browserWindow = null;
+    service.init();
+    expect(history.replaceState).not.toHaveBeenCalled();
+  });
+
+  it('normalizes the Spanish root after the router completes initial navigation', () => {
+    currentUrl = '/es/';
+    service.init();
+    currentUrl = '/es';
+    events.next(new NavigationEnd(1, '/es/', '/es'));
+    expect(history.replaceState).toHaveBeenCalledWith(history.state, '', '/es/');
   });
 
   it('exposes the current language through the getter', () => {

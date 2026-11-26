@@ -1,13 +1,7 @@
 <header class="navbar">
   <div class="container navbar__content">
     <button class="navbar__brand" type="button" (click)="navigate('home')" aria-label="Go home">
-      <img
-        [src]="logoUrl"
-        alt="Javier Batres logo"
-        class="brand-logo"
-        loading="lazy"
-        decoding="async"
-      />
+      <app-logo size="sm" />
       <div class="brand-name">Javier Batres</div>
     </button>
 
@@ -25,14 +19,13 @@
 
     <nav class="navbar__links" aria-label="Primary">
       @for (item of navItems; track item.section) {
-        <button
-          type="button"
-          (click)="navigate(item.section)"
+        <a
+          [href]="sectionHref(item.section)"
           class="navbar__link"
           [ngClass]="{ contact: item.section === 'contact' }"
         >
           {{ item.labelKey | translate }}
-        </button>
+        </a>
       }
     </nav>
 
@@ -93,14 +86,14 @@
     <div class="mobile-menu">
       <nav aria-label="Mobile primary">
         @for (item of navItems; track item.section) {
-          <button
+          <a
             class="mobile-menu__link"
-            type="button"
+            [href]="sectionHref(item.section)"
             [class.contact]="item.section === 'contact'"
-            (click)="navigate(item.section)"
+            (click)="closeMenu()"
           >
             {{ item.labelKey | translate }}
-          </button>
+          </a>
         }
       </nav>
       <div class="mobile-menu__actions">

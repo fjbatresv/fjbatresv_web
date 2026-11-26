@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SeoLinksService } from './seo-links.service';
@@ -10,6 +10,7 @@ describe('SeoLinksService', () => {
   let events: Subject<NavigationEnd>;
   let lang: 'en' | 'es';
   const meta = { updateTag: jasmine.createSpy('updateTag') };
+  const title = { setTitle: jasmine.createSpy('setTitle') };
   const routerStub = {
     get routerState() {
       return {
@@ -35,11 +36,13 @@ describe('SeoLinksService', () => {
     events = new Subject<NavigationEnd>();
     lang = 'en';
     meta.updateTag.calls.reset();
+    title.setTitle.calls.reset();
     TestBed.configureTestingModule({
       providers: [
         SeoLinksService,
         { provide: DOCUMENT, useValue: document },
         { provide: Meta, useValue: meta },
+        { provide: Title, useValue: title },
         { provide: Router, useValue: { ...routerStub, events: events.asObservable() } },
       ],
     });
@@ -69,6 +72,11 @@ describe('SeoLinksService', () => {
     ).toBe('https://fjbatresv.com/');
     expect(meta.updateTag).toHaveBeenCalledWith({ property: 'og:url', content: canonical });
     expect(meta.updateTag).toHaveBeenCalledWith({ property: 'og:locale', content: locale });
+    expect(title.setTitle).toHaveBeenCalledWith(
+      locale === 'es_GT'
+        ? 'Javier Batres — Arquitecto de Soluciones y Senior Full Stack Engineer'
+        : 'Javier Batres — Solutions Architect & Senior Full Stack Engineer'
+    );
   }
 
   it('sets English canonical, alternates, and Open Graph metadata', () => {

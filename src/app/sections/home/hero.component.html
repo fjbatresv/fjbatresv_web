@@ -1,46 +1,43 @@
-<section id="home" class="hero">
+<section id="top" class="hero">
   <div class="container hero__grid">
     <div class="hero__content">
-      <p class="tagline">{{ 'hero.tagline' | translate }}</p>
+      <p class="tagline">{{ 'hero.status' | translate }}</p>
       <h1>
-        Fernando Javier Batres Velásquez
-        <span class="accent">(Javier)</span>
+        {{ 'hero.title' | translate }}
+        <span class="accent">{{ 'hero.titleAccent' | translate }}</span>
       </h1>
-      <h2 class="subtitle">{{ 'hero.subtitle' | translate }}</h2>
+      <p class="hero__role">{{ 'hero.role' | translate }}</p>
       <p class="lead">{{ 'hero.summary' | translate }}</p>
-      <div class="hero__actions">
-        <a class="button" routerLink="/experience">{{ 'hero.cta.experience' | translate }}</a>
-        <a class="button alt" routerLink="/projects">{{ 'hero.cta.projects' | translate }}</a>
-      </div>
-      <div class="hero__badges">
-        <span class="badge">{{ 'hero.badges.cloud' | translate }}</span>
-        <span class="badge">{{ 'hero.badges.fullstack' | translate }}</span>
-        <span class="badge">{{ 'hero.badges.cloudmix' | translate }}</span>
-        <span class="badge">{{ 'hero.badges.quality' | translate }}</span>
+      <div class="hero__paths">
+        <a
+          class="hero__path hero__path--project"
+          [href]="sectionHref('how-i-work')"
+          (click)="track('cta_project')"
+        >
+          <span class="hero__path-label">{{ 'hero.paths.project.label' | translate }}</span>
+          <strong>{{ 'hero.paths.project.title' | translate }}</strong>
+          <span>{{ 'hero.paths.project.description' | translate }}</span>
+        </a>
+        <a
+          class="hero__path hero__path--hire"
+          [href]="sectionHref('experience')"
+          (click)="track('cta_hire')"
+        >
+          <span class="hero__path-label">{{ 'hero.paths.hire.label' | translate }}</span>
+          <strong>{{ 'hero.paths.hire.title' | translate }}</strong>
+          <span>{{ 'hero.paths.hire.description' | translate }}</span>
+        </a>
       </div>
     </div>
-    <div class="hero__visual" aria-hidden="true">
-      <div class="floating-card primary desktop-only">
-        <div class="title">{{ 'hero.cards.cloud.title' | translate }}</div>
-        <p>{{ 'hero.cards.cloud.desc' | translate }}</p>
-        <div class="chip-row">
-          <span class="badge">SQS</span>
-          <span class="badge">EventBridge</span>
-          <span class="badge">X-Ray</span>
-        </div>
-      </div>
-      <div class="floating-card secondary desktop-only">
-        <div class="title">{{ 'hero.cards.coffee.title' | translate }}</div>
-        <p>{{ 'hero.cards.coffee.desc' | translate }}</p>
-        <div class="chip-row">
-          <span class="badge">Espresso</span>
-          <span class="badge">Research</span>
-          <span class="badge">Gaia</span>
-        </div>
-      </div>
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-    </div>
+    <img
+      class="hero__photo"
+      src="/assets/face.webp"
+      srcset="/assets/face-240.webp 240w, /assets/face-360.webp 360w"
+      sizes="(max-width: 767px) 120px, 300px"
+      width="300"
+      height="300"
+      alt="Javier Batres"
+      fetchpriority="high"
+    />
   </div>
 </section>

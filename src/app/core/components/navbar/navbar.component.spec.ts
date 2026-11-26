@@ -7,7 +7,7 @@ import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
 
 describe('NavbarComponent', () => {
-  const routerMock = { url: '/es/projects', navigateByUrl: jasmine.createSpy('navigateByUrl') };
+  const routerMock = { url: '/es/#projects', navigateByUrl: jasmine.createSpy('navigateByUrl') };
   const themeServiceMock = {
     theme: 'light' as 'light' | 'dark',
     toggleTheme: jasmine.createSpy('toggleTheme'),
@@ -30,25 +30,44 @@ describe('NavbarComponent', () => {
     routerMock.navigateByUrl.calls.reset();
     themeServiceMock.toggleTheme.calls.reset();
     translationServiceMock.setLanguage.calls.reset();
-    routerMock.url = '/es/projects';
+    routerMock.url = '/es/#projects';
     translationServiceMock.language = 'es';
   });
 
   it('navigates and closes menu', () => {
     const fixture = TestBed.createComponent(NavbarComponent);
     const component = fixture.componentInstance;
-    component.isMenuOpen = true;
+    component.toggleMenu();
 
-    component.navigate('about');
+    component.navigate('projects');
 
-    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/about');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/#projects');
     expect(component.isMenuOpen).toBeFalse();
+  });
+
+  it('keeps desktop and mobile section links in the active locale', () => {
+    const fixture = TestBed.createComponent(NavbarComponent);
+    const component = fixture.componentInstance;
+    const resolve = (link: HTMLAnchorElement) =>
+      new URL(link.getAttribute('href')!, 'https://fjbatresv.com/es/').href;
+    fixture.detectChanges();
+    const desktop = [
+      ...fixture.nativeElement.querySelectorAll('.navbar__links a'),
+    ][1] as HTMLAnchorElement;
+    expect(resolve(desktop)).toBe('https://fjbatresv.com/es/#projects');
+
+    fixture.nativeElement.querySelector('.menu-toggle').click();
+    fixture.detectChanges();
+    const mobile = [
+      ...fixture.nativeElement.querySelectorAll('.mobile-menu a'),
+    ][1] as HTMLAnchorElement;
+    expect(resolve(mobile)).toBe('https://fjbatresv.com/es/#projects');
   });
 
   it('navigates to home root path', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.navigate('home');
-    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/#top');
   });
 
   it('toggles theme and exposes current theme/lang', () => {
@@ -69,7 +88,14 @@ describe('NavbarComponent', () => {
   it('changes locale while keeping the current section', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.setLanguage('en');
-    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/projects');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/#projects');
+  });
+
+  it('changes locale from the page root without a hash', () => {
+    routerMock.url = '/es/';
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.setLanguage('en');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/');
   });
 
   it('toggles menu state', () => {
@@ -77,5 +103,12 @@ describe('NavbarComponent', () => {
     component.isMenuOpen = false;
     component.toggleMenu();
     expect(component.isMenuOpen).toBeTrue();
+  });
+
+  it('closes the mobile menu after choosing a section', () => {
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.isMenuOpen = true;
+    component.closeMenu();
+    expect(component.isMenuOpen).toBeFalse();
   });
 });

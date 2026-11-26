@@ -1,31 +1,49 @@
 <section id="projects" aria-labelledby="projects-title">
   <div class="container">
-    <p class="tagline">{{ 'projects.tagline' | translate }}</p>
-    <h2 id="projects-title">{{ 'projects.title' | translate }}</h2>
-    <div class="grid grid-2">
-      @for (project of projects; track project.titleKey) {
-        <div class="card project">
-          <div class="project__header">
-            <h3>{{ project.titleKey | translate }}</h3>
-            @if (project.link) {
-              <a
-                [href]="project.link"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="link-inline"
-              >
-                {{ 'projects.view' | translate }}
-                <span aria-hidden="true">↗</span>
-              </a>
-            }
+    <div class="projects__heading">
+      <div>
+        <p class="tagline">{{ 'projects.tagline' | translate }}</p>
+        <h2 id="projects-title">{{ 'projects.title' | translate }}</h2>
+      </div>
+      <span>{{ 'projects.count' | translate }}</span>
+    </div>
+    <div class="projects__grid">
+      @for (project of projects; track project.id; let index = $index) {
+        <a
+          class="project"
+          [class.project--feature]="index < 2"
+          [href]="project.url"
+          target="_blank"
+          rel="noopener"
+          (click)="trackProject(project.id)"
+        >
+          <img
+            [src]="project.image.base + '-1280.webp'"
+            [srcset]="
+              project.image.base + '-640.webp 640w, ' + project.image.base + '-1280.webp 1280w'
+            "
+            sizes="(min-width: 1024px) 560px, 100vw"
+            [width]="project.image.width"
+            [height]="project.image.height"
+            [alt]="'projects.items.' + project.id + '.title' | translate"
+            loading="lazy"
+          />
+          <div class="project__body">
+            <span class="project__domain">{{ project.url.replace('https://', '') }}</span>
+            <h3>{{ 'projects.items.' + project.id + '.title' | translate }}</h3>
+            <p>{{ 'projects.items.' + project.id + '.summary' | translate }}</p>
+            <span class="project__role">{{
+              'projects.items.' + project.id + '.role' | translate
+            }}</span>
+            <div class="project__tags">
+              @for (tag of project.tags; track tag) {
+                <span>{{
+                  tag.startsWith('i18n:') ? ('projects.tags.' + tag.slice(5) | translate) : tag
+                }}</span>
+              }
+            </div>
           </div>
-          <p>{{ project.descriptionKey | translate }}</p>
-          <div class="chips">
-            @for (tag of project.tags; track tag) {
-              <span class="badge">{{ tag | translate }}</span>
-            }
-          </div>
-        </div>
+        </a>
       }
     </div>
   </div>

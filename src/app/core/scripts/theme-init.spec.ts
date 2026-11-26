@@ -17,9 +17,15 @@ describe('theme bootstrap script', () => {
     expect(document.body.classList.contains('theme-dark')).toBeTrue();
   });
 
-  it('uses the system dark preference without a stored choice', async () => {
-    spyOn(window, 'matchMedia').and.returnValue({ matches: true } as MediaQueryList);
+  it('defaults to dark regardless of system light preference', async () => {
+    spyOn(window, 'matchMedia').and.returnValue({ matches: false } as MediaQueryList);
     await runThemeScript();
     expect(document.body.classList.contains('theme-dark')).toBeTrue();
+  });
+
+  it('uses a stored light theme', async () => {
+    localStorage.setItem('fj-theme', 'light');
+    await runThemeScript();
+    expect(document.body.classList.contains('theme-light')).toBeTrue();
   });
 });

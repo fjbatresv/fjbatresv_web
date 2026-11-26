@@ -1,4 +1,4 @@
-import { copyFileSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { copyFileSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 
 const root = 'dist/javier-batres-site/browser';
 function stripUnusedEventReplayScript(directory) {
@@ -16,3 +16,4 @@ function stripUnusedEventReplayScript(directory) {
 
 stripUnusedEventReplayScript(root);
 copyFileSync(`${root}/404/index.html`, `${root}/404.html`);
+rmSync(`${root}/index.csr.html`, { force: true });

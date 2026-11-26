@@ -1,0 +1,30 @@
+<section id="verde" class="verde" aria-labelledby="verde-title">
+  <div class="container verde__grid">
+    <div>
+      <p class="tagline">{{ 'verde.label' | translate }}</p>
+      <h2 id="verde-title">{{ 'verde.title' | translate }}</h2>
+      <p>{{ 'verde.summary' | translate }}</p>
+      <a
+        class="verde__link"
+        href="https://verde.fjbatresv.com"
+        target="_blank"
+        rel="noopener"
+        (click)="track()"
+        >{{ 'verde.cta' | translate }}</a
+      >
+    </div>
+    <ol>
+      @for (
+        step of ['vault', 'brief', 'review', 'decision', 'evidence'];
+        track step;
+        let i = $index
+      ) {
+        <li>
+          <span>{{ 'verde.steps.' + step | translate }}</span><b aria-hidden="true">{{
+            'VERDE'[i]
+          }}</b>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

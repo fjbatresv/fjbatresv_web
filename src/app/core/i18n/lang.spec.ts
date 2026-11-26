@@ -8,9 +8,9 @@ describe('language paths', () => {
     expect(langFromUrl('/')).toBe('en');
   });
 
-  it('localizes section paths', () => {
-    expect(localizedPath('home', 'en')).toBe('/');
-    expect(localizedPath('home', 'es')).toBe('/es');
-    expect(localizedPath('contact', 'es')).toBe('/es/contact');
+  it('localizes the page and preserves an optional section hash', () => {
+    expect(localizedPath('en')).toBe('/');
+    expect(localizedPath('es')).toBe('/es/');
+    expect(localizedPath('es', 'projects')).toBe('/es/#projects');
   });
 });

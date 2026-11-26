@@ -1,0 +1,31 @@
+<section id="how-i-work" aria-labelledby="how-title">
+  <div class="container">
+    <p class="tagline">{{ 'how.label' | translate }}</p>
+    <h2 id="how-title">{{ 'how.title' | translate }}</h2>
+    <div class="engagements">
+      @for (card of ['architecture', 'mvp', 'migration']; track card) {
+        <article>
+          <span aria-hidden="true">0{{ $index + 1 }}</span>
+          <h3>{{ 'how.engagements.' + card + '.title' | translate }}</h3>
+          <p>{{ 'how.engagements.' + card + '.body' | translate }}</p>
+        </article>
+      }
+    </div>
+    <ol class="process">
+      @for (step of ['call', 'proposal', 'delivery', 'handoff']; track step; let i = $index) {
+        <li>
+          <span>0{{ i + 1 }}</span
+          >{{ 'how.process.' + step | translate }}
+        </li>
+      }
+    </ol>
+    <a
+      class="button"
+      href="https://calendar.notion.so/meet/javierbatres/7v3284yxr"
+      target="_blank"
+      rel="noopener"
+      (click)="track()"
+      >{{ 'how.cta' | translate }} <span aria-hidden="true">↗</span></a
+    >
+  </div>
+</section>

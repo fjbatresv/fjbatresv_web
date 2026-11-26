@@ -8,15 +8,7 @@ export function langFromUrl(url: string): Lang {
   return 'en';
 }
 
-export function localizedPath(section: string, lang: Lang): string {
-  if (lang === 'es') {
-    if (section === 'home') {
-      return '/es';
-    }
-    return `/es/${section}`;
-  }
-  if (section === 'home') {
-    return '/';
-  }
-  return `/${section}`;
+export function localizedPath(lang: Lang, hash = ''): string {
+  const path = lang === 'es' ? '/es/' : '/';
+  return hash ? `${path}#${hash}` : path;
 }

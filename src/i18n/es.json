@@ -1,69 +1,59 @@
 {
   "nav": {
     "home": "Inicio",
-    "about": "Sobre mí",
     "career": "Carrera",
-    "toolkit": "Toolkit",
     "highlights": "Destacados",
-    "notes": "Notas",
+    "verde": "Verde",
+    "how": "Cómo trabajo",
     "contact": "Contacto",
     "theme": "Cambiar tema"
   },
+  "a11y": { "skip": "Saltar al contenido" },
   "hero": {
-    "tagline": "Arquitectura en la nube, código y café",
-    "subtitle": "Arquitecto de Soluciones · Sr Full Stack Engineer · Tech Lead",
-    "summary": "Javier diseña y entrega software escalable para empresas: arquitecturas cloud-first, backends confiables y frontends que se sienten fluidos.",
+    "status": "Disponible para proyectos y rol fijo · Guatemala, remoto",
+    "title": "Dureza técnica,",
+    "titleAccent": "suavidad humana.",
+    "role": "Arquitecto de Soluciones · Senior Full Stack Engineer",
+    "summary": "12 años creando software para banca, pasarelas de pago, identidad digital y salud.",
     "cta": {
-      "experience": "Ver experiencia",
-      "projects": "Ver proyectos"
+      "project": "Tengo un proyecto",
+      "hire": "Busco contratar"
     },
-    "badges": {
-      "cloud": "Cloud y DevOps",
-      "fullstack": "NestJS y Angular",
-      "cloudmix": "AWS / Azure",
-      "quality": "CI/CD y Observabilidad"
-    },
-    "cards": {
-      "cloud": {
-        "title": "Arquitectura",
-        "desc": "Flujos event-driven, alta disponibilidad y gobierno para banca y healthtech."
+    "paths": {
+      "project": {
+        "label": "Para clientes",
+        "title": "Tengo un proyecto →",
+        "description": "MVPs, migraciones cloud y revisiones de arquitectura. Agenda 30 minutos."
       },
-      "coffee": {
-        "title": "Café y curiosidad",
-        "desc": "Barista aficionado, gamer e investigador. Siempre acompañado de Gaia, la Newfoundland de la familia."
+      "hire": {
+        "label": "Para empresas",
+        "title": "Busco contratar →",
+        "description": "Arquitectura o liderazgo técnico, rol fijo y remoto. Revisa mi experiencia."
       }
-    }
-  },
-  "about": {
-    "tagline": "Perfil",
-    "title": "Sobre Javier",
-    "body": {
-      "one": "Soy Fernando Javier Batres Velásquez, arquitecto de soluciones guatemalteco con más de 10 años construyendo software para banca, healthtech y equipos enterprise.",
-      "two": "Me enfoco en backend y plataformas cloud—NestJS, Angular, AWS, Azure—y lidero equipos con microservicios, diseños event-driven y CI/CD que entrega con seguridad.",
-      "three": "Fuera de la tecnología soy barista, gamer e investigador; disfruto explorar con mi esposa y nuestro perro Newfoundland, Gaia.",
-      "four": "Alineo arquitectura con resultados de negocio, formo cultura de ingeniería y combino mentoría con delivery práctico."
-    },
-    "list": {
-      "title": "Lo que lo mueve",
-      "items": {
-        "cloud": "Fundamentos cloud",
-        "devops": "Automatización y DevOps",
-        "architecture": "Decisiones de arquitectura",
-        "mentoring": "Mentoría de equipos"
-      }
-    },
-    "highlights": {
-      "years": { "label": "Experiencia", "value": "años entregando software enterprise" },
-      "mentoring": {
-        "label": "Mentoría",
-        "value": "Forma ingenieros y lidera equipos de delivery"
-      },
-      "personal": { "label": "Humano", "value": "Café, juegos, investigación y Gaia" }
     }
   },
   "experience": {
     "tagline": "Carrera",
-    "title": "Experiencia seleccionada",
+    "title": "Experiencia",
+    "companies": {
+      "gtc": "Banco G&T Continental",
+      "halo": "Halo Media",
+      "truelogic": "Truelogic",
+      "yalutec": "Yalutec",
+      "paypal": "PayPal",
+      "early": "Trayectoria inicial"
+    },
+    "periods": {
+      "current": "2025 – presente",
+      "halo": "2023 – 2025",
+      "truelogic": "2022 – 2023",
+      "yalutec": "2021 – 2022",
+      "paypal": "2020 – 2021",
+      "early": "2013 – 2020"
+    },
+    "stack": "Stack",
+    "sectors": "Sectores: banca, eventos a gran escala, identidad digital, mensajería transaccional, aplicaciones móviles, blockchain, pasarelas de pago, telecomunicaciones e investigación médica.",
+    "hire": "Busco una oportunidad laboral",
     "gtc": {
       "role": "Arquitecto de Soluciones",
       "b1": "Lideró Journey to Cloud con landing zones en Azure, gobierno y plantillas DevOps.",
@@ -102,52 +92,10 @@
       "b3": "Entregó features full stack mientras fortalecía la cultura técnica."
     }
   },
-  "skills": {
-    "tagline": "Toolkit",
-    "title": "Habilidades y stack",
-    "cloud": "Cloud y DevOps",
-    "backend": "Backend",
-    "frontend": "Frontend",
-    "databases": "Bases de datos",
-    "devops": "Pipelines y calidad",
-    "soft": "Liderazgo y soft skills",
-    "items": {
-      "aws": "AWS",
-      "azure": "Azure básico",
-      "lambdas": "Lambdas",
-      "eventbridge": "EventBridge",
-      "sqs": "SQS",
-      "cloudwatch": "CloudWatch",
-      "xray": "X-Ray",
-      "node": "Node.js",
-      "nest": "NestJS",
-      "ts": "TypeScript",
-      "python": "Python (Lambdas)",
-      "rest": "APIs REST",
-      "microservices": "Microservicios",
-      "angular": "Angular",
-      "react": "React",
-      "nx": "Monorepos con Nx",
-      "mongodb": "MongoDB",
-      "mysql": "MySQL",
-      "dynamodb": "DynamoDB",
-      "rds": "RDS",
-      "redis": "Redis",
-      "cicd": "CI/CD",
-      "github": "GitHub Actions",
-      "sonarqube": "SonarQube",
-      "observability": "Observabilidad",
-      "docker": "Docker",
-      "kubernetes": "Kubernetes básico",
-      "architecture": "Decisiones de arquitectura",
-      "mentoring": "Mentoría",
-      "leadership": "Liderazgo",
-      "writing": "Redacción técnica"
-    }
-  },
   "projects": {
     "tagline": "Destacados",
-    "title": "Proyectos destacados",
+    "title": "Proyectos",
+    "count": "8 en producción",
     "view": "Abrir",
     "titles": {
       "journey": "Journey to Cloud",
@@ -167,6 +115,48 @@
     "sar": "Plataforma cloud-native en AWS con automatización serverless, middleware de autenticación seguro y observabilidad (X-Ray, Sentry, CloudWatch). Monorepo Nx con librerías compartidas y CI/CD a medida.",
     "ascend": "MVPs de Ascend en móvil/escritorio/web: apps Flutter, integraciones GCP (SQL/NoSQL) y experiencias basadas en neurociencia con BrainCo y Dale Carnegie.",
     "awsArq": "E-commerce serverless en AWS con órdenes, notificaciones por email y analítica near real-time en un data lake.",
+    "items": {
+      "sdg19": {
+        "title": "SDG19",
+        "summary": "E-commerce serverless y orientado a eventos en AWS, con procesamiento de órdenes y un data lake Parquet.",
+        "role": "Arquitectura · Angular · Nx · AWS CDK"
+      },
+      "guso": {
+        "title": "Guso",
+        "summary": "Una aplicación de salud centrada en pacientes para citas, recetas e historial clínico.",
+        "role": "Arquitectura de producto · Flutter · NestJS"
+      },
+      "sinergia": {
+        "title": "Sinergia Dorada",
+        "summary": "Un sitio de una ONG editable por voluntarios, sobre infraestructura rápida y accesible.",
+        "role": "Ingeniería web · Angular · AWS"
+      },
+      "rockers": {
+        "title": "Rockers 502 MC",
+        "summary": "Un caso de estudio sobre las decisiones y el proceso detrás del sitio del club.",
+        "role": "Arquitectura · Web estática"
+      },
+      "pettzi": {
+        "title": "Pettzi",
+        "summary": "Una plataforma serverless de cuidado animal y referencia pública de su arquitectura.",
+        "role": "Full stack · Nx · Angular · AWS CDK"
+      },
+      "sar": {
+        "title": "SAR",
+        "summary": "Una plataforma para restaurantes con inventario, caja, ventas, eventos e informes.",
+        "role": "Ingeniería de plataforma · AWS · Nx"
+      },
+      "migo": {
+        "title": "Migo Payments",
+        "summary": "Una plataforma de pagos para Centroamérica y Latinoamérica, dirigida entre 2021 y 2022.",
+        "role": "Arquitectura de soluciones · Pagos"
+      },
+      "pdei": {
+        "title": "Pdei+",
+        "summary": "Un portal de inversión convertido desde lineamientos financieros en una librería UI probada.",
+        "role": "Ingeniería de producto · UI vanilla"
+      }
+    },
     "tags": {
       "banking": "Banca",
       "azure": "Azure",
@@ -187,6 +177,14 @@
       "lambdas": "Lambdas",
       "nx": "Nx",
       "flutter": "Flutter",
+      "healthcare": "Salud",
+      "accessibility": "Accesibilidad",
+      "architecture": "Arquitectura",
+      "staticWeb": "Web estática",
+      "serverless": "Sin servidor",
+      "payments": "Pagos",
+      "fintech": "Tecnología financiera",
+      "uiLibrary": "Biblioteca UI",
       "gcp": "GCP",
       "mobile": "Móvil",
       "nosql": "NoSQL",
@@ -194,26 +192,49 @@
       "firehose": "Firehose"
     }
   },
-  "writing": {
-    "tagline": "Notas",
-    "title": "Escritura y charlas",
-    "read": "Leer más",
-    "item1": {
-      "title": "Diseñando sistemas event-driven observables",
-      "summary": "Patrones para rastrear y depurar arquitecturas de mensajes entre equipos. (Medium)"
+  "how": {
+    "label": "Para proyectos",
+    "title": "Cómo trabajo",
+    "engagements": {
+      "architecture": {
+        "title": "Arquitectura y revisión técnica",
+        "body": "Un plan claro para construir o mejorar tu sistema."
+      },
+      "mvp": {
+        "title": "MVP y producto de punta a punta",
+        "body": "De una idea a un producto funcional con entregas enfocadas."
+      },
+      "migration": {
+        "title": "Migración a la nube y DevOps",
+        "body": "Modernizar infraestructura y hacer confiables las entregas."
+      }
     },
-    "item2": {
-      "title": "Guardrails de CI/CD en entornos regulados",
-      "summary": "Cómo entregar más rápido cumpliendo gobierno para banca y healthtech. (dev.to)"
+    "process": {
+      "call": "Llamada de 30 min",
+      "proposal": "Propuesta",
+      "delivery": "Entrega iterativa",
+      "handoff": "Traspaso documentado"
     },
-    "item3": {
-      "title": "Preparando mejores culturas de ingeniería",
-      "summary": "Lecciones de mentoría y de unir liderazgo con craft. (Medium)"
+    "cta": "Agendar llamada"
+  },
+  "verde": {
+    "label": "Mi framework",
+    "title": "Verde",
+    "summary": "Vault-Driven Development: un framework para desarrollar aplicaciones con agentes de IA, con roles fijos, memoria fuera del chat y nada integrado sin evidencia.",
+    "cta": "Conocer Verde ↗",
+    "steps": {
+      "vault": "Vault",
+      "brief": "Encargo",
+      "review": "Revisión",
+      "decision": "Decisión",
+      "evidence": "Evidencia"
     }
   },
   "contact": {
-    "tagline": "Colaboremos",
-    "title": "Listo para tu siguiente build",
+    "tagline": "Contacto",
+    "title": "Hablemos",
+    "email": "Escríbeme",
+    "calendar": "Agendar llamada",
     "body": "Disponible para consultoría, revisiones de arquitectura y delivery de productos en cloud y full stack.",
     "cta": "Escríbeme",
     "fun": "Hablemos de café, retos de arquitectura o el próximo juego que quieres probar.",
