@@ -9,12 +9,20 @@
       <p class="hero__role">{{ 'hero.role' | translate }}</p>
       <p class="lead">{{ 'hero.summary' | translate }}</p>
       <div class="hero__paths">
-        <a class="hero__path hero__path--project" href="#how-i-work" (click)="track('cta_project')">
+        <a
+          class="hero__path hero__path--project"
+          [href]="sectionHref('how-i-work')"
+          (click)="track('cta_project')"
+        >
           <span class="hero__path-label">{{ 'hero.paths.project.label' | translate }}</span>
           <strong>{{ 'hero.paths.project.title' | translate }}</strong>
           <span>{{ 'hero.paths.project.description' | translate }}</span>
         </a>
-        <a class="hero__path hero__path--hire" href="#experience" (click)="track('cta_hire')">
+        <a
+          class="hero__path hero__path--hire"
+          [href]="sectionHref('experience')"
+          (click)="track('cta_hire')"
+        >
           <span class="hero__path-label">{{ 'hero.paths.hire.label' | translate }}</span>
           <strong>{{ 'hero.paths.hire.title' | translate }}</strong>
           <span>{{ 'hero.paths.hire.description' | translate }}</span>

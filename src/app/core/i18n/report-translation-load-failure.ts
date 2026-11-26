@@ -1,3 +1,5 @@
+import { sentryLoader } from '../sentry-loader';
+
 export const runtimeContext = {
   hasKarma: (): boolean =>
     Boolean((globalThis as typeof globalThis & { __karma__?: unknown }).__karma__),
@@ -15,9 +17,12 @@ export const sentryClient = {
   captureMessage: (
     ...args: Parameters<typeof import('@sentry/browser').captureMessage>
   ): Promise<void> => {
-    return import('@sentry/browser').then((Sentry) => {
-      Sentry.captureMessage(...args);
-    });
+    return sentryLoader
+      .load()
+      .then((Sentry) => {
+        Sentry.captureMessage(...args);
+      })
+      .catch((error: unknown) => console.error(error));
   },
 };
 
@@ -27,7 +32,7 @@ export function reportTranslationLoadFailure(
 ): void {
   if (isTestRun()) return;
 
-  sentryClient.captureMessage('Translation load failed', {
+  void sentryClient.captureMessage('Translation load failed', {
     level: 'warning',
     extra: { lang, status: error?.status, statusText: error?.statusText, url: error?.url },
   });

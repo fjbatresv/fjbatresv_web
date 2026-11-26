@@ -7,6 +7,7 @@ import { SeoLinksService } from './core/services/seo-links.service';
 import { TranslationService } from './core/services/translation.service';
 import { LogoComponent } from './core/components/logo/logo.component';
 import { AnalyticsEvent, AnalyticsService } from './core/services/analytics.service';
+import { localizedPath } from './core/i18n/lang';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,10 @@ export class AppComponent implements OnInit {
   get emailLink(): string {
     const subject = this.translationService.language === 'es' ? 'Proyecto: ' : 'Project: ';
     return `mailto:fjbatresv@gmail.com?subject=${encodeURIComponent(subject)}`;
+  }
+
+  get skipLink(): string {
+    return localizedPath(this.translationService.language, 'content');
   }
 
   track(event: AnalyticsEvent): void {

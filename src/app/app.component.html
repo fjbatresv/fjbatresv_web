@@ -1,5 +1,5 @@
 <div class="app-shell">
-  <a class="skip-link" href="#content">{{ 'a11y.skip' | translate }}</a>
+  <a class="skip-link" [href]="skipLink">{{ 'a11y.skip' | translate }}</a>
   <app-navbar></app-navbar>
   <main id="content" tabindex="-1">
     <router-outlet></router-outlet>

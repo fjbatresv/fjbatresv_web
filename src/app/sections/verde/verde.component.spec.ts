@@ -17,7 +17,7 @@ describe('VerdeComponent', () => {
   });
 
   it('renders five steps and the live Verde link', () => {
-    expect(fixture.nativeElement.querySelectorAll('li').length).toBe(5);
+    expect(fixture.nativeElement.querySelectorAll('li')).toHaveSize(5);
     const link = fixture.nativeElement.querySelector('a') as HTMLAnchorElement;
     expect(link.getAttribute('href')).toBe('https://verde.fjbatresv.com');
     fixture.componentInstance.track();

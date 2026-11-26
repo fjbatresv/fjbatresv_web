@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { assertNoRawI18nText } from './no-raw-i18n-text.mjs';
 
 const root = new URL('../dist/javier-batres-site/browser/', import.meta.url);
 const attr = (tag, name) => tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, 'i'))?.[1];
@@ -53,5 +54,8 @@ for (const [lang, path, locale, canonical, title] of [
   )?.[1];
   assert.ok(jsonLd, `${path}: JSON-LD missing`);
   assert.equal(JSON.parse(jsonLd)['@type'], 'ProfilePage');
-  if (lang === 'es') assert.doesNotMatch(html, /"(?:hero|projects)\./);
+  if (lang === 'es') {
+    assert.doesNotMatch(html, /"(?:hero|projects)\./);
+    assertNoRawI18nText(html, path);
+  }
 }

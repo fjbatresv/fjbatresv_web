@@ -53,6 +53,6 @@ export function profilePageJsonLd(lang: Lang): Record<string, unknown> {
       knowsAbout: STACK,
     },
     about: itemList,
-    hasPart: itemList,
+    hasPart: projects.map(({ item }) => item),
   };
 }

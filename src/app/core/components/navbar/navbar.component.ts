@@ -61,4 +61,8 @@ export class NavbarComponent {
   closeMenu(): void {
     this.isMenuOpen = false;
   }
+
+  sectionHref(section: string): string {
+    return localizedPath(this.currentLanguage, section);
+  }
 }

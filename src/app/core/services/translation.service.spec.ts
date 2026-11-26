@@ -10,7 +10,11 @@ describe('TranslationService', () => {
   let events: Subject<NavigationEnd>;
   let currentUrl: string;
   const translateSpy = { use: jasmine.createSpy('use') };
-  const docMock = { documentElement: { lang: '' } } as Document;
+  const history = { state: { navigationId: 1 }, replaceState: jasmine.createSpy('replaceState') };
+  const docMock = {
+    documentElement: { lang: '' },
+    defaultView: { history },
+  } as unknown as Document;
 
   beforeEach(() => {
     events = new Subject<NavigationEnd>();
@@ -33,6 +37,7 @@ describe('TranslationService', () => {
     });
     service = TestBed.inject(TranslationService);
     translateSpy.use.calls.reset();
+    history.replaceState.calls.reset();
     docMock.documentElement.lang = '';
   });
 
@@ -53,6 +58,20 @@ describe('TranslationService', () => {
     events.next(new NavigationEnd(1, '/es/contact', '/projects'));
     expect(service.language).toBe('en');
     expect(translateSpy.use).toHaveBeenCalledWith('en');
+  });
+
+  it('restores the trailing slash on the Spanish root for fragment-only navigation', () => {
+    currentUrl = '/es';
+    service.init();
+    expect(history.replaceState).toHaveBeenCalledWith(history.state, '', '/es/');
+  });
+
+  it('normalizes the Spanish root after the router completes initial navigation', () => {
+    currentUrl = '/es/';
+    service.init();
+    currentUrl = '/es';
+    events.next(new NavigationEnd(1, '/es/', '/es'));
+    expect(history.replaceState).toHaveBeenCalledWith(history.state, '', '/es/');
   });
 
   it('exposes the current language through the getter', () => {

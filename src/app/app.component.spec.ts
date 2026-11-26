@@ -53,4 +53,15 @@ describe('AppComponent', () => {
     expect(analyticsMock.track).toHaveBeenCalledWith('contact_github');
     translationServiceMock.language = 'en';
   });
+
+  it('keeps the skip link inside the active locale', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    translationServiceMock.language = 'es';
+    fixture.detectChanges();
+    const link = fixture.nativeElement.querySelector('.skip-link') as HTMLAnchorElement;
+    expect(new URL(link.getAttribute('href')!, 'https://fjbatresv.com/es/').href).toBe(
+      'https://fjbatresv.com/es/#content'
+    );
+    translationServiceMock.language = 'en';
+  });
 });

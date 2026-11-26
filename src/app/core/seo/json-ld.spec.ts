@@ -7,8 +7,10 @@ describe('profilePageJsonLd', () => {
       expect(data['@type']).toBe('ProfilePage');
       expect(data.mainEntity.name).toBe('Javier Batres');
       expect(data.mainEntity.alternateName).toBe('Fernando Javier Batres Velásquez');
-      expect(data.hasPart.itemListElement.length).toBe(8);
-      expect(data.hasPart.itemListElement[0].item.name).toBe('SDG19');
+      expect(data.about.itemListElement).toHaveSize(8);
+      expect(data.hasPart).toHaveSize(8);
+      expect(data.hasPart[0]['@type']).toBe('CreativeWork');
+      expect(data.hasPart[0].name).toBe('SDG19');
     }
   });
 });

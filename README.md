@@ -147,7 +147,7 @@ If you need CloudFront cache invalidation, add `CLOUDFRONT_DISTRIBUTION_ID` and 
 - Accessibility: 100
 - Best Practices: 100
 - SEO: 100
-(Measured against the production build, served locally; run your own audit for fresh numbers.)
+  (Measured against the production build, served locally; run your own audit for fresh numbers.)
 
 ## Project structure (essentials)
 
@@ -170,9 +170,12 @@ src/
 - Email: <fjbatresv@gmail.com>
 - LinkedIn: [https://www.linkedin.com/in/fjbatresv](https://www.linkedin.com/in/fjbatresv)
 - GitHub: [https://github.com/fjbatresv](https://github.com/fjbatresv)
+
 # Project image captures
 
 Project thumbnails are captured from their live landing pages at 1280×800, then converted to
 1280px and 640px WebP files with `cwebp`. The one-off Playwright capture script is
-`scripts/capture-projects.mjs`; run it with Playwright available through `NODE_PATH` and convert
-the PNGs from `/tmp/jb-project-captures` into `public/projects/`.
+`scripts/capture-projects.mjs`. Install Playwright's bundled browser with
+`npx playwright install chromium`; it uses bundled Chromium by default, or set `CHROME_PATH` to use
+another browser. Run with Playwright available through `NODE_PATH` and convert the PNGs from
+`/tmp/jb-project-captures` into `public/projects/`.

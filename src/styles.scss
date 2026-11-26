@@ -66,7 +66,7 @@ a:hover {
   color: var(--color-accent-strong);
 }
 :focus-visible {
-  outline: 2px solid var(--jb-turquoise);
+  outline: 2px solid var(--color-accent-strong);
   outline-offset: 3px;
 }
 p {
@@ -123,17 +123,48 @@ h6 {
   }
 }
 
-.cookie-consent-hidden { display: none !important; }
+.cookie-consent-hidden {
+  display: none !important;
+}
 .cookie-consent {
-  position: fixed; z-index: 40; left: 16px; right: 16px; bottom: 16px; max-width: 480px;
-  display: flex; flex-direction: column; gap: 14px; padding: 18px;
-  border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface);
-  color: var(--color-text); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.24); font-size: 14px;
+  position: fixed;
+  z-index: 40;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.24);
+  font-size: 14px;
 }
-.cookie-consent a { color: var(--color-accent-strong); text-decoration: underline; }
-.cookie-consent__actions { display: flex; gap: 10px; }
+.cookie-consent a {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+}
+.cookie-consent__actions {
+  display: flex;
+  gap: 10px;
+}
 .cookie-consent__actions button {
-  min-height: 44px; padding: 10px 16px; border: 1px solid var(--color-border); border-radius: 6px;
-  background: var(--color-surface); color: var(--color-text); font: inherit; font-weight: 600; cursor: pointer;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
-.cookie-consent__actions button:first-child { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
+.cookie-consent__actions button:first-child {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
+}

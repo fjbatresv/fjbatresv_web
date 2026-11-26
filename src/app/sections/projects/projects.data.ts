@@ -18,19 +18,19 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
   {
     id: 'guso',
     url: 'https://guso.fjbatresv.com',
-    tags: ['Flutter', 'NestJS', 'Healthcare'],
+    tags: ['Flutter', 'NestJS', 'i18n:healthcare'],
     image: { base: '/projects/guso', width: 1280, height: 800 },
   },
   {
     id: 'sinergia',
     url: 'https://sinergia.fjbatresv.com',
-    tags: ['Angular', 'AWS', 'Accessibility'],
+    tags: ['Angular', 'AWS', 'i18n:accessibility'],
     image: { base: '/projects/sinergia', width: 1280, height: 800 },
   },
   {
     id: 'rockers',
     url: 'https://rockers.fjbatresv.com',
-    tags: ['Architecture', 'Static web'],
+    tags: ['i18n:architecture', 'i18n:staticWeb'],
     image: { base: '/projects/rockers', width: 1280, height: 800 },
   },
   {
@@ -42,19 +42,19 @@ export const PORTFOLIO_PROJECTS: readonly PortfolioProject[] = [
   {
     id: 'sar',
     url: 'https://sar.fjbatresv.com',
-    tags: ['AWS', 'Serverless', 'Nx'],
+    tags: ['AWS', 'i18n:serverless', 'Nx'],
     image: { base: '/projects/sar', width: 1280, height: 800 },
   },
   {
     id: 'migo',
     url: 'https://migo.fjbatresv.com',
-    tags: ['Payments', 'Architecture'],
+    tags: ['i18n:payments', 'i18n:architecture'],
     image: { base: '/projects/migo', width: 1280, height: 800 },
   },
   {
     id: 'pdei',
     url: 'https://pdei.fjbatresv.com',
-    tags: ['Fintech', 'UI library'],
+    tags: ['i18n:fintech', 'i18n:uiLibrary'],
     image: { base: '/projects/pdei', width: 1280, height: 800 },
   },
 ];

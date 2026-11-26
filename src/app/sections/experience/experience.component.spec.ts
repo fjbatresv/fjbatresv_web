@@ -31,8 +31,8 @@ describe('ExperienceComponent', () => {
       'experience.companies.paypal',
       'experience.companies.early',
     ]);
-    expect(fixture.nativeElement.querySelectorAll('.timeline-item').length).toBe(6);
-    expect(fixture.nativeElement.querySelectorAll('.achievements strong').length).toBe(4);
+    expect(fixture.nativeElement.querySelectorAll('.timeline-item')).toHaveSize(6);
+    expect(fixture.nativeElement.querySelectorAll('.achievements strong')).toHaveSize(4);
   });
 
   it('uses a locale-specific hiring subject and tracks the action', () => {

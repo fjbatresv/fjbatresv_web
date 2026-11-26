@@ -37,12 +37,31 @@ describe('NavbarComponent', () => {
   it('navigates and closes menu', () => {
     const fixture = TestBed.createComponent(NavbarComponent);
     const component = fixture.componentInstance;
-    component.isMenuOpen = true;
+    component.toggleMenu();
 
     component.navigate('projects');
 
     expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/#projects');
     expect(component.isMenuOpen).toBeFalse();
+  });
+
+  it('keeps desktop and mobile section links in the active locale', () => {
+    const fixture = TestBed.createComponent(NavbarComponent);
+    const component = fixture.componentInstance;
+    const resolve = (link: HTMLAnchorElement) =>
+      new URL(link.getAttribute('href')!, 'https://fjbatresv.com/es/').href;
+    fixture.detectChanges();
+    const desktop = [
+      ...fixture.nativeElement.querySelectorAll('.navbar__links a'),
+    ][1] as HTMLAnchorElement;
+    expect(resolve(desktop)).toBe('https://fjbatresv.com/es/#projects');
+
+    fixture.nativeElement.querySelector('.menu-toggle').click();
+    fixture.detectChanges();
+    const mobile = [
+      ...fixture.nativeElement.querySelectorAll('.mobile-menu a'),
+    ][1] as HTMLAnchorElement;
+    expect(resolve(mobile)).toBe('https://fjbatresv.com/es/#projects');
   });
 
   it('navigates to home root path', () => {

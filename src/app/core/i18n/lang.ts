@@ -9,5 +9,6 @@ export function langFromUrl(url: string): Lang {
 }
 
 export function localizedPath(lang: Lang, hash = ''): string {
-  return `${lang === 'es' ? '/es/' : '/'}${hash ? `#${hash}` : ''}`;
+  const path = lang === 'es' ? '/es/' : '/';
+  return hash ? `${path}#${hash}` : path;
 }

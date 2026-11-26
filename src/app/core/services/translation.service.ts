@@ -15,13 +15,26 @@ export class TranslationService {
   private readonly destroyRef = inject(DestroyRef);
 
   init(): void {
-    this.setLanguage(langFromUrl(this.router.url));
+    const currentUrl = this.router.url;
+    this.setLanguage(langFromUrl(currentUrl));
+    this.normalizeSpanishRoot();
     this.router.events
       .pipe(
         filter((event): event is NavigationEnd => event instanceof NavigationEnd),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((event) => this.setLanguage(langFromUrl(event.urlAfterRedirects)));
+      .subscribe((event) => {
+        this.setLanguage(langFromUrl(event.urlAfterRedirects));
+        this.normalizeSpanishRoot();
+      });
+  }
+
+  private normalizeSpanishRoot(): void {
+    if (this.router.url.split(/[?#]/, 1)[0] !== '/es') return;
+    const history = this.document.defaultView?.history;
+    if (typeof history?.replaceState === 'function') {
+      history.replaceState(history.state, '', '/es/');
+    }
   }
 
   setLanguage(lang: Lang): void {

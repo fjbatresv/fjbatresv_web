@@ -37,7 +37,9 @@
             }}</span>
             <div class="project__tags">
               @for (tag of project.tags; track tag) {
-                <span>{{ tag }}</span>
+                <span>{{
+                  tag.startsWith('i18n:') ? ('projects.tags.' + tag.slice(5) | translate) : tag
+                }}</span>
               }
             </div>
           </div>

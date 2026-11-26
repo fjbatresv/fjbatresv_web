@@ -12,8 +12,8 @@ describe('HowIWorkComponent', () => {
     }).compileComponents();
     const fixture = TestBed.createComponent(HowIWorkComponent);
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('.engagements article').length).toBe(3);
-    expect(fixture.nativeElement.querySelectorAll('.process li').length).toBe(4);
+    expect(fixture.nativeElement.querySelectorAll('.engagements article')).toHaveSize(3);
+    expect(fixture.nativeElement.querySelectorAll('.process li')).toHaveSize(4);
     const link = fixture.nativeElement.querySelector('.button') as HTMLAnchorElement;
     expect(link.getAttribute('href')).toBe(
       'https://calendar.notion.so/meet/javierbatres/7v3284yxr'
