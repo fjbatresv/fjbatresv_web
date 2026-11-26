@@ -60,19 +60,7 @@
   font-size: 12px;
 }
 .project--feature {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 560px) 1fr;
-  align-items: center;
-}
-.project--feature img {
-  height: 100%;
-  min-height: 340px;
-  border: 0;
-  border-right: 1px solid var(--color-border);
-}
-.project--feature .project__body {
-  padding: clamp(24px, 5vw, 64px);
+  min-height: 100%;
 }
 .project--feature h3 {
   font-size: 32px;
@@ -89,12 +77,8 @@
   .projects__grid {
     grid-template-columns: 1fr;
   }
-  .project--feature {
-    grid-template-columns: 1fr;
-  }
   .project--feature img {
     min-height: 0;
-    border-right: 0;
     border-bottom: 1px solid var(--color-border);
   }
 }

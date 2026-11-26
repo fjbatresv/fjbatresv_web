@@ -32,4 +32,14 @@ describe('ProjectsComponent', () => {
     (fixture.nativeElement.querySelector('.project') as HTMLAnchorElement).click();
     expect(analytics.track).toHaveBeenCalledWith('project_open', { project: 'sdg19' });
   });
+
+  it('features the first two projects in the agreed order', () => {
+    const featured = [
+      ...fixture.nativeElement.querySelectorAll('.project--feature'),
+    ] as HTMLAnchorElement[];
+    expect(featured.map((link) => link.getAttribute('href'))).toEqual([
+      'https://sdg19.fjbatresv.com',
+      'https://guso.fjbatresv.com',
+    ]);
+  });
 });

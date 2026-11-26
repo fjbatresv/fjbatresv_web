@@ -8,10 +8,10 @@
       <span>{{ 'projects.count' | translate }}</span>
     </div>
     <div class="projects__grid">
-      @for (project of projects; track project.id; let first = $first) {
+      @for (project of projects; track project.id; let index = $index) {
         <a
           class="project"
-          [class.project--feature]="first"
+          [class.project--feature]="index < 2"
           [href]="project.url"
           target="_blank"
           rel="noopener"
