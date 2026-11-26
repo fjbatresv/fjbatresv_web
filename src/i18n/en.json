@@ -129,7 +129,8 @@
   },
   "projects": {
     "tagline": "Highlights",
-    "title": "Featured Projects",
+    "title": "Projects",
+    "count": "8 in production",
     "view": "Open",
     "titles": {
       "journey": "Journey to Cloud",
@@ -149,6 +150,16 @@
     "sar": "Cloud-native platform on AWS with serverless automation, secure auth middleware, and deep observability (X-Ray, Sentry, CloudWatch). Nx monorepo with shared libs and custom CI/CD tasks.",
     "ascend": "Ascend MVPs across mobile/desktop/web: Flutter apps, GCP integrations (SQL/NoSQL), and neuroscience-based experiences with BrainCo and Dale Carnegie.",
     "awsArq": "Serverless AWS e-commerce with orders, email notifications, and near real-time analytics into a data lake.",
+    "items": {
+      "sdg19": { "title": "SDG19", "summary": "Event-driven serverless e-commerce on AWS, with order processing and a Parquet data lake.", "role": "Architecture · Angular · Nx · AWS CDK" },
+      "guso": { "title": "Guso", "summary": "A patient-first healthcare app for appointments, prescriptions, and health records.", "role": "Product architecture · Flutter · NestJS" },
+      "sinergia": { "title": "Sinergia Dorada", "summary": "A volunteer-editable nonprofit site built on fast, accessible infrastructure.", "role": "Web engineering · Angular · AWS" },
+      "rockers": { "title": "Rockers 502 MC", "summary": "An engineering case study on the decisions and process behind the club’s website.", "role": "Architecture · Static web" },
+      "pettzi": { "title": "Pettzi", "summary": "A serverless pet-care platform and public reference for its software architecture.", "role": "Full stack · Nx · Angular · AWS CDK" },
+      "sar": { "title": "SAR", "summary": "A multi-location restaurant platform for inventory, cash, sales, events, and reporting.", "role": "Platform engineering · AWS · Nx" },
+      "migo": { "title": "Migo Payments", "summary": "A payment platform for Central America and Latin America, architected and led from 2021 to 2022.", "role": "Solutions architecture · Payments" },
+      "pdei": { "title": "Pdei+", "summary": "An investment portal shaped from financial brand guidelines into a tested UI library.", "role": "Product engineering · Vanilla UI" }
+    },
     "tags": {
       "banking": "Banking",
       "azure": "Azure",

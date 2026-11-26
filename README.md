@@ -170,3 +170,9 @@ src/
 - Email: <fjbatresv@gmail.com>
 - LinkedIn: [https://www.linkedin.com/in/fjbatresv](https://www.linkedin.com/in/fjbatresv)
 - GitHub: [https://github.com/fjbatresv](https://github.com/fjbatresv)
+# Project image captures
+
+Project thumbnails are captured from their live landing pages at 1280×800, then converted to
+1280px and 640px WebP files with `cwebp`. The one-off Playwright capture script is
+`scripts/capture-projects.mjs`; run it with Playwright available through `NODE_PATH` and convert
+the PNGs from `/tmp/jb-project-captures` into `public/projects/`.

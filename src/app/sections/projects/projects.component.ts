@@ -1,101 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-
-interface ProjectItem {
-  titleKey: string;
-  descriptionKey: string;
-  tags: string[];
-  link?: string;
-}
+import { AnalyticsService } from '../../core/services/analytics.service';
+import { PORTFOLIO_PROJECTS } from './projects.data';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent {
-  projects: ProjectItem[] = [
-    {
-      titleKey: 'projects.titles.journey',
-      descriptionKey: 'projects.journey',
-      tags: ['projects.tags.banking', 'projects.tags.azure', 'projects.tags.governance'],
-    },
-    {
-      titleKey: 'projects.titles.vip',
-      descriptionKey: 'projects.vip',
-      tags: [
-        'projects.tags.nestjs',
-        'projects.tags.angular',
-        'projects.tags.aws',
-        'projects.tags.queues',
-      ],
-    },
-    {
-      titleKey: 'projects.titles.pettzi',
-      descriptionKey: 'projects.pettzi',
-      link: 'https://github.com/fjbatresv/pettzi',
-      tags: [
-        'projects.tags.health',
-        'projects.tags.aws',
-        'projects.tags.saas',
-        'projects.tags.angular',
-        'projects.tags.lambdas',
-        'projects.tags.nx',
-        'projects.tags.nosql',
-      ],
-    },
-    {
-      titleKey: 'projects.titles.awsArq',
-      descriptionKey: 'projects.awsArq',
-      tags: [
-        'projects.tags.aws',
-        'projects.tags.saas',
-        'projects.tags.angular',
-        'projects.tags.lambdas',
-        'projects.tags.nx',
-        'projects.tags.nosql',
-        'projects.tags.kinesis',
-        'projects.tags.firehose',
-      ],
-      link: 'https://github.com/fjbatresv/sdg19-final',
-    },
-    {
-      titleKey: 'projects.titles.sinergia',
-      descriptionKey: 'projects.sinergia',
-      tags: ['projects.tags.angular', 'projects.tags.aws', 'projects.tags.event'],
-      link: 'https://sinergiadoradagt.com',
-    },
-    {
-      titleKey: 'projects.titles.capriccio',
-      descriptionKey: 'projects.capriccio',
-      tags: ['projects.tags.nestjs', 'projects.tags.angular', 'projects.tags.saas'],
-      link: 'https://hechocapriccio.com',
-    },
-    {
-      titleKey: 'projects.titles.sar',
-      descriptionKey: 'projects.sar',
-      link: 'https://www.sar-latam.com/sar-back-office-2024/',
-      tags: [
-        'projects.tags.aws',
-        'projects.tags.lambdas',
-        'projects.tags.event',
-        'projects.tags.nx',
-      ],
-    },
-    {
-      titleKey: 'projects.titles.ascend',
-      descriptionKey: 'projects.ascend',
-      tags: [
-        'projects.tags.flutter',
-        'projects.tags.gcp',
-        'projects.tags.mobile',
-        'projects.tags.nosql',
-      ],
-      link: 'https://www.novuskills.ai/',
-    },
-  ];
+  readonly projects = PORTFOLIO_PROJECTS;
+  private readonly analytics = inject(AnalyticsService);
+
+  trackProject(id: string): void {
+    this.analytics.track('project_open', { project: id });
+  }
 }

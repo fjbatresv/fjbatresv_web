@@ -132,7 +132,8 @@
   },
   "projects": {
     "tagline": "Destacados",
-    "title": "Proyectos destacados",
+    "title": "Proyectos",
+    "count": "8 en producción",
     "view": "Abrir",
     "titles": {
       "journey": "Journey to Cloud",
@@ -152,6 +153,16 @@
     "sar": "Plataforma cloud-native en AWS con automatización serverless, middleware de autenticación seguro y observabilidad (X-Ray, Sentry, CloudWatch). Monorepo Nx con librerías compartidas y CI/CD a medida.",
     "ascend": "MVPs de Ascend en móvil/escritorio/web: apps Flutter, integraciones GCP (SQL/NoSQL) y experiencias basadas en neurociencia con BrainCo y Dale Carnegie.",
     "awsArq": "E-commerce serverless en AWS con órdenes, notificaciones por email y analítica near real-time en un data lake.",
+    "items": {
+      "sdg19": { "title": "SDG19", "summary": "E-commerce serverless y orientado a eventos en AWS, con procesamiento de órdenes y un data lake Parquet.", "role": "Arquitectura · Angular · Nx · AWS CDK" },
+      "guso": { "title": "Guso", "summary": "Una aplicación de salud centrada en pacientes para citas, recetas e historial clínico.", "role": "Arquitectura de producto · Flutter · NestJS" },
+      "sinergia": { "title": "Sinergia Dorada", "summary": "Un sitio de una ONG editable por voluntarios, sobre infraestructura rápida y accesible.", "role": "Ingeniería web · Angular · AWS" },
+      "rockers": { "title": "Rockers 502 MC", "summary": "Un caso de estudio sobre las decisiones y el proceso detrás del sitio del club.", "role": "Arquitectura · Web estática" },
+      "pettzi": { "title": "Pettzi", "summary": "Una plataforma serverless de cuidado animal y referencia pública de su arquitectura.", "role": "Full stack · Nx · Angular · AWS CDK" },
+      "sar": { "title": "SAR", "summary": "Una plataforma para restaurantes con inventario, caja, ventas, eventos e informes.", "role": "Ingeniería de plataforma · AWS · Nx" },
+      "migo": { "title": "Migo Payments", "summary": "Una plataforma de pagos para Centroamérica y Latinoamérica, dirigida entre 2021 y 2022.", "role": "Arquitectura de soluciones · Pagos" },
+      "pdei": { "title": "Pdei+", "summary": "Un portal de inversión convertido desde lineamientos financieros en una librería UI probada.", "role": "Ingeniería de producto · UI vanilla" }
+    },
     "tags": {
       "banking": "Banca",
       "azure": "Azure",
