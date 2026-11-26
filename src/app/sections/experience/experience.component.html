@@ -4,24 +4,45 @@
     <h2 id="experience-title">{{ 'experience.title' | translate }}</h2>
     <div class="timeline">
       @for (exp of experiences; track exp.company) {
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content card">
-            <div class="timeline-header">
+        <article class="timeline-item">
+          <div class="timeline-content">
+            <header>
               <div>
-                <h3>{{ exp.company }}</h3>
-                <p class="muted">{{ exp.roleKey | translate }}</p>
+                <h3>{{ exp.company | translate }}</h3>
+                <p>{{ exp.roleKey | translate }}</p>
               </div>
-              <span class="badge">{{ exp.period }}</span>
-            </div>
+              <span>{{ exp.period | translate }}</span>
+            </header>
             <ul>
               @for (bullet of exp.bullets; track bullet) {
                 <li>{{ bullet | translate }}</li>
               }
             </ul>
+            @if (exp.achievements) {
+              <div class="achievements">
+                @for (achievement of exp.achievements; track achievement.title) {
+                  <div>
+                    <strong>{{ achievement.title | translate }}</strong>
+                    <p>{{ achievement.summary | translate }}</p>
+                  </div>
+                }
+              </div>
+            }
           </div>
-        </div>
+        </article>
       }
     </div>
+    <div class="stack">
+      <h3>{{ 'experience.stack' | translate }}</h3>
+      <div>
+        @for (item of stack; track item) {
+          <span>{{ item }}</span>
+        }
+      </div>
+    </div>
+    <p class="sectors">{{ 'experience.sectors' | translate }}</p>
+    <a class="button" [href]="hireLink" (click)="trackHire()"
+      >{{ 'experience.hire' | translate }} <span aria-hidden="true">→</span></a
+    >
   </div>
 </section>
