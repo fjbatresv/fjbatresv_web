@@ -20,12 +20,15 @@ DIST=$("${AWS[@]}" cloudfront get-distribution-config --id E2EV9RW3Q35Z60)
 DIST_ETAG=$(jq -r '.ETag' <<< "$DIST")
 REWRITE_ARN=arn:aws:cloudfront::605134457500:function/fjbatresv-index-rewrite
 SECURITY_HEADERS_ARN=arn:aws:cloudfront::605134457500:function/fjbatresv-security-headers
-jq --arg rewrite "$REWRITE_ARN" --arg security_headers "$SECURITY_HEADERS_ARN" \
-  '.DistributionConfig
-   | .DefaultCacheBehavior.FunctionAssociations = {"Quantity":2,"Items":[{"EventType":"viewer-request","FunctionARN":$rewrite},{"EventType":"viewer-response","FunctionARN":$security_headers}]}
-   | .CustomErrorResponses.Items = ((.CustomErrorResponses.Items // []) | map(select(.ErrorCode != 403 and .ErrorCode != 404))) + [{"ErrorCode":403,"ResponsePagePath":"/404.html","ResponseCode":"404","ErrorCachingMinTTL":60},{"ErrorCode":404,"ResponsePagePath":"/404.html","ResponseCode":"404","ErrorCachingMinTTL":60}]
-   | .CustomErrorResponses.Quantity = (.CustomErrorResponses.Items | length)' \
-  <<< "$DIST" > "$TMP_DIR/distribution.json"
+build_distribution_config() {
+  jq --arg rewrite "$REWRITE_ARN" --arg security_headers "$SECURITY_HEADERS_ARN" \
+    '.DistributionConfig
+     | .DefaultCacheBehavior.FunctionAssociations = {"Quantity":2,"Items":[{"EventType":"viewer-request","FunctionARN":$rewrite},{"EventType":"viewer-response","FunctionARN":$security_headers}]}
+     | .CustomErrorResponses.Items = ((.CustomErrorResponses.Items // []) | map(select(.ErrorCode != 403 and .ErrorCode != 404))) + [{"ErrorCode":403,"ResponsePagePath":"/404.html","ResponseCode":"404","ErrorCachingMinTTL":60},{"ErrorCode":404,"ResponsePagePath":"/404.html","ResponseCode":"404","ErrorCachingMinTTL":60}]
+     | .CustomErrorResponses.Quantity = (.CustomErrorResponses.Items | length)' \
+    > "$TMP_DIR/distribution.json"
+}
+build_distribution_config <<< "$DIST"
 
 if $DRY_RUN; then
   echo 'Proposed distribution configuration:'
@@ -69,5 +72,8 @@ else
 fi
 "${AWS[@]}" iam put-role-policy --role-name fjbatresv-web-gha-deploy --policy-name deploy --policy-document file://infra/iam/gha-deploy-policy.json
 
+DIST=$("${AWS[@]}" cloudfront get-distribution-config --id E2EV9RW3Q35Z60)
+DIST_ETAG=$(jq -r '.ETag' <<< "$DIST")
+build_distribution_config <<< "$DIST"
 "${AWS[@]}" cloudfront update-distribution --id E2EV9RW3Q35Z60 --if-match "$DIST_ETAG" \
   --distribution-config "file://$TMP_DIR/distribution.json" > /dev/null
