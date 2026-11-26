@@ -4,6 +4,7 @@ import { ExperienceComponent } from '../experience/experience.component';
 import { ProjectsComponent } from '../projects/projects.component';
 import { VerdeComponent } from '../verde/verde.component';
 import { HeroComponent } from './hero.component';
+import { HowIWorkComponent } from '../how-i-work/how-i-work.component';
 
 @Component({
   selector: 'app-home-page',
@@ -13,6 +14,7 @@ import { HeroComponent } from './hero.component';
     ProjectsComponent,
     VerdeComponent,
     ExperienceComponent,
+    HowIWorkComponent,
     ContactComponent,
   ],
   templateUrl: './home-page.component.html',

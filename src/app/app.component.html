@@ -5,15 +5,24 @@
   </main>
   <footer class="footer">
     <div class="container footer__content">
+      <app-logo size="sm" />
       <span>&copy; {{ currentYear }} {{ 'footer.copy' | translate }}</span>
       <div class="footer__links">
-        <a href="https://github.com/fjbatresv" target="_blank" rel="noopener noreferrer">{{
-          'footer.links.github' | translate
-        }}</a>
-        <a href="https://www.linkedin.com/in/fjbatresv" target="_blank" rel="noopener noreferrer">{{
-          'footer.links.linkedin' | translate
-        }}</a>
-        <a href="mailto:fjbatresv@gmail.com?subject=Contact%20from%20website">{{
+        <a
+          href="https://github.com/fjbatresv"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="track('contact_github')"
+          >{{ 'footer.links.github' | translate }}</a
+        >
+        <a
+          href="https://www.linkedin.com/in/fjbatresv"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="track('contact_linkedin')"
+          >{{ 'footer.links.linkedin' | translate }}</a
+        >
+        <a [href]="emailLink" (click)="track('contact_email')">{{
           'footer.links.email' | translate
         }}</a>
       </div>

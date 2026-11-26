@@ -19,33 +19,6 @@
       "hire": "Busco contratar"
     }
   },
-  "about": {
-    "tagline": "Perfil",
-    "title": "Sobre Javier",
-    "body": {
-      "one": "Soy Fernando Javier Batres Velásquez, arquitecto de soluciones guatemalteco con más de 10 años construyendo software para banca, healthtech y equipos enterprise.",
-      "two": "Me enfoco en backend y plataformas cloud—NestJS, Angular, AWS, Azure—y lidero equipos con microservicios, diseños event-driven y CI/CD que entrega con seguridad.",
-      "three": "Fuera de la tecnología soy barista, gamer e investigador; disfruto explorar con mi esposa y nuestro perro Newfoundland, Gaia.",
-      "four": "Alineo arquitectura con resultados de negocio, formo cultura de ingeniería y combino mentoría con delivery práctico."
-    },
-    "list": {
-      "title": "Lo que lo mueve",
-      "items": {
-        "cloud": "Fundamentos cloud",
-        "devops": "Automatización y DevOps",
-        "architecture": "Decisiones de arquitectura",
-        "mentoring": "Mentoría de equipos"
-      }
-    },
-    "highlights": {
-      "years": { "label": "Experiencia", "value": "años entregando software enterprise" },
-      "mentoring": {
-        "label": "Mentoría",
-        "value": "Forma ingenieros y lidera equipos de delivery"
-      },
-      "personal": { "label": "Humano", "value": "Café, juegos, investigación y Gaia" }
-    }
-  },
   "experience": {
     "tagline": "Carrera",
     "title": "Experiencia",
@@ -104,49 +77,6 @@
       "b1": "Construyó plataformas en Novuskills, Progrentis y equipos early-stage.",
       "b2": "Introdujo hábitos de pruebas, automatización y documentación.",
       "b3": "Entregó features full stack mientras fortalecía la cultura técnica."
-    }
-  },
-  "skills": {
-    "tagline": "Toolkit",
-    "title": "Habilidades y stack",
-    "cloud": "Cloud y DevOps",
-    "backend": "Backend",
-    "frontend": "Frontend",
-    "databases": "Bases de datos",
-    "devops": "Pipelines y calidad",
-    "soft": "Liderazgo y soft skills",
-    "items": {
-      "aws": "AWS",
-      "azure": "Azure básico",
-      "lambdas": "Lambdas",
-      "eventbridge": "EventBridge",
-      "sqs": "SQS",
-      "cloudwatch": "CloudWatch",
-      "xray": "X-Ray",
-      "node": "Node.js",
-      "nest": "NestJS",
-      "ts": "TypeScript",
-      "python": "Python (Lambdas)",
-      "rest": "APIs REST",
-      "microservices": "Microservicios",
-      "angular": "Angular",
-      "react": "React",
-      "nx": "Monorepos con Nx",
-      "mongodb": "MongoDB",
-      "mysql": "MySQL",
-      "dynamodb": "DynamoDB",
-      "rds": "RDS",
-      "redis": "Redis",
-      "cicd": "CI/CD",
-      "github": "GitHub Actions",
-      "sonarqube": "SonarQube",
-      "observability": "Observabilidad",
-      "docker": "Docker",
-      "kubernetes": "Kubernetes básico",
-      "architecture": "Decisiones de arquitectura",
-      "mentoring": "Mentoría",
-      "leadership": "Liderazgo",
-      "writing": "Redacción técnica"
     }
   },
   "projects": {
@@ -241,22 +171,30 @@
       "firehose": "Firehose"
     }
   },
-  "writing": {
-    "tagline": "Notas",
-    "title": "Escritura y charlas",
-    "read": "Leer más",
-    "item1": {
-      "title": "Diseñando sistemas event-driven observables",
-      "summary": "Patrones para rastrear y depurar arquitecturas de mensajes entre equipos. (Medium)"
+  "how": {
+    "label": "Para proyectos",
+    "title": "Cómo trabajo",
+    "engagements": {
+      "architecture": {
+        "title": "Arquitectura y revisión técnica",
+        "body": "Un plan claro para construir o mejorar tu sistema."
+      },
+      "mvp": {
+        "title": "MVP y producto de punta a punta",
+        "body": "De una idea a un producto funcional con entregas enfocadas."
+      },
+      "migration": {
+        "title": "Migración a la nube y DevOps",
+        "body": "Modernizar infraestructura y hacer confiables las entregas."
+      }
     },
-    "item2": {
-      "title": "Guardrails de CI/CD en entornos regulados",
-      "summary": "Cómo entregar más rápido cumpliendo gobierno para banca y healthtech. (dev.to)"
+    "process": {
+      "call": "Llamada de 30 min",
+      "proposal": "Propuesta",
+      "delivery": "Entrega iterativa",
+      "handoff": "Traspaso documentado"
     },
-    "item3": {
-      "title": "Preparando mejores culturas de ingeniería",
-      "summary": "Lecciones de mentoría y de unir liderazgo con craft. (Medium)"
-    }
+    "cta": "Agendar llamada"
   },
   "verde": {
     "label": "Mi framework",
@@ -272,8 +210,10 @@
     }
   },
   "contact": {
-    "tagline": "Colaboremos",
-    "title": "Listo para tu siguiente build",
+    "tagline": "Contacto",
+    "title": "Hablemos",
+    "email": "Escríbeme",
+    "calendar": "Agendar llamada",
     "body": "Disponible para consultoría, revisiones de arquitectura y delivery de productos en cloud y full stack.",
     "cta": "Escríbeme",
     "fun": "Hablemos de café, retos de arquitectura o el próximo juego que quieres probar.",

@@ -19,30 +19,6 @@
       "hire": "I’m hiring"
     }
   },
-  "about": {
-    "tagline": "Profile",
-    "title": "About Javier",
-    "body": {
-      "one": "I'm Fernando Javier Batres Velásquez, a Guatemalan solutions architect with 10+ years building software for banking, healthtech, and enterprise teams.",
-      "two": "I focus on backend and cloud platforms—NestJS, Angular, AWS, Azure—and I lead teams through microservices, event-driven designs, and CI/CD that ships safely.",
-      "three": "Outside work, I'm a barista hobbyist, gamer, and deep researcher who loves exploring with my wife and our Newfoundland dog, Gaia.",
-      "four": "I align architecture with business outcomes, shape engineering culture, and pair mentorship with hands-on delivery."
-    },
-    "list": {
-      "title": "What drives him",
-      "items": {
-        "cloud": "Cloud foundations",
-        "devops": "Automation & DevOps",
-        "architecture": "Architecture decisions",
-        "mentoring": "Mentoring squads"
-      }
-    },
-    "highlights": {
-      "years": { "label": "Experience", "value": "years shipping enterprise software" },
-      "mentoring": { "label": "Mentoring", "value": "Coaches engineers and leads delivery teams" },
-      "personal": { "label": "Human", "value": "Coffee, games, research, and Gaia" }
-    }
-  },
   "experience": {
     "tagline": "Career",
     "title": "Experience",
@@ -101,49 +77,6 @@
       "b1": "Built platforms at Novuskills, Progrentis, and early-stage teams.",
       "b2": "Introduced testing, automation, and documentation habits.",
       "b3": "Shipped full-stack features while growing engineering culture."
-    }
-  },
-  "skills": {
-    "tagline": "Toolkit",
-    "title": "Skills & Stack",
-    "cloud": "Cloud & DevOps",
-    "backend": "Backend",
-    "frontend": "Frontend",
-    "databases": "Databases",
-    "devops": "Pipelines & Quality",
-    "soft": "Leadership & Soft Skills",
-    "items": {
-      "aws": "AWS",
-      "azure": "Azure basics",
-      "lambdas": "Lambdas",
-      "eventbridge": "EventBridge",
-      "sqs": "SQS",
-      "cloudwatch": "CloudWatch",
-      "xray": "X-Ray",
-      "node": "Node.js",
-      "nest": "NestJS",
-      "ts": "TypeScript",
-      "python": "Python (Lambdas)",
-      "rest": "REST APIs",
-      "microservices": "Microservices",
-      "angular": "Angular",
-      "react": "React",
-      "nx": "Nx monorepos",
-      "mongodb": "MongoDB",
-      "mysql": "MySQL",
-      "dynamodb": "DynamoDB",
-      "rds": "RDS",
-      "redis": "Redis",
-      "cicd": "CI/CD",
-      "github": "GitHub Actions",
-      "sonarqube": "SonarQube",
-      "observability": "Observability",
-      "docker": "Docker",
-      "kubernetes": "Kubernetes basics",
-      "architecture": "Architecture decisions",
-      "mentoring": "Mentoring",
-      "leadership": "Leadership",
-      "writing": "Technical writing"
     }
   },
   "projects": {
@@ -238,22 +171,30 @@
       "firehose": "Firehose"
     }
   },
-  "writing": {
-    "tagline": "Notes",
-    "title": "Writing & Talks",
-    "read": "Read more",
-    "item1": {
-      "title": "Designing observable event-driven systems",
-      "summary": "Patterns for tracing and debugging message-driven architectures across teams. (Medium)"
+  "how": {
+    "label": "For projects",
+    "title": "How I work",
+    "engagements": {
+      "architecture": {
+        "title": "Architecture and technical review",
+        "body": "Get a clear plan for the system you need to build or improve."
+      },
+      "mvp": {
+        "title": "MVP and end-to-end product",
+        "body": "Move from an idea to a working product with focused delivery."
+      },
+      "migration": {
+        "title": "Cloud migration and DevOps",
+        "body": "Modernize infrastructure and make delivery reliable."
+      }
     },
-    "item2": {
-      "title": "CI/CD guardrails in regulated environments",
-      "summary": "How to ship faster while meeting governance for banking and healthtech. (dev.to)"
+    "process": {
+      "call": "30-minute call",
+      "proposal": "Proposal",
+      "delivery": "Iterative delivery",
+      "handoff": "Documented handoff"
     },
-    "item3": {
-      "title": "Brewing better engineering cultures",
-      "summary": "Lessons from mentoring teams and pairing leadership with craftsmanship. (Medium)"
-    }
+    "cta": "Schedule a call"
   },
   "verde": {
     "label": "My framework",
@@ -269,8 +210,10 @@
     }
   },
   "contact": {
-    "tagline": "Let’s collaborate",
-    "title": "Ready for your next build",
+    "tagline": "Contact",
+    "title": "Let’s talk",
+    "email": "Email Javier",
+    "calendar": "Schedule a call",
     "body": "Open to consulting, architecture reviews, and product delivery across cloud and full stack.",
     "cta": "Email me",
     "fun": "Bring coffee questions, architecture puzzles, or a new game recommendation.",

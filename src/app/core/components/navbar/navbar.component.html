@@ -1,13 +1,7 @@
 <header class="navbar">
   <div class="container navbar__content">
     <button class="navbar__brand" type="button" (click)="navigate('home')" aria-label="Go home">
-      <img
-        [src]="logoUrl"
-        alt="Javier Batres logo"
-        class="brand-logo"
-        loading="lazy"
-        decoding="async"
-      />
+      <app-logo size="sm" />
       <div class="brand-name">Javier Batres</div>
     </button>
 

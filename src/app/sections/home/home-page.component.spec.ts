@@ -21,6 +21,6 @@ describe('HomePageComponent', () => {
     const ids = [...fixture.nativeElement.querySelectorAll('section[id]')].map(
       (section: HTMLElement) => section.id
     );
-    expect(ids).toEqual(['top', 'projects', 'verde', 'experience', 'contact']);
+    expect(ids).toEqual(['top', 'projects', 'verde', 'experience', 'how-i-work', 'contact']);
   });
 });

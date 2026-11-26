@@ -6,11 +6,12 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
 import { Lang, localizedPath } from '../../i18n/lang';
+import { LogoComponent } from '../logo/logo.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, TranslatePipe],
+  imports: [CommonModule, TranslatePipe, LogoComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +26,6 @@ export class NavbarComponent {
     { labelKey: 'nav.contact', section: 'contact' },
   ];
 
-  logoUrl = '/brand/jb-isotipo-96.webp';
   isMenuOpen = false;
   private readonly router = inject(Router);
   private readonly themeService = inject(ThemeService);
