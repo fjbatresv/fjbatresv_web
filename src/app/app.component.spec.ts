@@ -5,14 +5,17 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import { SeoLinksService } from './core/services/seo-links.service';
 import { TranslationService } from './core/services/translation.service';
+import { AnalyticsService } from './core/services/analytics.service';
 
 describe('AppComponent', () => {
   const translationServiceMock = {
     init: jasmine.createSpy('init'),
+    language: 'en' as 'en' | 'es',
   };
   const seoLinksServiceMock = {
     init: jasmine.createSpy('init'),
   };
+  const analyticsMock = { track: jasmine.createSpy('track') };
 
   beforeEach(async () => {
     translationServiceMock.init.calls.reset();
@@ -24,6 +27,7 @@ describe('AppComponent', () => {
         provideTranslateService(),
         { provide: TranslationService, useValue: translationServiceMock },
         { provide: SeoLinksService, useValue: seoLinksServiceMock },
+        { provide: AnalyticsService, useValue: analyticsMock },
       ],
     }).compileComponents();
   });
@@ -38,5 +42,15 @@ describe('AppComponent', () => {
     TestBed.createComponent(AppComponent).componentInstance.ngOnInit();
     expect(translationServiceMock.init).toHaveBeenCalled();
     expect(seoLinksServiceMock.init).toHaveBeenCalled();
+  });
+
+  it('builds a localized project email and tracks footer actions', () => {
+    const component = TestBed.createComponent(AppComponent).componentInstance;
+    expect(component.emailLink).toBe('mailto:fjbatresv@gmail.com?subject=Project%3A%20');
+    translationServiceMock.language = 'es';
+    expect(component.emailLink).toBe('mailto:fjbatresv@gmail.com?subject=Proyecto%3A%20');
+    component.track('contact_github');
+    expect(analyticsMock.track).toHaveBeenCalledWith('contact_github');
+    translationServiceMock.language = 'en';
   });
 });

@@ -19,14 +19,13 @@
 
     <nav class="navbar__links" aria-label="Primary">
       @for (item of navItems; track item.section) {
-        <button
-          type="button"
-          (click)="navigate(item.section)"
+        <a
+          [href]="'#' + item.section"
           class="navbar__link"
           [ngClass]="{ contact: item.section === 'contact' }"
         >
           {{ item.labelKey | translate }}
-        </button>
+        </a>
       }
     </nav>
 
@@ -87,14 +86,14 @@
     <div class="mobile-menu">
       <nav aria-label="Mobile primary">
         @for (item of navItems; track item.section) {
-          <button
+          <a
             class="mobile-menu__link"
-            type="button"
+            [href]="'#' + item.section"
             [class.contact]="item.section === 'contact'"
-            (click)="navigate(item.section)"
+            (click)="closeMenu()"
           >
             {{ item.labelKey | translate }}
-          </button>
+          </a>
         }
       </nav>
       <div class="mobile-menu__actions">

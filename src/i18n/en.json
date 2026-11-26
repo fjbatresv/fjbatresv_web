@@ -8,6 +8,7 @@
     "contact": "Contact",
     "theme": "Toggle theme"
   },
+  "a11y": { "skip": "Skip to content" },
   "hero": {
     "status": "Available for projects and full-time roles · Guatemala, remote",
     "title": "Technical rigor,",

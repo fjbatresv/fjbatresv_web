@@ -1,6 +1,6 @@
 # Phase 2 — Redesign Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Rebuild fjbatresv.com as one prerendered page per locale (`/`, `/es/`) in Javier's brand ("Antracita" direction) that invites both clients and employers to contact him, showcases 8 live projects and the Verde framework, and passes `seo-review`.
 
@@ -43,9 +43,9 @@
 
 **Interfaces — Produces:** CSS vars `--color-bg|surface|border|text|muted|accent|accent-strong|on-accent` per `body.theme-dark` / `body.theme-light`; `<app-logo size="sm|md|lg">` (renders the isotipo `<img>` with explicit width/height and `alt="Javier Batres"`).
 
-- [ ] **Step 1: Failing tests:** `theme-init.spec` — nothing stored + `matchMedia('(prefers-color-scheme: light)')` true → `theme-dark`; stored `light` → `theme-light`. `theme.service.spec` — initial theme `dark` when storage empty. `logo.component.spec` — `size="lg"` renders img 96×96, alt text.
-- [ ] **Step 2:** Run → FAIL. Implement. Remove the Google Fonts `<link>`s from `index.html`; add `@font-face` for self-hosted Poppins and `<link rel="preload" as="font" type="font/woff2" crossorigin>` for 400/600.
-- [ ] **Step 3:** `npm run test:coverage && npm run build` green. Commit `🎨 Add brand tokens, self-hosted Poppins and logo`.
+- [x] **Step 1: Failing tests:** `theme-init.spec` — nothing stored + `matchMedia('(prefers-color-scheme: light)')` true → `theme-dark`; stored `light` → `theme-light`. `theme.service.spec` — initial theme `dark` when storage empty. `logo.component.spec` — `size="lg"` renders img 96×96, alt text.
+- [x] **Step 2:** Run → FAIL. Implement. Remove the Google Fonts `<link>`s from `index.html`; add `@font-face` for self-hosted Poppins and `<link rel="preload" as="font" type="font/woff2" crossorigin>` for 400/600.
+- [x] **Step 3:** `npm run test:coverage && npm run build` green. Commit `🎨 Add brand tokens, self-hosted Poppins and logo`.
 
 ### Task 2: Single-page routing + legacy redirects
 
@@ -53,9 +53,9 @@
 
 **Interfaces:** Routes = `''` and `'es'` (both `HomePageComponent`, `data.lang`) + `'**'` NotFound. `localizedPath(lang): '/' | '/es/'`. Navbar items scroll to `#<id>` (`<a href="#projects">`, router `anchorScrolling` already on). Language switch → `/es/` ↔ `/`, keeping the current hash.
 
-- [ ] **Step 1: Failing tests** in `index-rewrite.test.mjs`: 301 with `location` for each of `/about`,`/experience`,`/skills` → `/#experience`; `/projects` → `/#projects`; `/contact` → `/#contact`; `/writing` → `/`; same set under `/es/` → `/es/#…`; trailing-slash variants (`/about/`) too; `/es` → rewrite `/es/index.html` (not redirect); unknown `/nope` → `/nope/index.html` (404 handled by CloudFront). `app.routes.spec`: exactly 3 routes.
-- [ ] **Step 2:** Implement the `REDIRECTS` map (keys normalized without trailing slash). Run `npm run test:infra && npm test` → PASS.
-- [ ] **Step 3:** Build: dist contains only `index.html`, `es/index.html`, `404.html` (+`404/`) as HTML. Commit `♻️ Collapse sections into one page per locale with legacy redirects`.
+- [x] **Step 1: Failing tests** in `index-rewrite.test.mjs`: 301 with `location` for each of `/about`,`/experience`,`/skills` → `/#experience`; `/projects` → `/#projects`; `/contact` → `/#contact`; `/writing` → `/`; same set under `/es/` → `/es/#…`; trailing-slash variants (`/about/`) too; `/es` → rewrite `/es/index.html` (not redirect); unknown `/nope` → `/nope/index.html` (404 handled by CloudFront). `app.routes.spec`: exactly 3 routes.
+- [x] **Step 2:** Implement the `REDIRECTS` map (keys normalized without trailing slash). Run `npm run test:infra && npm test` → PASS.
+- [x] **Step 3:** Build: dist contains only `index.html`, `es/index.html`, `404.html` (+`404/`) as HTML. Commit `♻️ Collapse sections into one page per locale with legacy redirects`.
 
 ### Task 3: Hero with the two paths + analytics events
 
@@ -65,8 +65,8 @@
 
 Hero content (keys `hero.*`): status line ("Disponible para proyectos y rol fijo · Guatemala, remoto"), H1 "Dureza técnica, suavidad humana." with the second clause in accent, paragraph (12 años; banca, pasarelas de pago, identidad digital, salud), round photo (`face.webp`, 300×300, `fetchpriority="high"`), two path cards: **Tengo un proyecto →** (turquoise fill, `#283232` text; href `#how-i-work`; event `cta_project`) and **Busco contratar →** (surface card; href `#experience`; event `cta_hire`). Exactly one `<h1>` on the page.
 
-- [ ] **Step 1: Failing tests:** analytics — no consent → gtag not called; consent + gtag → called with args; server platform → no-op. hero — renders one h1, both path links with correct hrefs, clicking each calls `track` with the right event.
-- [ ] **Step 2:** Implement → PASS. Commit `✨ Add dual-path hero and consent-gated analytics events`.
+- [x] **Step 1: Failing tests:** analytics — no consent → gtag not called; consent + gtag → called with args; server platform → no-op. hero — renders one h1, both path links with correct hrefs, clicking each calls `track` with the right event.
+- [x] **Step 2:** Implement → PASS. Commit `✨ Add dual-path hero and consent-gated analytics events`.
 
 ### Task 4: Projects section (8 live projects)
 
@@ -88,9 +88,9 @@ Copy sources (draft EN + ES summaries ≤ 160 chars from these; flag for review)
 
 Layout (Antracita): section header "Proyectos" + "8 en producción"; first project as a wide feature card (image left 560px, text right), remaining 7 in a responsive grid (3 cols ≥1024px, 2 ≥640px, 1 below) — each card is ONE `<a>` (whole card clickable, visible focus ring), image `loading="lazy"` with width/height + `srcset` 640/1280, domain label in accent, title, summary, 3–4 tag chips. Click → `track('project_open', { project: id })`.
 
-- [ ] **Step 1:** Capture screenshots: `scripts/capture-projects.mjs` with Playwright (`npx playwright@latest` one-off is fine) at 1280×800 viewport, then convert to webp 1280 and 640 wide (≤ 90 kB each; any converter). Commit the images.
-- [ ] **Step 2: Failing tests:** data — 8 items, ids/urls/order exactly as above, every image file exists (Karma can't read fs → put this assertion in a `node --test scripts/projects-data.test.mjs` that imports the ids from a small JSON mirror or parses the TS file with a regex). component — renders 8 links with `href` = urls, `target="_blank"`, `rel` includes `noopener`; click tracks event.
-- [ ] **Step 3:** Implement → PASS. Commit `✨ Showcase the 8 live projects`.
+- [x] **Step 1:** Capture screenshots: `scripts/capture-projects.mjs` with Playwright (`npx playwright@latest` one-off is fine) at 1280×800 viewport, then convert to webp 1280 and 640 wide (≤ 90 kB each; any converter). Commit the images.
+- [x] **Step 2: Failing tests:** data — 8 items, ids/urls/order exactly as above, every image file exists (Karma can't read fs → put this assertion in a `node --test scripts/projects-data.test.mjs` that imports the ids from a small JSON mirror or parses the TS file with a regex). component — renders 8 links with `href` = urls, `target="_blank"`, `rel` includes `noopener`; click tracks event.
+- [x] **Step 3:** Implement → PASS. Commit `✨ Showcase the 8 live projects`.
 
 ### Task 5: Verde section
 
@@ -98,7 +98,7 @@ Layout (Antracita): section header "Proyectos" + "8 en producción"; first proje
 
 Content: light (mint) block inside the dark page (inverse in light theme: anthracite block), label "Mi framework", H2 "Verde", text "Vault-Driven Development: un framework para desarrollar aplicaciones con agentes de IA, con roles fijos, memoria fuera del chat y nada integrado sin evidencia." (EN equivalent), CTA "Conocer Verde ↗" → https://verde.fjbatresv.com (`track('verde_open')`), and the five steps V·E·R·D·E = Vault, Encargo, Revisión, Decisión, Evidencia (EN: Vault, Brief, Review, Decision, Evidence) as an ordered list.
 
-- [ ] Test (renders 5 `li`, CTA href, event) → implement → commit `✨ Feature the Verde framework`.
+- [x] Test (renders 5 `li`, CTA href, event) → implement → commit `✨ Feature the Verde framework`.
 
 ### Task 6: Experience section (timeline + achievements + stack)
 
@@ -106,7 +106,7 @@ Content: light (mint) block inside the dark page (inverse in light theme: anthra
 
 Content: timeline from current data (Banco G&T Continental 2025–present; Halo Media 2023–2025; Truelogic 2022–2023; Yalutec 2021–2022; PayPal 2020–2021; Early journey 2013–2020) with role + 2 bullets each (reuse existing keys, trim to 2). Under the relevant roles add achievements: Journey to Cloud (G&T), Mercer VIP (Halo), Hecho Capriccio, Ascend/Novuskills (early) — reuse `projects.*` copy from the old en/es.json. A "Stack" row of chips: AWS, Azure, NestJS, Angular, Node.js, TypeScript, Python, Nx, DynamoDB, MongoDB, PostgreSQL/MySQL, Redis, GitHub Actions, SonarQube, Observability. Sector line from the brand manual: banca, eventos a gran escala, identidad digital, mensajería transaccional, apps móviles, blockchain, pasarelas de pago, telecom, investigación médica. Ends with a "Busco contratar" CTA → `mailto:` with hire subject (`track('contact_email', { path: 'hire' })`).
 
-- [ ] Tests (6 entries in order, achievements present, mailto subject per locale) → implement → commit `✨ Rework experience with achievements and stack`.
+- [x] Tests (6 entries in order, achievements present, mailto subject per locale) → implement → commit `✨ Rework experience with achievements and stack`.
 
 ### Task 7: How I work + Contact
 
@@ -115,7 +115,7 @@ Content: timeline from current data (Banco G&T Continental 2025–present; Halo 
 How I work (project path): three engagement cards — Arquitectura y revisión técnica; MVP / producto de punta a punta; Migración y DevOps a la nube — each 1 line; plus a 4-step process (Llamada de 30 min → Propuesta → Entrega iterativa → Traspaso documentado). CTA "Agendar llamada ↗" → booking URL (`track('contact_calendar')`).
 Contact: H2 "Hablemos", three actions: email (project subject), LinkedIn, booking; GitHub as tertiary link. Footer: logo, © year, links, "Construido con Angular" (keep).
 
-- [ ] Tests (hrefs exact, events) → implement → commit `✨ Add how-I-work and contact sections`.
+- [x] Tests (hrefs exact, events) → implement → commit `✨ Add how-I-work and contact sections`.
 
 ### Task 8: SEO, structured data, OG image, CSP fonts
 
@@ -126,12 +126,12 @@ Contact: H2 "Hablemos", three actions: email (project subject), LinkedIn, bookin
 - `check-seo.mjs` asserts on `browser/index.html` and `browser/es/index.html`: one `<h1>`; `<title>`, meta description, canonical, 3 hreflang links, `og:image` absolute URL, `og:locale`, `twitter:card`, valid JSON parse of the ld+json with `@type` ProfilePage; `es/index.html` contains no `"hero.`/`"projects.` raw keys and has `lang="es"`.
 - CSP (`security-headers.js`): remove `https://fonts.googleapis.com` and `https://fonts.gstatic.com`; `font-src 'self'`; keep Report-Only; update the test.
 
-- [ ] Tests → implement → `npm run build` (check-seo green) → commit `🔍️ Add structured data, localized meta, OG images and self-hosted font CSP`.
+- [x] Tests → implement → `npm run build` (check-seo green) → commit `🔍️ Add structured data, localized meta, OG images and self-hosted font CSP`.
 
 ### Task 9: Polish, a11y, verification, PR
 
-- [ ] Skip link "Saltar al contenido", visible focus rings (2px turquoise outline, offset 3px) in both themes, `prefers-reduced-motion` respected, touch targets ≥ 44px, 375/768/1024/1440 widths without horizontal scroll.
-- [ ] `npm run lint && npm run test:coverage && npm run test:infra && npm run build` green.
-- [ ] Lighthouse (mobile) on `npx http-server dist/javier-batres-site/browser` for `/` and `/es/` — paste scores.
-- [ ] Screenshots: dark+light × EN+ES × 390/1440 in the PR.
-- [ ] PR `✨ Phase 2: redesign` with: summary, copy-review checklist for Javier (every new EN/ES string grouped by section), Lighthouse, screenshots, follow-ups (designer SVG/dark logo swap; CSP enforce ~2026-12-03; apply `infra/apply.sh` after merge for the redirects + CSP font change), end with "Implemented by Codex, planned and reviewed by Claude Code."
+- [x] Skip link "Saltar al contenido", visible focus rings (2px turquoise outline, offset 3px) in both themes, `prefers-reduced-motion` respected, touch targets ≥ 44px, 375/768/1024/1440 widths without horizontal scroll.
+- [x] `npm run lint && npm run test:coverage && npm run test:infra && npm run build` green.
+- [x] Lighthouse (mobile) on `npx http-server dist/javier-batres-site/browser` for `/` and `/es/` — scores recorded in PR (performance below target).
+- [x] Screenshots: dark+light × EN+ES × 390/1440 in the PR.
+- [x] PR `✨ Phase 2: redesign` with: summary, copy-review checklist for Javier (every new EN/ES string grouped by section), Lighthouse, screenshots, follow-ups (designer SVG/dark logo swap; CSP enforce ~2026-12-03; apply `infra/apply.sh` after merge for the redirects + CSP font change), end with "Implemented by Codex, planned and reviewed by Claude Code."

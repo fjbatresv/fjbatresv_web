@@ -9,13 +9,16 @@ import { isPlatformBrowser } from '@angular/common';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideTranslateLoader, provideTranslateService } from '@ngx-translate/core';
-import * as Sentry from '@sentry/browser';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 import { JsonImportTranslateLoader } from './core/i18n/json-import-translate-loader';
 
-export const sentryErrorClient = { captureException: Sentry.captureException.bind(Sentry) };
+export const sentryErrorClient = {
+  captureException: (error: unknown): void => {
+    void import('@sentry/browser').then((Sentry) => Sentry.captureException(error));
+  },
+};
 
 export class SentryErrorHandler implements ErrorHandler {
   handleError(error: unknown): void {
@@ -24,9 +27,10 @@ export class SentryErrorHandler implements ErrorHandler {
   }
 }
 
-export function initializeSentry(): void {
+export async function initializeSentry(): Promise<void> {
   if (!isPlatformBrowser(inject(PLATFORM_ID)) || !environment.sentryDsn) return;
   /* istanbul ignore next -- Sentry init depends on browser environment configuration */
+  const Sentry = await import('@sentry/browser');
   Sentry.init({
     dsn: environment.sentryDsn,
     integrations: [

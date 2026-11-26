@@ -72,10 +72,24 @@ describe('NavbarComponent', () => {
     expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/#projects');
   });
 
+  it('changes locale from the page root without a hash', () => {
+    routerMock.url = '/es/';
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.setLanguage('en');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/');
+  });
+
   it('toggles menu state', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.isMenuOpen = false;
     component.toggleMenu();
     expect(component.isMenuOpen).toBeTrue();
+  });
+
+  it('closes the mobile menu after choosing a section', () => {
+    const component = TestBed.createComponent(NavbarComponent).componentInstance;
+    component.isMenuOpen = true;
+    component.closeMenu();
+    expect(component.isMenuOpen).toBeFalse();
   });
 });

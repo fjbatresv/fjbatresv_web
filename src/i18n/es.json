@@ -8,6 +8,7 @@
     "contact": "Contacto",
     "theme": "Cambiar tema"
   },
+  "a11y": { "skip": "Saltar al contenido" },
   "hero": {
     "status": "Disponible para proyectos y rol fijo · Guatemala, remoto",
     "title": "Dureza técnica,",

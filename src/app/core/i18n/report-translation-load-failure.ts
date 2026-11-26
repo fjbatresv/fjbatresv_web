@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/browser';
-
 export const runtimeContext = {
   hasKarma: (): boolean =>
     Boolean((globalThis as typeof globalThis & { __karma__?: unknown }).__karma__),
@@ -13,7 +11,11 @@ const isTestRun = (): boolean =>
   runtimeContext.hasJasmine() ||
   runtimeContext.pathname().includes('context.html');
 
-export const sentryClient = { captureMessage: Sentry.captureMessage.bind(Sentry) };
+export const sentryClient = {
+  captureMessage: (...args: Parameters<typeof import('@sentry/browser').captureMessage>): void => {
+    void import('@sentry/browser').then((Sentry) => Sentry.captureMessage(...args));
+  },
+};
 
 export function reportTranslationLoadFailure(
   lang: string,
