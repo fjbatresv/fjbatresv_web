@@ -18,6 +18,18 @@
     "cta": {
       "project": "Tengo un proyecto",
       "hire": "Busco contratar"
+    },
+    "paths": {
+      "project": {
+        "label": "Para clientes",
+        "title": "Tengo un proyecto →",
+        "description": "MVPs, migraciones cloud y revisiones de arquitectura. Agenda 30 minutos."
+      },
+      "hire": {
+        "label": "Para empresas",
+        "title": "Busco contratar →",
+        "description": "Arquitectura o liderazgo técnico, rol fijo y remoto. Revisa mi experiencia."
+      }
     }
   },
   "experience": {

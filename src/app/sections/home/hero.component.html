@@ -8,18 +8,24 @@
       </h1>
       <p class="hero__role">{{ 'hero.role' | translate }}</p>
       <p class="lead">{{ 'hero.summary' | translate }}</p>
-      <div class="hero__actions">
-        <a class="button" href="#how-i-work" (click)="track('cta_project')"
-          >{{ 'hero.cta.project' | translate }} <span aria-hidden="true">→</span></a
-        >
-        <a class="button alt" href="#experience" (click)="track('cta_hire')"
-          >{{ 'hero.cta.hire' | translate }} <span aria-hidden="true">→</span></a
-        >
+      <div class="hero__paths">
+        <a class="hero__path hero__path--project" href="#how-i-work" (click)="track('cta_project')">
+          <span class="hero__path-label">{{ 'hero.paths.project.label' | translate }}</span>
+          <strong>{{ 'hero.paths.project.title' | translate }}</strong>
+          <span>{{ 'hero.paths.project.description' | translate }}</span>
+        </a>
+        <a class="hero__path hero__path--hire" href="#experience" (click)="track('cta_hire')">
+          <span class="hero__path-label">{{ 'hero.paths.hire.label' | translate }}</span>
+          <strong>{{ 'hero.paths.hire.title' | translate }}</strong>
+          <span>{{ 'hero.paths.hire.description' | translate }}</span>
+        </a>
       </div>
     </div>
     <img
       class="hero__photo"
       src="/assets/face.webp"
+      srcset="/assets/face-240.webp 240w, /assets/face-360.webp 360w"
+      sizes="(max-width: 767px) 120px, 300px"
       width="300"
       height="300"
       alt="Javier Batres"

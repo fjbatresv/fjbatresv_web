@@ -18,6 +18,18 @@
     "cta": {
       "project": "I have a project",
       "hire": "I’m hiring"
+    },
+    "paths": {
+      "project": {
+        "label": "For clients",
+        "title": "I have a project →",
+        "description": "MVPs, cloud migrations, and architecture reviews. Book 30 minutes."
+      },
+      "hire": {
+        "label": "For companies",
+        "title": "I’m hiring →",
+        "description": "Architecture or technical leadership, full-time and remote. Review my experience."
+      }
     }
   },
   "experience": {
