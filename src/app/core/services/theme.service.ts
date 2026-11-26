@@ -29,8 +29,7 @@ export class ThemeService {
       return stored;
     }
 
-    const prefersDark = this.win?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
-    return prefersDark ? 'dark' : 'light';
+    return 'dark';
   }
 
   private applyThemeClass(): void {
