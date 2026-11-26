@@ -1,24 +1,38 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'parse5';
 
 const root = 'dist/javier-batres-site/browser';
 
 export function findInlineIssue(html) {
-  const scripts = html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi);
-  for (const match of scripts) {
-    const attributes = match[1];
-    if (/(?:^|\s)src(?:\s|=|$)/i.test(attributes)) continue;
+  const document = parse(html);
+  const nodes = [...(document.childNodes ?? [])];
 
-    const type = attributes.match(/(?:^|\s)type\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
-    const value = type?.[1] ?? type?.[2] ?? type?.[3];
-    if (value !== 'application/json' && value !== 'application/ld+json') {
-      return { snippet: match[0].slice(0, 180) };
+  while (nodes.length) {
+    const node = nodes.pop();
+    if (!node) continue;
+
+    const attributes = node.attrs ?? [];
+    if (attributes.some(({ name }) => /^on[a-z]+$/i.test(name))) {
+      return { snippet: `<${node.tagName ?? 'element'}>` };
     }
+
+    if (node.tagName === 'script') {
+      const hasSrc = attributes.some(({ name }) => name === 'src');
+      const type = attributes
+        .find(({ name }) => name === 'type')
+        ?.value.trim()
+        .toLowerCase();
+      if (!hasSrc && type !== 'application/json' && type !== 'application/ld+json') {
+        return { snippet: '<script>' };
+      }
+    }
+
+    nodes.push(...(node.childNodes ?? []), ...(node.content?.childNodes ?? []));
   }
 
-  const inlineHandler = html.match(/\son[a-z]+\s*=/i);
-  return inlineHandler ? { snippet: inlineHandler[0] } : null;
+  return null;
 }
 
 async function collectHtml(directory, htmlFiles) {
