@@ -1,37 +1,22 @@
 {
   "nav": {
     "home": "Home",
-    "about": "About",
     "career": "Career",
-    "toolkit": "Toolkit",
     "highlights": "Highlights",
-    "notes": "Notes",
+    "verde": "Verde",
+    "how": "How I work",
     "contact": "Contact",
     "theme": "Toggle theme"
   },
   "hero": {
-    "tagline": "Cloud architecture, code, and coffee",
-    "subtitle": "Solutions Architect · Senior Full Stack Engineer · Tech Lead",
-    "summary": "Javier designs and ships scalable software for enterprises—cloud-first architectures, reliable backends, and frontends that feel effortless.",
+    "status": "Available for projects and full-time roles · Guatemala, remote",
+    "title": "Technical rigor,",
+    "titleAccent": "human warmth.",
+    "role": "Solutions Architect · Senior Full Stack Engineer",
+    "summary": "12 years building software across banking, payment platforms, digital identity, and healthcare.",
     "cta": {
-      "experience": "View experience",
-      "projects": "View projects"
-    },
-    "badges": {
-      "cloud": "Cloud & DevOps",
-      "fullstack": "NestJS & Angular",
-      "cloudmix": "AWS / Azure",
-      "quality": "CI/CD & Observability"
-    },
-    "cards": {
-      "cloud": {
-        "title": "Architecture",
-        "desc": "Event-driven flows, high-availability patterns, and governance tuned for banking and healthtech."
-      },
-      "coffee": {
-        "title": "Coffee & Curiosity",
-        "desc": "Espresso tinkerer, gamer, and researcher. Often paired with Gaia, the family Newfoundland."
-      }
+      "project": "I have a project",
+      "hire": "I’m hiring"
     }
   },
   "about": {

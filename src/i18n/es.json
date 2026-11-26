@@ -1,37 +1,22 @@
 {
   "nav": {
     "home": "Inicio",
-    "about": "Sobre mí",
     "career": "Carrera",
-    "toolkit": "Toolkit",
     "highlights": "Destacados",
-    "notes": "Notas",
+    "verde": "Verde",
+    "how": "Cómo trabajo",
     "contact": "Contacto",
     "theme": "Cambiar tema"
   },
   "hero": {
-    "tagline": "Arquitectura en la nube, código y café",
-    "subtitle": "Arquitecto de Soluciones · Sr Full Stack Engineer · Tech Lead",
-    "summary": "Javier diseña y entrega software escalable para empresas: arquitecturas cloud-first, backends confiables y frontends que se sienten fluidos.",
+    "status": "Disponible para proyectos y rol fijo · Guatemala, remoto",
+    "title": "Dureza técnica,",
+    "titleAccent": "suavidad humana.",
+    "role": "Arquitecto de Soluciones · Senior Full Stack Engineer",
+    "summary": "12 años creando software para banca, pasarelas de pago, identidad digital y salud.",
     "cta": {
-      "experience": "Ver experiencia",
-      "projects": "Ver proyectos"
-    },
-    "badges": {
-      "cloud": "Cloud y DevOps",
-      "fullstack": "NestJS y Angular",
-      "cloudmix": "AWS / Azure",
-      "quality": "CI/CD y Observabilidad"
-    },
-    "cards": {
-      "cloud": {
-        "title": "Arquitectura",
-        "desc": "Flujos event-driven, alta disponibilidad y gobierno para banca y healthtech."
-      },
-      "coffee": {
-        "title": "Café y curiosidad",
-        "desc": "Barista aficionado, gamer e investigador. Siempre acompañado de Gaia, la Newfoundland de la familia."
-      }
+      "project": "Tengo un proyecto",
+      "hire": "Busco contratar"
     }
   },
   "about": {
