@@ -74,6 +74,11 @@ describe('analytics consent script', () => {
     document.cookie = '_ga=test; path=/';
     await runConsentScript();
     document.getElementById('cookie-consent-accept')?.click();
+    const stub = document.createElement('script');
+    stub.type = 'text/plain';
+    stub.src = 'https://www.googletagmanager.com/gtag/js?id=G-MSCC45EHNV';
+    document.body.appendChild(stub);
+    expect(document.querySelector('script[src*="googletagmanager.com/gtag/js"]')).toBe(stub);
     document.getElementById('cookie-consent-reject')?.click();
     expect(document.cookie).toContain('analytics_consent=rejected');
     expect(document.cookie).not.toContain('_ga=test');
