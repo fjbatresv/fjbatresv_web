@@ -1,5 +1,5 @@
 import { PLATFORM_ID } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { DeferErrorComponent } from './defer-error.component';
 
 describe('DeferErrorComponent', () => {
@@ -13,37 +13,35 @@ describe('DeferErrorComponent', () => {
 
   beforeEach(() => {
     sessionStorage.clear();
-    jasmine.clock().install();
   });
 
   afterEach(() => {
     sessionStorage.clear();
-    jasmine.clock().uninstall();
     TestBed.resetTestingModule();
     delete (globalThis as typeof globalThis & { __deferReloaded?: boolean }).__deferReloaded;
   });
 
-  it('reports and reloads once for a section', () => {
+  it('reports and reloads once for a section', fakeAsync(() => {
     const component = create();
     component.section = 'projects';
     const reload = spyOn(component as unknown as { reload: () => void }, 'reload');
     component.ngOnInit();
 
     expect(sessionStorage.getItem('defer-reload:projects')).toBe('1');
-    jasmine.clock().tick(50);
+    tick(50);
     expect(reload).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it('does not reload repeatedly after a prior attempt', () => {
+  it('does not reload repeatedly after a prior attempt', fakeAsync(() => {
     sessionStorage.setItem('defer-reload:unknown', '1');
     const component = create();
     const reload = spyOn(component as unknown as { reload: () => void }, 'reload');
     component.ngOnInit();
-    jasmine.clock().tick(50);
+    tick(50);
     expect(reload).not.toHaveBeenCalled();
-  });
+  }));
 
-  it('uses the in-memory guard when session storage throws', () => {
+  it('uses the in-memory guard when session storage throws', fakeAsync(() => {
     spyOn(Storage.prototype, 'getItem').and.throwError('blocked');
     const component = create();
     const reload = spyOn(component as unknown as { reload: () => void }, 'reload');
@@ -51,9 +49,9 @@ describe('DeferErrorComponent', () => {
     expect(
       (globalThis as typeof globalThis & { __deferReloaded?: boolean }).__deferReloaded
     ).toBeTrue();
-    jasmine.clock().tick(50);
+    tick(50);
     expect(reload).toHaveBeenCalledTimes(1);
-  });
+  }));
 
   it('does not access browser APIs while rendering on the server', () => {
     const storage = spyOn(Storage.prototype, 'getItem');

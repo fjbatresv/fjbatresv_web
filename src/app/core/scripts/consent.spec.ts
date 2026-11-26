@@ -20,11 +20,28 @@ function makeConsentBanner(): void {
 }
 
 describe('analytics consent script', () => {
+  let analyticsScript: HTMLScriptElement | undefined;
+  let gtagDescriptor: PropertyDescriptor | undefined;
+  let dataLayerDescriptor: PropertyDescriptor | undefined;
+
   beforeEach(() => {
+    analyticsScript = undefined;
+    gtagDescriptor = Object.getOwnPropertyDescriptor(window, 'gtag');
+    dataLayerDescriptor = Object.getOwnPropertyDescriptor(window, 'dataLayer');
     document.cookie = 'analytics_consent=; Max-Age=0; path=/';
     document.cookie = '_ga=; Max-Age=0; path=/';
     document.documentElement.lang = 'en';
     makeConsentBanner();
+
+    const appendChild = document.head.appendChild.bind(document.head);
+    spyOn(document.head, 'appendChild').and.callFake(<T extends Node>(node: T): T => {
+      const script = node as unknown as HTMLScriptElement;
+      if (node.nodeName === 'SCRIPT' && script.src.includes('googletagmanager.com')) {
+        analyticsScript = script;
+        return node;
+      }
+      return appendChild(node) as T;
+    });
   });
 
   afterEach(() => {
@@ -34,6 +51,10 @@ describe('analytics consent script', () => {
       .forEach((script) => script.remove());
     document.cookie = 'analytics_consent=; Max-Age=0; path=/';
     document.cookie = '_ga=; Max-Age=0; path=/';
+    if (gtagDescriptor) Object.defineProperty(window, 'gtag', gtagDescriptor);
+    else delete (window as Window & { gtag?: unknown }).gtag;
+    if (dataLayerDescriptor) Object.defineProperty(window, 'dataLayer', dataLayerDescriptor);
+    else delete (window as Window & { dataLayer?: unknown }).dataLayer;
   });
 
   it('shows the banner when consent is missing', async () => {
@@ -45,9 +66,8 @@ describe('analytics consent script', () => {
     await runConsentScript();
     document.getElementById('cookie-consent-accept')?.click();
     expect(document.cookie).toContain('analytics_consent=accepted');
-    expect(
-      document.querySelector('script[src*="googletagmanager.com/gtag/js?id=G-MSCC45EHNV"]')
-    ).toBeTruthy();
+    expect(analyticsScript?.src).toBe('https://www.googletagmanager.com/gtag/js?id=G-MSCC45EHNV');
+    expect(document.head.contains(analyticsScript!)).toBeFalse();
   });
 
   it('clears analytics cookies and the script on rejection', async () => {

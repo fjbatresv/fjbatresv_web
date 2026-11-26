@@ -11,7 +11,7 @@ module.exports = function (config) {
       require('karma-coverage')
     ],
     client: {
-      jasmine: {},
+      jasmine: { random: true, seed: process.env.JASMINE_SEED },
       clearContext: false
     },
     coverageReporter: {
