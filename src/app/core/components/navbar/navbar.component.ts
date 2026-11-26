@@ -17,23 +17,24 @@ import { Lang, localizedPath } from '../../i18n/lang';
 })
 export class NavbarComponent {
   navItems = [
-    { labelKey: 'nav.home', section: 'home' },
-    { labelKey: 'nav.about', section: 'about' },
-    { labelKey: 'nav.career', section: 'experience' },
-    { labelKey: 'nav.toolkit', section: 'skills' },
+    { labelKey: 'nav.home', section: 'top' },
     { labelKey: 'nav.highlights', section: 'projects' },
-    { labelKey: 'nav.notes', section: 'writing' },
+    { labelKey: 'nav.verde', section: 'verde' },
+    { labelKey: 'nav.career', section: 'experience' },
+    { labelKey: 'nav.how', section: 'how-i-work' },
     { labelKey: 'nav.contact', section: 'contact' },
   ];
 
-  logoUrl = 'assets/logo.webp';
+  logoUrl = '/brand/jb-isotipo-96.webp';
   isMenuOpen = false;
   private readonly router = inject(Router);
   private readonly themeService = inject(ThemeService);
   private readonly translationService = inject(TranslationService);
 
   navigate(section: string): void {
-    void this.router.navigateByUrl(localizedPath(section, this.currentLanguage));
+    void this.router.navigateByUrl(
+      localizedPath(this.currentLanguage, section === 'home' ? 'top' : section)
+    );
     this.isMenuOpen = false;
   }
 
@@ -42,7 +43,7 @@ export class NavbarComponent {
   }
 
   setLanguage(lang: Lang): void {
-    void this.router.navigateByUrl(localizedPath(this.currentSection, lang));
+    void this.router.navigateByUrl(localizedPath(lang, this.router.url.split('#')[1] || ''));
   }
 
   get currentTheme(): 'light' | 'dark' {
@@ -51,14 +52,6 @@ export class NavbarComponent {
 
   get currentLanguage(): Lang {
     return this.translationService.language || 'en';
-  }
-
-  private get currentSection(): string {
-    const path = this.router.url
-      .split(/[?#]/, 1)[0]
-      .replace(/^\/es(?=\/|$)/, '')
-      .replace(/^\//, '');
-    return this.navItems.some((item) => item.section === path) ? path : 'home';
   }
 
   toggleMenu(): void {

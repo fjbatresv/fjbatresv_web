@@ -7,7 +7,7 @@ import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
 
 describe('NavbarComponent', () => {
-  const routerMock = { url: '/es/projects', navigateByUrl: jasmine.createSpy('navigateByUrl') };
+  const routerMock = { url: '/es/#projects', navigateByUrl: jasmine.createSpy('navigateByUrl') };
   const themeServiceMock = {
     theme: 'light' as 'light' | 'dark',
     toggleTheme: jasmine.createSpy('toggleTheme'),
@@ -30,7 +30,7 @@ describe('NavbarComponent', () => {
     routerMock.navigateByUrl.calls.reset();
     themeServiceMock.toggleTheme.calls.reset();
     translationServiceMock.setLanguage.calls.reset();
-    routerMock.url = '/es/projects';
+    routerMock.url = '/es/#projects';
     translationServiceMock.language = 'es';
   });
 
@@ -39,16 +39,16 @@ describe('NavbarComponent', () => {
     const component = fixture.componentInstance;
     component.isMenuOpen = true;
 
-    component.navigate('about');
+    component.navigate('projects');
 
-    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/about');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/#projects');
     expect(component.isMenuOpen).toBeFalse();
   });
 
   it('navigates to home root path', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.navigate('home');
-    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/#top');
   });
 
   it('toggles theme and exposes current theme/lang', () => {
@@ -69,7 +69,7 @@ describe('NavbarComponent', () => {
   it('changes locale while keeping the current section', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.setLanguage('en');
-    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/projects');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/#projects');
   });
 
   it('toggles menu state', () => {
