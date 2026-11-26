@@ -1,39 +1,36 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { NavbarComponent } from './navbar.component';
 import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
 
 describe('NavbarComponent', () => {
-  const routerMock = { navigate: jasmine.createSpy('navigate') };
+  const routerMock = { url: '/es/projects', navigateByUrl: jasmine.createSpy('navigateByUrl') };
   const themeServiceMock = {
     theme: 'light' as 'light' | 'dark',
     toggleTheme: jasmine.createSpy('toggleTheme'),
   };
   const translationServiceMock = {
     language: 'es' as 'en' | 'es' | undefined,
-    setLanguage: jasmine.createSpy('setLanguage').and.callFake((lang: 'en' | 'es') => {
-      translationServiceMock.language = lang;
-    }),
+    setLanguage: jasmine.createSpy('setLanguage'),
   };
-  const translateServiceMock = { currentLang: 'es' };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NavbarComponent],
       providers: [
+        provideTranslateService(),
         { provide: Router, useValue: routerMock },
         { provide: ThemeService, useValue: themeServiceMock },
         { provide: TranslationService, useValue: translationServiceMock },
-        { provide: TranslateService, useValue: translateServiceMock },
       ],
     }).compileComponents();
-    routerMock.navigate.calls.reset();
+    routerMock.navigateByUrl.calls.reset();
     themeServiceMock.toggleTheme.calls.reset();
     translationServiceMock.setLanguage.calls.reset();
-    translateServiceMock.currentLang = 'es';
+    routerMock.url = '/es/projects';
     translationServiceMock.language = 'es';
   });
 
@@ -44,14 +41,14 @@ describe('NavbarComponent', () => {
 
     component.navigate('about');
 
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/about']);
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es/about');
     expect(component.isMenuOpen).toBeFalse();
   });
 
   it('navigates to home root path', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.navigate('home');
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/']);
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/es');
   });
 
   it('toggles theme and exposes current theme/lang', () => {
@@ -69,10 +66,10 @@ describe('NavbarComponent', () => {
     expect(component.currentLanguage).toBe('en');
   });
 
-  it('sets language through translation service', () => {
+  it('changes locale while keeping the current section', () => {
     const component = TestBed.createComponent(NavbarComponent).componentInstance;
     component.setLanguage('en');
-    expect(translationServiceMock.setLanguage).toHaveBeenCalledWith('en');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/projects');
   });
 
   it('toggles menu state', () => {

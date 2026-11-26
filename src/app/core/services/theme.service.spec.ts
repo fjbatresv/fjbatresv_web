@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 import { ThemeService } from './theme.service';
 
@@ -31,15 +32,18 @@ describe('ThemeService', () => {
     removeListener() {},
   });
 
-  const configureWithMatchMedia = (matches: boolean) => {
+  const configureWithMatchMedia = (
+    matches: boolean,
+    platformId: 'browser' | 'server' = 'browser'
+  ) => {
     TestBed.resetTestingModule();
     spyOn(globalThis as any, 'matchMedia').and.returnValue(mockMql(matches) as any);
-    localStorage.removeItem('fj-theme');
     TestBed.configureTestingModule({
       providers: [
         ThemeService,
         { provide: DOCUMENT, useValue: docMock },
         { provide: Window, useValue: globalThis },
+        { provide: PLATFORM_ID, useValue: platformId },
       ],
     });
     service = TestBed.inject(ThemeService);
@@ -89,6 +93,12 @@ describe('ThemeService', () => {
     expect(service.theme).toBe('dark');
   });
 
+  it('uses a stored theme before the system preference', () => {
+    localStorage.setItem('fj-theme', 'dark');
+    configureWithMatchMedia(false);
+    expect(service.theme).toBe('dark');
+  });
+
   it('handles storage access errors gracefully', () => {
     configureWithMatchMedia(false);
     const localStorageSpy = spyOnProperty(globalThis as any, 'localStorage', 'get').and.throwError(
@@ -97,6 +107,18 @@ describe('ThemeService', () => {
     try {
       service.toggleTheme();
       expect(service.theme).toBeDefined();
+    } finally {
+      localStorageSpy.and.callFake(() => originalLocalStorage);
+    }
+  });
+
+  it('uses the system preference when browser storage is unavailable', () => {
+    const localStorageSpy = spyOnProperty(globalThis as any, 'localStorage', 'get').and.returnValue(
+      null
+    );
+    try {
+      configureWithMatchMedia(true);
+      expect(service.theme).toBe('dark');
     } finally {
       localStorageSpy.and.callFake(() => originalLocalStorage);
     }
@@ -119,5 +141,23 @@ describe('ThemeService', () => {
     } finally {
       (globalThis as any).matchMedia = originalMatchMedia;
     }
+  });
+
+  it('does not access browser storage or matchMedia on the server', () => {
+    TestBed.resetTestingModule();
+    const storage = spyOnProperty(globalThis as any, 'localStorage', 'get');
+    const matchMedia = spyOn(globalThis as any, 'matchMedia');
+    TestBed.configureTestingModule({
+      providers: [
+        ThemeService,
+        { provide: DOCUMENT, useValue: docMock },
+        { provide: Window, useValue: globalThis },
+        { provide: PLATFORM_ID, useValue: 'server' },
+      ],
+    });
+    service = TestBed.inject(ThemeService);
+    expect(service.theme).toBe('light');
+    expect(storage).not.toHaveBeenCalled();
+    expect(matchMedia).not.toHaveBeenCalled();
   });
 });

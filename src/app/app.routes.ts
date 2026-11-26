@@ -1,47 +1,47 @@
 import { Routes } from '@angular/router';
 
+const sections = [
+  'home',
+  'about',
+  'experience',
+  'skills',
+  'projects',
+  'writing',
+  'contact',
+] as const;
+
+function routePath(section: (typeof sections)[number], lang: 'en' | 'es'): string {
+  if (lang === 'es') {
+    if (section === 'home') {
+      return 'es';
+    }
+    return `es/${section}`;
+  }
+  if (section === 'home') {
+    return '';
+  }
+  return section;
+}
+
 export const routes: Routes = [
+  ...(['en', 'es'] as const).flatMap((lang) =>
+    sections.map((section) => ({
+      path: routePath(section, lang),
+      loadComponent: () =>
+        import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
+      data: { section, lang },
+    }))
+  ),
   {
-    path: '',
+    path: '404',
     loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'home' },
+      import('./sections/not-found/not-found.component').then((m) => m.NotFoundComponent),
+    data: { lang: 'en' },
   },
   {
-    path: 'about',
+    path: '**',
     loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'about' },
+      import('./sections/not-found/not-found.component').then((m) => m.NotFoundComponent),
+    data: { lang: 'en' },
   },
-  {
-    path: 'experience',
-    loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'experience' },
-  },
-  {
-    path: 'skills',
-    loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'skills' },
-  },
-  {
-    path: 'projects',
-    loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'projects' },
-  },
-  {
-    path: 'writing',
-    loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'writing' },
-  },
-  {
-    path: 'contact',
-    loadComponent: () =>
-      import('./sections/home/home-page.component').then((m) => m.HomePageComponent),
-    data: { section: 'contact' },
-  },
-  { path: '**', redirectTo: '' },
 ];

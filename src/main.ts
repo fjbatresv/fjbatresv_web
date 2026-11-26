@@ -32,5 +32,5 @@ const isKarma =
 /* istanbul ignore next -- guard only relevant in test runner */
 if (!isKarma) {
   /* istanbul ignore next -- actual bootstrap only matters outside test */
-  void bootstrapApp();
+  void bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
 }

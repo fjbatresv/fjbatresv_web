@@ -6,6 +6,7 @@
 - [ ] `npm run lint`
 - [ ] `npm run test -- --watch=false --browsers=ChromeHeadless --port=9877`
 - [ ] `npm run build`
+- [ ] `npm run test:infra`
 
 ## Notes
 - Mention any follow-ups, risks, or dependencies.

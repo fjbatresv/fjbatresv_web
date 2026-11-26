@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 interface ExperienceItem {
   readonly company: string;
@@ -12,7 +12,7 @@ interface ExperienceItem {
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

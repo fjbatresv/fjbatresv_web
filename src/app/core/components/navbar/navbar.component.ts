@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { ThemeService } from '../../services/theme.service';
 import { TranslationService } from '../../services/translation.service';
+import { Lang, localizedPath } from '../../i18n/lang';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,10 +31,9 @@ export class NavbarComponent {
   private readonly router = inject(Router);
   private readonly themeService = inject(ThemeService);
   private readonly translationService = inject(TranslationService);
-  private readonly translateService = inject(TranslateService);
 
   navigate(section: string): void {
-    this.router.navigate([section === 'home' ? '/' : `/${section}`]);
+    void this.router.navigateByUrl(localizedPath(section, this.currentLanguage));
     this.isMenuOpen = false;
   }
 
@@ -41,16 +41,24 @@ export class NavbarComponent {
     this.themeService.toggleTheme();
   }
 
-  setLanguage(lang: 'en' | 'es'): void {
-    this.translationService.setLanguage(lang);
+  setLanguage(lang: Lang): void {
+    void this.router.navigateByUrl(localizedPath(this.currentSection, lang));
   }
 
   get currentTheme(): 'light' | 'dark' {
     return this.themeService.theme;
   }
 
-  get currentLanguage(): string {
+  get currentLanguage(): Lang {
     return this.translationService.language || 'en';
+  }
+
+  private get currentSection(): string {
+    const path = this.router.url
+      .split(/[?#]/, 1)[0]
+      .replace(/^\/es(?=\/|$)/, '')
+      .replace(/^\//, '');
+    return this.navItems.some((item) => item.section === path) ? path : 'home';
   }
 
   toggleMenu(): void {

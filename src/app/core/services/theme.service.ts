@@ -1,14 +1,14 @@
-import { DOCUMENT } from '@angular/common';
-import { Injectable, inject } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly storageKey = 'fj-theme';
   private readonly document = inject(DOCUMENT);
-  private readonly win: Window | undefined =
-    typeof globalThis !== 'undefined' && 'matchMedia' in globalThis
-      ? (globalThis as unknown as Window)
-      : undefined;
+  private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly win: Window | undefined = this.browser
+    ? (globalThis as unknown as Window)
+    : undefined;
   theme: 'light' | 'dark' = this.getInitialTheme();
 
   constructor() {
@@ -40,7 +40,7 @@ export class ThemeService {
 
   private getStorage(): Storage | null {
     try {
-      return this.win?.localStorage ?? null;
+      return this.browser ? (this.win?.localStorage ?? null) : null;
     } catch {
       return null;
     }

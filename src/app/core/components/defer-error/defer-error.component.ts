@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+  PLATFORM_ID,
+  inject,
+} from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import * as Sentry from '@sentry/browser';
 
 const reloadFlag = '__deferReloaded';
@@ -6,6 +14,7 @@ const reloadFlag = '__deferReloaded';
 @Component({
   selector: 'app-defer-error',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="skeleton-section">
       <div class="container skeleton-card"></div>
@@ -14,17 +23,16 @@ const reloadFlag = '__deferReloaded';
 })
 export class DeferErrorComponent implements OnInit {
   @Input({ required: true }) section = '';
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly document = inject(DOCUMENT);
 
   ngOnInit(): void {
-    const path = typeof location === 'undefined' ? '' : location.pathname;
+    if (!this.isBrowser) return;
+    const path = location.pathname;
     Sentry.captureMessage('Defer block failed to load', {
       level: 'error',
       extra: { section: this.section || 'unknown', path },
     });
-
-    if (typeof location === 'undefined') {
-      return;
-    }
 
     const storageKey = `defer-reload:${this.section || 'unknown'}`;
     try {
@@ -34,7 +42,7 @@ export class DeferErrorComponent implements OnInit {
           return;
         }
         storage.setItem(storageKey, '1');
-        setTimeout(() => location.reload(), 50);
+        setTimeout(() => this.reload(), 50);
         return;
       }
     } catch {
@@ -44,7 +52,11 @@ export class DeferErrorComponent implements OnInit {
     const globalObj = globalThis as typeof globalThis & { [reloadFlag]?: boolean };
     if (!globalObj[reloadFlag]) {
       globalObj[reloadFlag] = true;
-      setTimeout(() => location.reload(), 50);
+      setTimeout(() => this.reload(), 50);
     }
+  }
+
+  protected reload(): void {
+    this.document.defaultView?.location.reload();
   }
 }

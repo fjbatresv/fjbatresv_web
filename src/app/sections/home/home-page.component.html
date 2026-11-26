@@ -1,85 +1,109 @@
 <app-hero></app-hero>
 
-@defer (on viewport) {
+@if (section === 'about') {
   <app-about></app-about>
-} @placeholder {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @loading {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @error {
-  <app-defer-error section="about"></app-defer-error>
+} @else {
+  @defer (on viewport) {
+    <app-about></app-about>
+  } @placeholder {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @loading {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @error {
+    <app-defer-error section="about"></app-defer-error>
+  }
 }
 
-@defer (on viewport) {
+@if (section === 'experience') {
   <app-experience></app-experience>
-} @placeholder {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @loading {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @error {
-  <app-defer-error section="experience"></app-defer-error>
+} @else {
+  @defer (on viewport) {
+    <app-experience></app-experience>
+  } @placeholder {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @loading {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @error {
+    <app-defer-error section="experience"></app-defer-error>
+  }
 }
 
-@defer (on viewport) {
+@if (section === 'skills') {
   <app-skills></app-skills>
-} @placeholder {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @loading {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @error {
-  <app-defer-error section="skills"></app-defer-error>
+} @else {
+  @defer (on viewport) {
+    <app-skills></app-skills>
+  } @placeholder {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @loading {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @error {
+    <app-defer-error section="skills"></app-defer-error>
+  }
 }
 
-@defer (on viewport) {
+@if (section === 'projects') {
   <app-projects></app-projects>
-} @placeholder {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @loading {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @error {
-  <app-defer-error section="projects"></app-defer-error>
+} @else {
+  @defer (on viewport) {
+    <app-projects></app-projects>
+  } @placeholder {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @loading {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @error {
+    <app-defer-error section="projects"></app-defer-error>
+  }
 }
 
-@defer (on viewport) {
+@if (section === 'writing') {
   <app-writing></app-writing>
-} @placeholder {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @loading {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @error {
-  <app-defer-error section="writing"></app-defer-error>
+} @else {
+  @defer (on viewport) {
+    <app-writing></app-writing>
+  } @placeholder {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @loading {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @error {
+    <app-defer-error section="writing"></app-defer-error>
+  }
 }
 
-@defer (on viewport) {
+@if (section === 'contact') {
   <app-contact></app-contact>
-} @placeholder {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @loading {
-  <section class="skeleton-section">
-    <div class="container skeleton-card"></div>
-  </section>
-} @error {
-  <app-defer-error section="contact"></app-defer-error>
+} @else {
+  @defer (on viewport) {
+    <app-contact></app-contact>
+  } @placeholder {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @loading {
+    <section class="skeleton-section">
+      <div class="container skeleton-card"></div>
+    </section>
+  } @error {
+    <app-defer-error section="contact"></app-defer-error>
+  }
 }

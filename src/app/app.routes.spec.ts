@@ -2,21 +2,20 @@ import { routes } from './app.routes';
 
 describe('App routes', () => {
   it('defines sections with data and lazy components', () => {
-    const expectedPaths = ['', 'about', 'experience', 'skills', 'projects', 'writing', 'contact'];
-    const sectionRoutes = routes.filter((route) => route.path !== '**');
-
-    expect(sectionRoutes.map((r) => r.path)).toEqual(expectedPaths);
-    const expectedSections = [
-      'home',
-      'about',
-      'experience',
-      'skills',
-      'projects',
-      'writing',
-      'contact',
-    ];
-    sectionRoutes.forEach((route, index) => {
-      expect(route.data?.['section']).toBe(expectedSections[index]);
+    const sectionRoutes = routes.filter((route) => route.data?.['section']);
+    expect(sectionRoutes).toHaveSize(14);
+    const spanish = sectionRoutes.filter((route) => route.data?.['lang'] === 'es');
+    expect(spanish.map((route) => route.path)).toEqual([
+      'es',
+      'es/about',
+      'es/experience',
+      'es/skills',
+      'es/projects',
+      'es/writing',
+      'es/contact',
+    ]);
+    sectionRoutes.forEach((route) => {
+      expect(['en', 'es']).toContain(route.data?.['lang']);
       expect(typeof route.loadComponent).toBe('function');
     });
   });
@@ -27,8 +26,9 @@ describe('App routes', () => {
     components.forEach((component) => expect(component).toBeDefined());
   });
 
-  it('redirects unknown paths to home', () => {
+  it('renders a not-found component for unknown paths', () => {
     const fallback = routes.find((r) => r.path === '**');
-    expect(fallback?.redirectTo).toBe('');
+    expect(fallback?.loadComponent).toBeDefined();
+    expect(routes.find((r) => r.path === '404')?.loadComponent).toBeDefined();
   });
 });

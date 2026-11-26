@@ -10,9 +10,15 @@ html {
   width: 100%;
   height: 100%;
   font-family: var(--font-body);
-  scroll-behavior: smooth;
   position: relative;
   overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
 }
 
 body.theme-light {
@@ -112,10 +118,6 @@ section {
   color: #0b1221;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
 }
 
 .button.alt {
@@ -124,10 +126,19 @@ section {
   border-color: var(--color-border);
 }
 
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(30, 136, 229, 0.2);
-  filter: brightness(1.02);
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(30, 136, 229, 0.2);
+    filter: brightness(1.02);
+  }
 }
 
 .badge {
@@ -202,3 +213,61 @@ h6 {
     padding: 0 12px;
   }
 }
+
+/* Cookie consent banner */
+
+      .cookie-consent.cookie-consent-hidden {
+        display: none;
+      }
+
+      .cookie-consent {
+        align-items: flex-start;
+        background-color: rgba(25, 25, 25, 0.95);
+        border-radius: 1.25rem;
+        bottom: 1rem;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        left: 1rem;
+        padding: 1rem 1.25rem;
+        position: fixed;
+        right: 1rem;
+        z-index: 1000;
+      }
+
+      .cookie-consent button {
+        background: #fff;
+        border: 0;
+        border-radius: 999px;
+        color: #121212;
+        cursor: pointer;
+        font-weight: 600;
+        padding: 0.4rem 0.9rem;
+      }
+
+      .cookie-consent__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: flex-end;
+      }
+
+      .cookie-consent a {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      @media (min-width: 768px) {
+        .cookie-consent {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .cookie-consent span {
+          flex: 1;
+        }
+      }
+    

@@ -219,6 +219,11 @@
       "linkedin": "LinkedIn"
     }
   },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you requested does not exist.",
+    "cta": "Return home"
+  },
   "footer": {
     "copy": "Javier Batres. Built with Angular.",
     "links": {

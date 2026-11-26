@@ -1,13 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
+import { SeoLinksService } from './core/services/seo-links.service';
 import { TranslationService } from './core/services/translation.service';
 
 describe('AppComponent', () => {
   const translationServiceMock = {
+    init: jasmine.createSpy('init'),
+  };
+  const seoLinksServiceMock = {
     init: jasmine.createSpy('init'),
   };
   const titleMock = {
@@ -19,13 +23,16 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     translationServiceMock.init.calls.reset();
+    seoLinksServiceMock.init.calls.reset();
     titleMock.setTitle.calls.reset();
     metaMock.addTags.calls.reset();
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TranslateModule.forRoot(), AppComponent],
+      imports: [RouterTestingModule, AppComponent],
       providers: [
+        provideTranslateService(),
         { provide: TranslationService, useValue: translationServiceMock },
+        { provide: SeoLinksService, useValue: seoLinksServiceMock },
         { provide: Title, useValue: titleMock },
         { provide: Meta, useValue: metaMock },
       ],
@@ -41,6 +48,7 @@ describe('AppComponent', () => {
   it('initializes translations and metadata on init', () => {
     TestBed.createComponent(AppComponent).componentInstance.ngOnInit();
     expect(translationServiceMock.init).toHaveBeenCalled();
+    expect(seoLinksServiceMock.init).toHaveBeenCalled();
     expect(titleMock.setTitle).toHaveBeenCalledWith('Javier Batres');
     expect(metaMock.addTags).toHaveBeenCalled();
   });
