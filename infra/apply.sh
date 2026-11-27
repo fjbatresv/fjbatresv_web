@@ -23,6 +23,7 @@ SECURITY_HEADERS_ARN=arn:aws:cloudfront::605134457500:function/fjbatresv-securit
 build_distribution_config() {
   jq --arg rewrite "$REWRITE_ARN" --arg security_headers "$SECURITY_HEADERS_ARN" \
     '.DistributionConfig
+     | .DefaultCacheBehavior.ViewerProtocolPolicy = "redirect-to-https"
      | .DefaultCacheBehavior.FunctionAssociations = {"Quantity":2,"Items":[{"EventType":"viewer-request","FunctionARN":$rewrite},{"EventType":"viewer-response","FunctionARN":$security_headers}]}
      | .CustomErrorResponses.Items = ((.CustomErrorResponses.Items // []) | map(select(.ErrorCode != 403 and .ErrorCode != 404))) + [{"ErrorCode":403,"ResponsePagePath":"/404.html","ResponseCode":"404","ErrorCachingMinTTL":60},{"ErrorCode":404,"ResponsePagePath":"/404.html","ResponseCode":"404","ErrorCachingMinTTL":60}]
      | .CustomErrorResponses.Quantity = (.CustomErrorResponses.Items | length)' \
