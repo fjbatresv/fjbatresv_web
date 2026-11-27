@@ -64,3 +64,28 @@ test('rewrites locales and unknown paths without redirecting', () => {
     assert.equal(result.statusCode, undefined);
   }
 });
+
+test('redirects www to apex before legacy redirects or index rewrites', () => {
+  for (const [uri, querystring, host, expected] of [
+    ['/', {}, 'www.fjbatresv.com', 'https://fjbatresv.com/'],
+    ['/es/', { ref: { value: 'linkedin' } }, 'www.fjbatresv.com', 'https://fjbatresv.com/es/?ref=linkedin'],
+    ['/about', {}, 'WWW.FJBATRESV.COM', 'https://fjbatresv.com/about'],
+    [
+      '/search',
+      { 'tag%20name': { multiValue: [{ value: 'hello%20world' }, { value: 'a%2Bb' }] } },
+      'www.fjbatresv.com',
+      'https://fjbatresv.com/search?tag%20name=hello%20world&tag%20name=a%2Bb',
+    ],
+  ]) {
+    const result = handler({ request: { uri, querystring, headers: { host: { value: host } } } });
+    assert.equal(result.statusCode, 301);
+    assert.equal(result.headers.location.value, expected);
+    assert.equal(result.headers['cache-control'].value, 'max-age=3600');
+  }
+});
+
+test('requests without a host header continue through the normal handler', () => {
+  const result = handler({ request: { uri: '/nope' } });
+  assert.equal(result.uri, '/nope/index.html');
+  assert.equal(result.statusCode, undefined);
+});
