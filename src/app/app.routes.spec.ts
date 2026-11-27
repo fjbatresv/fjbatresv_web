@@ -5,6 +5,8 @@ describe('App routes', () => {
     expect(routes.map((route) => route.path)).toEqual(['', 'es', '404', '**']);
     expect(routes[0].data?.['lang']).toBe('en');
     expect(routes[1].data?.['lang']).toBe('es');
+    expect(routes[2].data?.['notFound']).toBe(true);
+    expect(routes[3].data?.['notFound']).toBe(true);
   });
 
   it('lazy-loads the home page component for each section', async () => {

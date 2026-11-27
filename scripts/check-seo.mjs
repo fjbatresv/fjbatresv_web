@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { assertNoRawI18nText } from './no-raw-i18n-text.mjs';
+import { assertIndexableSeo, assertNotFoundSeo } from './seo-assertions.mjs';
 
 const root = new URL('../dist/javier-batres-site/browser/', import.meta.url);
 const attr = (tag, name) => tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, 'i'))?.[1];
@@ -15,17 +16,18 @@ for (const [lang, path, locale, canonical, title] of [
     'index.html',
     'en_US',
     'https://fjbatresv.com/',
-    'Javier Batres — Solutions Architect &amp; Senior Full Stack Engineer',
+    'Javier Batres — Solutions Architect &amp; Full Stack Engineer',
   ],
   [
     'es',
     'es/index.html',
     'es_GT',
     'https://fjbatresv.com/es/',
-    'Javier Batres — Arquitecto de Soluciones y Senior Full Stack Engineer',
+    'Javier Batres — Arquitecto de Soluciones y Full Stack',
   ],
 ]) {
   const html = await readFile(new URL(path, root), 'utf8');
+  assertIndexableSeo(html, path);
   assert.equal(attr(html.match(/<html\b[^>]*>/i)?.[0] ?? '', 'lang'), lang);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1, `${path}: expected one h1`);
   assert.ok(html.includes(`<title>${title}</title>`), `${path}: title mismatch`);
@@ -59,3 +61,6 @@ for (const [lang, path, locale, canonical, title] of [
     assertNoRawI18nText(html, path);
   }
 }
+
+const notFound = await readFile(new URL('404.html', root), 'utf8');
+assertNotFoundSeo(notFound);

@@ -17,12 +17,12 @@ export const routes: Routes = [
     path: '404',
     loadComponent: () =>
       import('./sections/not-found/not-found.component').then((m) => m.NotFoundComponent),
-    data: { lang: 'en' },
+    data: { lang: 'en', notFound: true },
   },
   {
     path: '**',
     loadComponent: () =>
       import('./sections/not-found/not-found.component').then((m) => m.NotFoundComponent),
-    data: { lang: 'en' },
+    data: { lang: 'en', notFound: true },
   },
 ];

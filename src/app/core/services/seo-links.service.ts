@@ -29,8 +29,25 @@ export class SeoLinksService {
   }
 
   private updateLinks(): void {
-    const lang =
-      this.router.routerState.snapshot.root.firstChild?.data['lang'] === 'es' ? 'es' : 'en';
+    const data = this.router.routerState.snapshot.root.firstChild?.data;
+    const lang = data?.['lang'] === 'es' ? 'es' : 'en';
+    if (data?.['notFound']) {
+      this.title.setTitle('Page not found — Javier Batres');
+      this.meta.updateTag({
+        name: 'description',
+        content:
+          "The page you were looking for doesn't exist. Go back to Javier Batres' home page.",
+      });
+      this.meta.updateTag({ name: 'robots', content: 'noindex' });
+      this.document.head.querySelector('link[rel="canonical"]')?.remove();
+      this.document.head
+        .querySelectorAll('link[rel="alternate"][hreflang]')
+        .forEach((link) => link.remove());
+      this.document.head.querySelector('meta[property="og:url"]')?.remove();
+      this.document.head.querySelector('#profile-jsonld')?.remove();
+      return;
+    }
+    this.meta.removeTag('name="robots"');
     const canonical = lang === 'es' ? `${SITE_URL}/es/` : `${SITE_URL}/`;
 
     this.upsertLink('canonical', canonical);
@@ -41,8 +58,8 @@ export class SeoLinksService {
     this.meta.updateTag({ property: 'og:locale', content: lang === 'es' ? 'es_GT' : 'en_US' });
     const pageTitle =
       lang === 'es'
-        ? 'Javier Batres — Arquitecto de Soluciones y Senior Full Stack Engineer'
-        : 'Javier Batres — Solutions Architect & Senior Full Stack Engineer';
+        ? 'Javier Batres — Arquitecto de Soluciones y Full Stack'
+        : 'Javier Batres — Solutions Architect & Full Stack Engineer';
     const description =
       lang === 'es'
         ? 'Arquitecto de Soluciones y Senior Full Stack Engineer con 12 años en banca, pagos, identidad digital y salud. Desde Guatemala, en remoto.'
@@ -53,8 +70,14 @@ export class SeoLinksService {
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:site_name', content: 'Javier Batres' });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({ property: 'og:image:alt', content: pageTitle });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: pageTitle });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:image:alt', content: pageTitle });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.document.head.querySelector('#profile-jsonld')?.remove();
     const structuredData = this.document.createElement('script');
