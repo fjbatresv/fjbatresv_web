@@ -15,6 +15,22 @@ var REDIRECTS = {
 
 function handler(event) {
   var request = event.request;
+  if (request.headers && request.headers.host && request.headers.host.value.toLowerCase() === 'www.fjbatresv.com') {
+    var query = [];
+    for (var key in request.querystring || {}) {
+      var parameter = request.querystring[key];
+      var values = parameter.multiValue || [parameter];
+      for (var i = 0; i < values.length; i++) query.push(key + '=' + values[i].value);
+    }
+    return {
+      statusCode: 301,
+      statusDescription: 'Moved Permanently',
+      headers: {
+        location: { value: 'https://fjbatresv.com' + request.uri + (query.length ? '?' + query.join('&') : '') },
+        'cache-control': { value: 'max-age=3600' },
+      },
+    };
+  }
   var path = request.uri.replace(/\/+$/, '') || '/';
   var location = REDIRECTS[path];
   if (location) {

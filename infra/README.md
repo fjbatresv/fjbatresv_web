@@ -1,6 +1,7 @@
 # CloudFront and deployment IAM
 
 - `cloudfront/index-rewrite.js` maps extensionless requests to prerendered `index.html` files and leaves requests for files unchanged.
+- The CloudFront distribution serves `fjbatresv.com` and `www.fjbatresv.com`; Route 53 has A and AAAA alias records for both names, and the viewer-request function redirects www requests to the apex domain while preserving the path and query string.
 - `cloudfront/security-headers.js` adds the response security headers, including a report-only CSP. `SENTRY_CSP_REPORT_URI` replaces the CSP report URI placeholder when the function is deployed.
 - The distribution is on CloudFront's Free flat-rate plan, which does not support custom response headers policies. Security headers are attached with the `fjbatresv-security-headers` viewer-response CloudFront Function instead.
 - `iam/gha-deploy-trust.json` and `iam/gha-deploy-policy.json` define the GitHub Actions OIDC role and its scoped deployment permissions.
